@@ -1,0 +1,6 @@
+frontend/node_modules
+.gradle
+.idea
+build
+.classpath
+.project

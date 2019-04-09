@@ -1,0 +1,11 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: 'none'
+  datasource:
+    driver-class-name: 'org.postgresql.Driver'
+    url: ${CHALENDIARY_DB_URL:jdbc:postgresql://192.168.99.100:5432/chalendiary}
+    username: ${CHALENDIARY_DB_USERNAME:chalendiary}
+    password: ${CHALENDIARY_DB_PASSWORD:}
+server:
+  port: 3000
