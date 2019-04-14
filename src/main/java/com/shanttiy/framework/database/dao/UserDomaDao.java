@@ -9,8 +9,8 @@ import java.util.List;
 
 @Dao
 @ConfigAutowireable
-public interface UsersDomaDao {
+public interface UserDomaDao {
     @Select
-    public List<UserDomaEntity> selectSomething();
+    public List<UserDomaEntity> select();
 }
 

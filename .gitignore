@@ -1,6 +1,9 @@
-frontend/node_modules
 .gradle
 .idea
+bin
 build
+frontend/node_modules
+gen
 .classpath
 .project
+.env

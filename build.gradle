@@ -31,6 +31,7 @@ version = "1.0-SNAPSHOT"
 apply plugin: 'java'
 apply plugin: 'kotlin'
 apply plugin: 'kotlin-spring'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'eu.appsatori.fatjar'
@@ -48,18 +49,39 @@ processResources.destinationDir = compileJava.destinationDir
 compileJava.dependsOn processResources
 
 dependencies {
+    // Doma packages
+    kapt "org.seasar.doma:doma:$domaVersion"
+    implementation "org.seasar.doma:doma:$domaVersion"
+    compile "org.seasar.doma.boot:doma-spring-boot-starter:${springBootDomaVersion}"
+
+    compile 'com.h2database:h2:1.4.199'
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.5'
+
+    // Spring Boot Framework
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.4.RELEASE'
+    compile "org.springframework.boot:spring-boot-starter-security"
+    compile "org.springframework.boot:spring-boot-devtools"
+    compile "org.springframework.boot:spring-boot-starter-websocket"
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    // Returning response as JSON
+    compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.8"
+
+
+    //Building in Kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.4.RELEASE'
-    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.5'
-    //compile "org.springframework.boot:spring-boot-starter-security"
-    compile "org.springframework.boot:spring-boot-devtools"
-    compile 'com.h2database:h2:1.4.199'
-    compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.8"
-    compile "org.seasar.doma:doma:$domaVersion"
-    compile "org.seasar.doma.boot:doma-spring-boot-starter:${springBootDomaVersion}"
+    
+    // Testing
     testCompile "org.springframework.boot:spring-boot-starter-test"
     testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    // Websocket on client side
+    compile "org.webjars:webjars-locator-core"
+    compile "org.webjars:sockjs-client:1.0.2"
+    compile "org.webjars:stomp-websocket:2.3.3"
+    compile "org.webjars:bootstrap:3.3.7"
+    compile "org.webjars:jquery:3.1.0"
 }
 
 flyway {
@@ -67,6 +89,12 @@ flyway {
     user = 'chalendiary'
     password = ''
     schemas = ['chalendiary']
+}
+
+kapt {
+    arguments {
+        arg("doma.resources.dir", compileKotlin.destinationDir)
+    }
 }
 
 task copyDomaResources(type: Sync)  {
