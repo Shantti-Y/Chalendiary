@@ -15,8 +15,8 @@ module.exports = merge(common, {
   devtool: 'source-map',
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.rootUrl': JSON.stringify('http://localhost:8080'),
-      'process.env.apiUrl': JSON.stringify('http://localhost:8080/api/v1')
+      'process.env.rootUrl': JSON.stringify('http://localhost:3000'),
+      'process.env.apiUrl': JSON.stringify('http://localhost:3000/api/v1')
     })
   ],
   devServer: {
