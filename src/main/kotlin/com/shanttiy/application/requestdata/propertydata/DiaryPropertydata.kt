@@ -2,6 +2,7 @@ package com.shanttiy.application.requestdata.propertydata
 
 import com.shanttiy.domain.model.Diary
 import org.springframework.stereotype.Component
+import java.io.Serializable
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -10,12 +11,12 @@ data class DiaryPropertydata(
     val userId: Int,
     val contentText: String,
     val postedAt: String
-)
+): Serializable
 
 @Component
 class DiaryPropertydataAdapter {
     fun construct(diaryPropertydata: DiaryPropertydata): Diary {
-        val localdateFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd")
+        val localdateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         return Diary(
             id = diaryPropertydata.id,
             userId = diaryPropertydata.userId,

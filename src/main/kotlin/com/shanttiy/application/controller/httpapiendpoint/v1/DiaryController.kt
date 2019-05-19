@@ -1,8 +1,10 @@
 package com.shanttiy.application.controller.httpapiendpoint.v1
 
+import com.shanttiy.application.requestdata.DiaryRequestdata
 import com.shanttiy.application.requestdata.propertydata.DiaryPropertydataAdapter
 import com.shanttiy.application.responsedata.DiariesInDayResponsedata
 import com.shanttiy.application.responsedata.DiariesInMonthResponsedata
+import com.shanttiy.application.responsedata.DiaryResponsedata
 import com.shanttiy.application.responsedata.propertydata.DiaryPropertydataFactory
 import com.shanttiy.application.usecaseboundary.DiaryUsecaseBoundary
 import com.shanttiy.application.usecaseboundary.UserUsecaseBoundary
@@ -66,5 +68,20 @@ class DiaryController(
         }
 
         return DiariesInMonthResponsedata(year = year, month = month, items = diariesInDayResponsedata)
+    }
+
+    @PostMapping("")
+    fun postNewDiary(
+        @RequestBody diaryRequestData: DiaryRequestdata,
+        @RequestHeader("uid") uniqueId: String
+    ): DiaryResponsedata {
+        val user = userUsecaseBoundary.findUserByUniqueId(uniqueId)
+
+        val diaryData = diaryPropertydataAdapter.construct(diaryRequestData.diary)
+        val createdDiary = diaryUsecaseBoundary.createDiary(diaryData)
+        return DiaryResponsedata(
+            createdDiary.postedAt,
+            diaryPropertydataFactory.construct(createdDiary)
+        )
     }
 }
