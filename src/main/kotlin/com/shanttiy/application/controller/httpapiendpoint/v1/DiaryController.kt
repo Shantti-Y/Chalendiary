@@ -59,7 +59,7 @@ class DiaryController(
         val diariesInDayResponsedata = IntStream.range(dayFrom, dayTo).toList().map {
             val targetDate = YearMonth.of(year, month).atDay(it)
             val diaryPropertydatas = diaries.filter { diary ->
-                diary.postedAt === targetDate
+                diary.postedAt == targetDate
             }.map { diary -> diaryPropertydataFactory.construct(diary)}
 
             DiariesInDayResponsedata(date = targetDate, diaries = diaryPropertydatas)

@@ -18,7 +18,7 @@ class TagController(
     private val fullTagPropertydataFactory: FullTagPropertydataFactory
 ){
 
-    @GetMapping("/me")
+    @GetMapping("")
     fun getMyTags(
         @RequestHeader("uid") uniqueId: String
     ): TagsResponsedata {

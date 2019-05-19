@@ -27,7 +27,7 @@ class DiaryInteractor(
     }
 
     override fun findDiariesInMonth(date: String?): List<Diary> {
-        if(date == null || date.split(Regex("-")).size == 2) throw InvalidParameterException()
+        if(date == null || date.split(Regex("-")).size != 2) throw InvalidParameterException()
         val (year, month) = date.split(Regex("-")).map { it.toInt() }
 
         val from = YearMonth.of(year, month).atDay(1)

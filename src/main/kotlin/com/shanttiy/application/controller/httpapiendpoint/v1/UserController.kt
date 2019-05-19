@@ -4,10 +4,7 @@ import com.shanttiy.application.responsedata.UsersResponsedata
 import com.shanttiy.application.responsedata.propertydata.FullUserPropertydataFactory
 import com.shanttiy.application.usecaseboundary.UserUsecaseBoundary
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -17,10 +14,11 @@ class UserController(
     @Autowired
     private val fullUserPropertydataFactory: FullUserPropertydataFactory
 ){
-    @GetMapping("/{teamId}")
+    @GetMapping("")
     fun getAllUsers(
-        @PathVariable("teamId") teamId: Int
+        @RequestHeader("uid") uniqueId: String
     ): UsersResponsedata{
+        val user = userUsecaseBoundary.findUserByUniqueId(uniqueId)
         val users = userUsecaseBoundary.findAllUsers()
         val userPropertydatas = users.map { user -> fullUserPropertydataFactory.construct(user) }
         return UsersResponsedata(userPropertydatas)
