@@ -1,5 +1,6 @@
 package com.shanttiy.framework.database.dao;
 
+import com.shanttiy.framework.database.entity.TagDomaEntity;
 import com.shanttiy.framework.database.entity.UserDomaEntity;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Select;
@@ -11,6 +12,14 @@ import java.util.List;
 @ConfigAutowireable
 public interface UserDomaDao {
     @Select
-    public List<UserDomaEntity> select();
-}
+    UserDomaEntity selectUserById(Integer userId);
 
+    @Select
+    List<UserDomaEntity> selectUsersByTeamId(Integer teamId);
+
+    @Select
+    List<UserDomaEntity> selectUsersByTagId(Integer tagId);
+
+    @Select
+    UserDomaEntity selectUserByUniqueId(String uniqueId);
+}
