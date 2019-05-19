@@ -14,17 +14,16 @@ import {
 const getState = state => state.tag;
 
 // APIs
-function* invokeFetchTags(action){
-  const { teamId } = action.payload;
-  const { data } = yield call(httpClient.get, `/tags/${teamId}`);
+function* invokeFetchTags(){
+  const { data } = yield call(httpClient.get, `/tags`);
   yield put(setTags(data));
 }
 
 function* invokeChangeCurrentTagId(action){
-  const { tagId, teamId } = action.payload;
+  const { tagId } = action.payload;
   const { tags } = yield select(getState);
   if(!tags.find(tag => tag.id === tagId)){
-    yield put(fetchTags({ teamId }));
+    yield put(fetchTags());
   }
   yield put(setCurrentTagId({ tagId }));
 }

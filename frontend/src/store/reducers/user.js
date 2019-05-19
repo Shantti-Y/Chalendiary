@@ -14,7 +14,6 @@ const initialState = {
     uniqueId: '',
     createdAt: '',
     updatedAt: '',
-    teams: [],
     tags: []
   }]
 };

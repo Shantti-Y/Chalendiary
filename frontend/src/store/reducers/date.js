@@ -3,7 +3,7 @@ import moment from 'moment';
 
 import * as actions from '@store/actions/date';
 
-const currentDate = moment().format('YYYY/MM/DD');
+const currentDate = moment();
 const initialState = {
   currentDate: currentDate
 };

@@ -7,15 +7,14 @@ import {
 } from '@store/actions/user';
 
 // APIs
-function* fetchUsers(action){
-  const { teamId } = action.payload;
-  const { data } = yield call(httpClient.get, `/users/${teamId}`)
+function* invokeFetchUsers(){
+  const { data } = yield call(httpClient.get, `/users`)
   yield put(setUsers(data));
 }
 
 // Bundle api functions to watcher and saga
 function* watchAsyncTriggers(){
-  yield takeLatest(FETCH_USERS, fetchUsers)
+  yield takeLatest(FETCH_USERS, invokeFetchUsers)
 }
 
 export default function* userSaga(){

@@ -4,22 +4,13 @@ import * as actions from '@store/actions/diary';
 
 const initialState = {
   currentDiaryId: 0,
-  diaries: [{
-    id: 0,
-    team: {},
-    user: {},
-    contentText: '',
-    postedAt: '',
-    createdAt: '',
-    updatedAt: '',
-    replies: []
-  }]
+  diaries: []
 };
 
 const functions = {
   setDiaries: (state, payload) => ({
     ...state,
-    diaries: payload.diaries
+    diaries: payload.items
   }),
   setCurrentDiaryId: (state, payload) => ({
     ...state,

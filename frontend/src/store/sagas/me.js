@@ -9,14 +9,14 @@ import {
 } from '@store/actions/me';
 
 // APIs
-function* fetchMe(action){
+function* invokeFetchMe(action){
   const { data } = yield call(httpClient.get, `/me`);
   yield put(setMe(data));
 }
 
 // Bundle api functions to watcher and saga
 function* watchAsyncTriggers(){
-  yield takeLatest(FETCH_ME, fetchMe);
+  yield takeLatest(FETCH_ME, invokeFetchMe);
 }
 
 export default function* meSaga(){

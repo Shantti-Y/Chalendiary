@@ -2,22 +2,10 @@ import { handleActions } from 'redux-actions';
 
 import * as actions from '@store/actions/tag';
 
-const DEFAULT_TAG_NAME = 'all members';
-
 // REVIEW: currentTag would be currentTagIdx that fetch specific tag from tagList
 const initialState = {
-  currentTagId: 0,
-  tags: [{
-    id: 0,
-    name: ``,
-    team: {},
-    ownerUser: {},
-    description: '',
-    publicFlag: false,
-    createdAt: '',
-    updatedAt: '',
-    users: []
-  }]
+  currentTagId: null,
+  tags: []
 };
 
 const functions = {

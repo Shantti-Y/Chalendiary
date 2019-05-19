@@ -15,8 +15,8 @@ const getState = state => state.diary;
 
 // APIs
 function* invokeSearchDiaries(action){
-  const { teamId, date } = action.payload;
-  const { data } = yield call(httpClient.get, `/diaries`, { params: { teamId, date } });
+  const { date } = action.payload;
+  const { data } = yield call(httpClient.get, `/diaries/month`, { params: { date } });
   yield put(setDiaries(data));
 }
 
