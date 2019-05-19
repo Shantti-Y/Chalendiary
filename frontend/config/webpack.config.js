@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const ManifestPlugin = require('webpack-manifest-plugin');
 require('dotenv').config();
 
-const entryDir = '..';
+const entryDir = '../src';
 
 module.exports = {
   entry: {

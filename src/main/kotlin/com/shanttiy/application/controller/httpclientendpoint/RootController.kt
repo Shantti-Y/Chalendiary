@@ -16,7 +16,6 @@ class RootController(
     @GetMapping("")
     fun index(
         // @RequestHeader("uid") uniqueId: String, TODO: Add header when authorization system is built
-        @PathVariable("teamDomain") teamDomain: String
     ): String{
         //val user = userUsecaseBoundary.getCurrentUser(uniqueId)
         //teamUsecaseBoundary.getTeamByDomain(teamDomain, user)

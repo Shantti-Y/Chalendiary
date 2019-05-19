@@ -6,7 +6,6 @@ const common = require('./webpack.config.js');
 const entryDir = '../../build/classes/java/main/static/javascript'
 
 module.exports = merge(common, {
-  watch: true,
   mode: 'development',
   output: {
     path: path.resolve(__dirname, `${entryDir}/dev`),
@@ -19,5 +18,10 @@ module.exports = merge(common, {
       'process.env.rootUrl': JSON.stringify('http://localhost:8080'),
       'process.env.apiUrl': JSON.stringify('http://localhost:8080/api/v1')
     })
-  ]
+  ],
+  devServer: {
+    path: path.resolve(__dirname, `${entryDir}/dev`),
+    compress: true,
+    port: 9000
+  }
 });

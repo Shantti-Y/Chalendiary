@@ -5,6 +5,7 @@
   "main": "./index.js",
   "scripts": {
     "dev": "webpack --config ./config/webpack.dev.js -w --progress --color",
+    "dev-server": "webpack-dev-server",
     "build": "webpack --config ./config/webpack.prod.js --progress"
   },
   "author": "Takahiro Yoshioka (Shantti_Y)",
@@ -64,7 +65,7 @@
     "url-loader": "^1.1.2",
     "webpack-cli": "^3.3.0",
     "webpack-dev-middleware": "^3.6.1",
-    "webpack-dev-server": "^3.2.1",
+    "webpack-dev-server": "^3.4.1",
     "webpack-hot-middleware": "^2.24.3",
     "webpack-manifest-plugin": "^2.0.4",
     "webpack-merge": "^4.2.1",
