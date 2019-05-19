@@ -1,0 +1,15 @@
+.main-navbar-content {
+  .navbar-button {
+    padding: 8px;
+  }
+
+  .navbar-current-channel {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .navbar-current-date {
+    font-size: 20px;
+  }
+}

@@ -1,0 +1,20 @@
+.reaction-button {
+  display: inline-block;
+
+  .reaction-button-icon {
+    margin-right: 8px;
+    height: 24px;
+
+    .reaction-button-icon-avatar {
+      width: 24px;
+      height: 24px;
+
+
+    }
+
+    span {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+  }
+}

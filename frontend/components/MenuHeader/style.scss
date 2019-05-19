@@ -1,0 +1,21 @@
+.menu-header {
+
+
+  .menu-header-wrapper {
+    padding: 12px 16px;
+
+    * {
+      vertical-align: top;
+      display: inline-block;
+    }
+
+    .menu-header-icon {
+      margin-right: 8px;
+    }
+
+    .menu-header-label {
+      font-size: 18px;
+      font-weight: 400;
+    }
+  }
+}

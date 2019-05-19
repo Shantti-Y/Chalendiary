@@ -1,0 +1,74 @@
+.menubar {
+  box-sizing: border-box;
+  width: 100%;
+  // indigo color TODO: make this color common
+
+
+  .manubar-header {
+    background-color: #3f51b5;
+    padding: 24px 16px 16px 16px;
+
+    * {
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    .header-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 3px;
+      margin: 8px 16px 0 0;
+    }
+
+    .header-contents {
+      width: 160px;
+
+      p {
+        color: #ffffff;
+        margin: 0;
+      }
+
+      .contents-fullname {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+      }
+
+      .contents-loginname {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 12px;
+      }
+
+      .contents-tabs {
+        width: 100%;
+        min-height: 28px;
+        margin-top: 4px;
+
+        .contents-tab {
+          min-width: 32px;
+          min-height: 32px;
+          margin-right: 8px;
+
+          span {
+            color: #ffffff;
+            height: 100%;
+          }
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+
+        .active {
+          background-color: #1a237e;
+          border-radius: 18px;
+          transition: background .3s ease-in-out;
+        }
+      }
+    }
+  }
+}
+
+.channel-text {
+  font-size: 14px;
+}

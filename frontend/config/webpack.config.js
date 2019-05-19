@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const ManifestPlugin = require('webpack-manifest-plugin');
 require('dotenv').config();
 
-const entryDir = '../client';
+const entryDir = '..';
 
 module.exports = {
   entry: {
@@ -49,7 +49,14 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif|mp4)$/,
-        loader: 'file-loader'
+        use: {
+          loader: 'file-loader',
+          options: {
+            outputPath: '../../assets/images',
+            publicPath: '../../assets/images'
+          }
+        }
+
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
@@ -58,7 +65,15 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.jpg', '.scss'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.jpg', '.png', '.scss'],
+    alias: {
+      '@assets': path.resolve(__dirname, `${entryDir}/assets`),
+      '@client': path.resolve(__dirname, `${entryDir}/client`),
+      '@components': path.resolve(__dirname, `${entryDir}/components`),
+      '@routes': path.resolve(__dirname, `${entryDir}/routes`),
+      '@store': path.resolve(__dirname, `${entryDir}/store`),
+      '@utils': path.resolve(__dirname, `${entryDir}/utils`)
+    }
   },
   plugins: [
     new ManifestPlugin(),

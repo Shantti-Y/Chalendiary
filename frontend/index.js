@@ -1,23 +1,18 @@
-const path = require('path');
-const express = require('express');
-require('dotenv').config();
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-const router = express.Router();
+import { Provider } from 'react-redux'
 
-const app = express();
-const distDir = path.resolve(__dirname, `./dist/dev`);
+import store from '@store';
 
-app.use(express.static(distDir));
+import Main from '@routes/Main';
 
-const indexHtmlFile = path.resolve(__dirname, './index.html');
-router.get('/', (_, res) => {
-  res.sendFile(indexHtmlFile);
-});
+const App = () => {
+  return (
+    <Provider store={store}>
+      <Main />
+    </Provider>
+  );
+};
 
-app.use(router);
-
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`App listening to ${PORT}....`);
-  console.log('Press Ctrl+C to quit.');
-});
+ReactDOM.render(<App />, document.getElementById('app'));
