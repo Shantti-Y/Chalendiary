@@ -1,7 +1,6 @@
 package com.shanttiy.application.responsedata.propertydata
 
 import com.shanttiy.application.usecaseboundary.TagUsecaseBoundary
-import com.shanttiy.application.usecaseboundary.TeamUsecaseBoundary
 import com.shanttiy.domain.model.User
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -16,7 +15,6 @@ data class FullUserPropertydata(
     val uniqueId: String,
     val createdAt: LocalDateTime?,
     val updatedAt: LocalDateTime?,
-    val teams: List<SimplifiedTeamPropertydata>,
     val tags: List<SimplifiedTagPropertydata>
 )
 
@@ -25,15 +23,10 @@ class FullUserPropertydataFactory(
     @Autowired
     private val tagUsecaseBoundary: TagUsecaseBoundary,
     @Autowired
-    private val teamUsecaseBoundary: TeamUsecaseBoundary,
-    @Autowired
-    private val simplifiedTagPropertydataFactory: SimplifiedTagPropertydataFactory,
-    @Autowired
-    private val simplifiedTeamPropertydataFactory: SimplifiedTeamPropertydataFactory
+    private val simplifiedTagPropertydataFactory: SimplifiedTagPropertydataFactory
 ){
     fun construct(user: User): FullUserPropertydata{
-        val teams = teamUsecaseBoundary.getTeamsByUserId(user.id)
-        val tags = tagUsecaseBoundary.getTagsByUserId(user.id)
+        val tags = tagUsecaseBoundary.findTagsByUserId(user.id)
 
         return FullUserPropertydata(
             id = user.id,
@@ -44,7 +37,6 @@ class FullUserPropertydataFactory(
             uniqueId = user.uniqueId,
             createdAt = user.createdAt,
             updatedAt = user.updatedAt,
-            teams = teams.map { simplifiedTeamPropertydataFactory.construct(it) },
             tags = tags.map { simplifiedTagPropertydataFactory.construct(it) }
         )
     }

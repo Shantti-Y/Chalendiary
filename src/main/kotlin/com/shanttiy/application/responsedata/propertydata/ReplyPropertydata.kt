@@ -22,7 +22,7 @@ class ReplyPropertydataFactory(
     private val userPropertydataFactory: SimplifiedUserPropertydataFactory
 ){
     fun construct(reply: Reply): ReplyPropertydata{
-        val user = userUsecaseBoundary.getUserById(reply.userId)
+        val user = userUsecaseBoundary.findUserById(reply.userId)
         return ReplyPropertydata(
             id = reply.id,
             user = userPropertydataFactory.construct(user),

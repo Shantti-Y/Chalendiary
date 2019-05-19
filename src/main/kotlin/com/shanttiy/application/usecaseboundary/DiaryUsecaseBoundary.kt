@@ -5,7 +5,9 @@ import com.shanttiy.domain.model.User
 import java.time.LocalDate
 
 interface DiaryUsecaseBoundary {
-    fun getDiariesInCondition(teamId: Int?, date: LocalDate): List<Diary>
+    fun findDiariesInDay(date: String?): List<Diary>
 
-    fun postDiary(diary: Diary): Diary
+    fun findDiariesInMonth(date: String?): List<Diary>
+
+    fun createDiary(diary: Diary): Diary
 }

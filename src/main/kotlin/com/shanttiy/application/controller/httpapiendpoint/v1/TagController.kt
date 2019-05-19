@@ -22,22 +22,12 @@ class TagController(
     fun getMyTags(
         @RequestHeader("uid") uniqueId: String
     ): TagsResponsedata {
-        val user = userUsecaseBoundary.getCurrentUser(uniqueId)
+        val user = userUsecaseBoundary.findUserByUniqueId(uniqueId)
 
-        val tags = tagUsecaseBoundary.getTagsByUserId(user.id)
+        val tags = tagUsecaseBoundary.findTagsByUserId(user.id)
+
         val tagPropertydatas = tags.map { tag -> fullTagPropertydataFactory.construct(tag) }
-        return TagsResponsedata(tagPropertydatas)
-    }
 
-    @GetMapping("/{teamId}")
-    fun getTagsInTeam(
-        @RequestHeader("uid") uniqueId: String,
-        @PathVariable("teamId") teamId: Int
-    ): TagsResponsedata {
-        val user = userUsecaseBoundary.getCurrentUser(uniqueId)
-
-        val tags = tagUsecaseBoundary.getTagsByTeamId(teamId)
-        val tagPropertydatas = tags.map { tag -> fullTagPropertydataFactory.construct(tag) }
         return TagsResponsedata(tagPropertydatas)
     }
 }

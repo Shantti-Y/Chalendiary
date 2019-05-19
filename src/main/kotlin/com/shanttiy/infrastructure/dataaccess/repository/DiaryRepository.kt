@@ -1,9 +1,8 @@
 package com.shanttiy.infrastructure.dataaccess.repository
 
 import com.shanttiy.domain.model.Diary
-import com.shanttiy.framework.database.dao.DiaryDomaDao
-import com.shanttiy.infrastructure.dataaccess.domainmappertoentity.DiaryDomainMapperToEntity
-import com.shanttiy.infrastructure.dataaccess.entitymappertodomain.DiaryEntityMapperToDomain
+import com.shanttiy.infrastructure.dataaccess.entitymappertodomain.DiaryObjectMapper
+import com.shanttiy.infrastructure.database.dao.DiaryDao
 import com.shanttiy.usecase.infrastructureboundary.DiaryInfrastructureBoundary
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
@@ -13,23 +12,24 @@ import java.time.LocalDate
 @Repository
 class DiaryRepository(
     @Autowired
-    private val diaryDomaDao: DiaryDomaDao,
+    private val diaryDao: DiaryDao,
     @Autowired
-    private val diaryEntityMapperToDomain: DiaryEntityMapperToDomain,
-    @Autowired
-    private val diaryDomainMapperToDomain: DiaryDomainMapperToEntity
+    private val diaryObjectMapper: DiaryObjectMapper
 ): DiaryInfrastructureBoundary {
-    override fun selectDiariesInCondition(teamId: Int, date: LocalDate): List<Diary> {
-        val diaryEntities = diaryDomaDao.selectDiariesInCondition(teamId, Date.valueOf(date))
-        return diaryEntities.map { diaryEntity ->
-            diaryEntityMapperToDomain.mapEntityToDomain(diaryEntity)
-        }
+    override fun selectDiariesByDate(from: LocalDate, to: LocalDate): List<Diary> {
+        val diaryEntities = diaryDao.selectByDateInRange(
+            Date.valueOf(from), Date.valueOf(to)
+        )
+        return diaryEntities.map { entity -> diaryObjectMapper.mapEntityToDomain(entity) }
+    }
+
+    override fun selectDiaryById(diaryId: Int): Diary? {
+        val diaryEntity = diaryDao.selectById(diaryId)
+        if(diaryEntity != null) return diaryObjectMapper.mapEntityToDomain(diaryEntity) else return null
     }
 
     override fun insertDiary(diary: Diary): Diary {
-        val diaryEntityForInsert = diaryDomainMapperToDomain.mapDomaintoEntity(diary)
-        val diaryEntityForFetch = diaryDomaDao.insertDiary(diaryEntityForInsert).entity
-        return diaryEntityMapperToDomain.mapEntityToDomain(diaryEntityForFetch)
-
+        val diaryEntity = diaryDao.insert(diaryObjectMapper.mapDomainToEntity(diary)).entity
+        return diaryObjectMapper.mapEntityToDomain(diaryEntity)
     }
 }

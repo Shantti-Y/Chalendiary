@@ -1,8 +1,8 @@
 package com.shanttiy.infrastructure.dataaccess.repository
 
 import com.shanttiy.domain.model.User
-import com.shanttiy.framework.database.dao.UserDomaDao
-import com.shanttiy.infrastructure.dataaccess.entitymappertodomain.UserEntityMapperToDomain
+import com.shanttiy.infrastructure.dataaccess.objectmapper.UserObjectMapper
+import com.shanttiy.infrastructure.database.dao.UserDao
 import com.shanttiy.usecase.infrastructureboundary.UserInfrastructureBoundary
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
@@ -10,31 +10,27 @@ import org.springframework.stereotype.Repository
 @Repository
 class UserRepository(
     @Autowired
-    private val userDomaDao: UserDomaDao,
+    private val userDao: UserDao,
     @Autowired
-    private val userEntityMapperToDomain: UserEntityMapperToDomain
+    private val userObjectMapper: UserObjectMapper
 ): UserInfrastructureBoundary{
-    override fun selectUserById(userId: Int): User {
-        val userEntity = userDomaDao.selectUserById(userId)
-        return userEntityMapperToDomain.mapEntityToDomain(userEntity)
+    override fun selectAllUsers(): List<User> {
+        val userEntities = userDao.selectAll()
+        return userEntities.map { entity -> userObjectMapper.mapEntityToDomain(entity) }
     }
 
-    override fun selectUserByUniqueId(uniqueId: String): User {
-        val userEntity = userDomaDao.selectUserByUniqueId(uniqueId)
-        return userEntityMapperToDomain.mapEntityToDomain(userEntity)
+    override fun selectUserById(userId: Int): User? {
+        val userEntity = userDao.selectById(userId)
+        if(userEntity != null) return userObjectMapper.mapEntityToDomain(userEntity) else return null
     }
 
-    override fun selectUsersByTeamId(teamId: Int): List<User> {
-        val usersEntities = userDomaDao.selectUsersByTeamId(teamId)
-        return usersEntities.map { userEntity ->
-            userEntityMapperToDomain.mapEntityToDomain(userEntity)
-        }
+    override fun selectUserByUniqueId(uniqueId: String): User? {
+        val userEntity = userDao.selectByUniqueId(uniqueId)
+        if(userEntity != null) return userObjectMapper.mapEntityToDomain(userEntity) else return null
     }
 
-    override fun selectUsersByTagId(tagId: Int): List<User> {
-        val usersEntities = userDomaDao.selectUsersByTagId(tagId)
-        return usersEntities.map { userEntity ->
-            userEntityMapperToDomain.mapEntityToDomain(userEntity)
-        }
+    override fun selectUserByTagId(tagId: Int): List<User> {
+        val userEntities = userDao.selectByTagId(tagId)
+        return userEntities.map { entity -> userObjectMapper.mapEntityToDomain(entity) }
     }
 }

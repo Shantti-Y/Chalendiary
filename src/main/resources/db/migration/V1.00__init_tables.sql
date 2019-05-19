@@ -51,14 +51,7 @@ CREATE TABLE public.replies (
     id serial PRIMARY KEY,
     diary_id integer NOT NULL,
     user_id integer NOT NULL,
-    SELECT
-    d.*
-FROM
-    diaries AS d
-WHERE
-    d.posted_at = '2019-05-06'
-AND
-    d.team_id = 1 text NOT NULL,
+    content_text text NOT NULL,
     created_at timestamp without time zone DEFAULT NOW() NOT NULL,
     updated_at timestamp without time zone,
     FOREIGN KEY (diary_id) REFERENCES diaries (id),

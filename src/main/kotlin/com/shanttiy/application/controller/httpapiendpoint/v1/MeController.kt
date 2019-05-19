@@ -18,10 +18,10 @@ class MeController(
     private val fullUserPropertydataFactory: FullUserPropertydataFactory
 ){
     @GetMapping("")
-    fun getUser(
+    fun getMyInformation(
         @RequestHeader("uid") uniqueId: String
     ): UserResponsedata{
-        val user = userUsecaseBoundary.getCurrentUser(uniqueId)
+        val user = userUsecaseBoundary.findUserByUniqueId(uniqueId)
         val userPropertydata = fullUserPropertydataFactory.construct(user)
         return UserResponsedata(userPropertydata)
     }

@@ -18,10 +18,10 @@ class UserController(
     private val fullUserPropertydataFactory: FullUserPropertydataFactory
 ){
     @GetMapping("/{teamId}")
-    fun getUsersInTeam(
+    fun getAllUsers(
         @PathVariable("teamId") teamId: Int
     ): UsersResponsedata{
-        val users = userUsecaseBoundary.getUsersByTeamId(teamId)
+        val users = userUsecaseBoundary.findAllUsers()
         val userPropertydatas = users.map { user -> fullUserPropertydataFactory.construct(user) }
         return UsersResponsedata(userPropertydatas)
     }

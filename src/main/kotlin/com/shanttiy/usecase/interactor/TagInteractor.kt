@@ -12,12 +12,7 @@ class TagInteractor(
     @Autowired
     private val tagInfrastructureBoundary: TagInfrastructureBoundary
 ): TagUsecaseBoundary {
-    override fun getTagsByTeamId(teamId: Int?): List<Tag> {
-        if (teamId === null) throw InvalidParameterException()
-        return tagInfrastructureBoundary.selectTagsByTeamId(teamId)
-    }
-
-    override fun getTagsByUserId(userId: Int?): List<Tag> {
+    override fun findTagsByUserId(userId: Int?): List<Tag> {
         if (userId === null) throw InvalidParameterException()
         return tagInfrastructureBoundary.selectTagsByUserId(userId)
     }

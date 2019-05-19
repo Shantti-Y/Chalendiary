@@ -9,7 +9,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 
 data class DiaryPropertydata(
-    val id: Int?,
+    val id: Int,
     val user: SimplifiedUserPropertydata,
     val contentText: String,
     val postedAt: LocalDate,
@@ -30,10 +30,11 @@ class DiaryPropertydataFactory(
     private val replyPropertydataFactory: ReplyPropertydataFactory
 ){
     fun construct(diary: Diary): DiaryPropertydata{
-        val user = userUsecaseBoundary.getUserById(diary.userId)
-        val replies = replyUsecaseBoundary.getRepliesByDiaryId(diary.id)
+        val user = userUsecaseBoundary.findUserById(diary.userId)
+        val replies = replyUsecaseBoundary.findRepliesByDiaryId(diary.id)
+
         return DiaryPropertydata(
-            id = diary.id,
+            id = diary.id!!,
             user = simplifiedUserPropertydataFactory.construct(user),
             contentText = diary.contentText,
             postedAt = diary.postedAt,

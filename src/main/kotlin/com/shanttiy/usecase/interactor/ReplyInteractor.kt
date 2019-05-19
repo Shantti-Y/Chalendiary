@@ -12,7 +12,7 @@ class ReplyInteractor(
     @Autowired
     private val replyInfrastructureBoundary: ReplyInfrastructureBoundary
 ): ReplyUsecaseBoundary{
-    override fun getRepliesByDiaryId(diaryId: Int?): List<Reply> {
+    override fun findRepliesByDiaryId(diaryId: Int?): List<Reply> {
         if (diaryId === null) throw InvalidParameterException()
         return replyInfrastructureBoundary.selectRepliesByDiaryId(diaryId)
     }

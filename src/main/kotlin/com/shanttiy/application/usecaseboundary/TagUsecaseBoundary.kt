@@ -4,7 +4,5 @@ import com.shanttiy.domain.model.Tag
 import com.shanttiy.domain.model.User
 
 interface TagUsecaseBoundary {
-    fun getTagsByTeamId(teamId: Int?): List<Tag>
-
-    fun getTagsByUserId(userId: Int?): List<Tag>
+    fun findTagsByUserId(userId: Int?): List<Tag>
 }

@@ -7,7 +7,6 @@ import java.time.format.DateTimeFormatter
 
 data class DiaryPropertydata(
     val id: Int?,
-    val teamId: Int,
     val userId: Int,
     val contentText: String,
     val postedAt: String
@@ -19,7 +18,6 @@ class DiaryPropertydataAdapter {
         val localdateFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd")
         return Diary(
             id = diaryPropertydata.id,
-            teamId = diaryPropertydata.teamId,
             userId = diaryPropertydata.userId,
             contentText = diaryPropertydata.contentText,
             postedAt = LocalDate.parse(diaryPropertydata.postedAt, localdateFormatter),

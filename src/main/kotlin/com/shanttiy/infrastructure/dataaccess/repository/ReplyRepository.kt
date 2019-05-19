@@ -1,8 +1,8 @@
 package com.shanttiy.infrastructure.dataaccess.repository
 
 import com.shanttiy.domain.model.Reply
-import com.shanttiy.framework.database.dao.ReplyDomaDao
-import com.shanttiy.infrastructure.dataaccess.entitymappertodomain.ReplyEntityMapperToDomain
+import com.shanttiy.infrastructure.database.dao.ReplyDao
+import com.shanttiy.infrastructure.dataaccess.objectmapper.ReplyObjectMapper
 import com.shanttiy.usecase.infrastructureboundary.ReplyInfrastructureBoundary
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
@@ -10,14 +10,12 @@ import org.springframework.stereotype.Repository
 @Repository
 class ReplyRepository(
     @Autowired
-    private val replyDomaDao: ReplyDomaDao,
+    private val replyDao: ReplyDao,
     @Autowired
-    private val replyEntityMapperToDomain: ReplyEntityMapperToDomain
+    private val replyObjectMapper: ReplyObjectMapper
 ): ReplyInfrastructureBoundary{
     override fun selectRepliesByDiaryId(diaryId: Int): List<Reply> {
-        val replyEntities = replyDomaDao.selectRepliesByDiaryId(diaryId)
-        return replyEntities.map { replyEntity ->
-            replyEntityMapperToDomain.mapEntityToDomain(replyEntity)
-        }
+        val replyEntities = replyDao.selectByDiaryId(diaryId)
+        return replyEntities.map { entity -> replyObjectMapper.mapEntityToDomain(entity) }
     }
 }

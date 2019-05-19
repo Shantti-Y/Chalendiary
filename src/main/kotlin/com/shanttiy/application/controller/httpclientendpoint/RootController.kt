@@ -1,22 +1,19 @@
 package com.shanttiy.infrastructure.config.application
 
-import com.shanttiy.application.responsedata.TagsResponsedata
-import com.shanttiy.application.usecaseboundary.TeamUsecaseBoundary
 import com.shanttiy.application.usecaseboundary.UserUsecaseBoundary
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
-import org.springframework.ui.Model
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestMapping
 
 @Controller
 @RequestMapping("")
 class RootController(
     @Autowired
-    private val userUsecaseBoundary: UserUsecaseBoundary,
-    @Autowired
-    private val teamUsecaseBoundary: TeamUsecaseBoundary
+    private val userUsecaseBoundary: UserUsecaseBoundary
 ) {
-    @GetMapping("/teams/{teamDomain}")
+    @GetMapping("")
     fun index(
         // @RequestHeader("uid") uniqueId: String, TODO: Add header when authorization system is built
         @PathVariable("teamDomain") teamDomain: String
