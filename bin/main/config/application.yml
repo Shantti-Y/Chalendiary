@@ -11,3 +11,5 @@ spring:
     static-locations: classpath:/static/
 server:
   port: 8080
+doma:
+  dialect: postgres
