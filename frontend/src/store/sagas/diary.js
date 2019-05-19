@@ -1,4 +1,4 @@
-import { put, all, takeLatest, call } from 'redux-saga/effects';
+import { put, all, takeLatest, call, select } from 'redux-saga/effects';
 
 import httpClient from '@client/http';
 import {
@@ -32,8 +32,8 @@ function* invokeAddNewDiary(action) {
 
   const { diaries } = yield select(getState);
   const newDiaries = Object.assign([], diaries);
-  newDiaries.unshift(data)
-  yield put(setDiaries({ diaries: newDiaries }));
+  newDiaries.find(diaryData => diaryData.date === data.date).diaries.unshift(data.diary);
+  yield put(setDiaries({ items: newDiaries }));
 }
 
 // Bundle api functions to watcher and saga
