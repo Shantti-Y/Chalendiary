@@ -18,6 +18,10 @@ export const changeCurrentDiaryId = createAction(CHANGE_CURRENT_DIARY_ID);
 export const addNewDiary = createAction(ADD_NEW_DIARY);
 export const updateDiary = createAction(UPDATE_DIARY);
 
+// for handling receiving messages in websocker
+export const RECEIVE_DIARY = 'RECEIVE_DIARY';
+export const receiveDiary = createAction(RECEIVE_DIARY);
+
 // for calling reducers
 export const SET_DIARIES = 'SET_DIARIES';
 export const SET_CURRENT_DIARY_ID = 'SET_CURRENT_DIARY_ID';

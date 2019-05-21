@@ -4,9 +4,11 @@ import './style.scss';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
+import stompClient from '@client/stomp';
+
 import { fetchMe } from '@store/actions/me';
 import { fetchUsers } from '@store/actions/user';
-import { searchDiaries } from '@store/actions/diary';
+import { searchDiaries, receiveDiary } from '@store/actions/diary';
 import { fetchTags } from '@store/actions/tag';
 
 import ForDesktop from '@routes/Main/ForDesktop';
@@ -19,6 +21,12 @@ class Main extends React.Component{
 
   componentDidMount(){
     this.props.onInitialize();
+    stompClient.connect('1', 'password', async frame => {
+      console.log('Connected: ' + frame);
+      stompClient.subscribe('/socket/diaries', response => {
+        this.props.onReceiveDiary(JSON.parse(response.body));
+      });
+    });
   }
 
   render(){
@@ -40,7 +48,7 @@ class Main extends React.Component{
           currentTagId={currentTagId}
           users={users}
           diaries={diaries}
-          />
+        />
       </div>
     )
   }
@@ -62,7 +70,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(fetchTags());
     const currentDate = moment().format('YYYY-MM');
     dispatch(searchDiaries({ date: currentDate }));
-  }
+  },
+  onReceiveDiary: diary => dispatch(receiveDiary({ data: diary }))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
