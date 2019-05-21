@@ -18,7 +18,7 @@ import kotlin.streams.toList
 
 @RestController
 @RequestMapping("/api/v1/diaries")
-class DiaryController(
+class DiaryApiV1Controller(
     @Autowired
     private val diaryUsecaseBoundary: DiaryUsecaseBoundary,
     @Autowired
@@ -68,20 +68,5 @@ class DiaryController(
         }
 
         return DiariesInMonthResponsedata(year = year, month = month, items = diariesInDayResponsedata)
-    }
-
-    @PostMapping("")
-    fun postNewDiary(
-        @RequestBody diaryRequestData: DiaryRequestdata,
-        @RequestHeader("uid") uniqueId: String
-    ): DiaryResponsedata {
-        val user = userUsecaseBoundary.findUserByUniqueId(uniqueId)
-
-        val diaryData = diaryPropertydataAdapter.construct(diaryRequestData.diary)
-        val createdDiary = diaryUsecaseBoundary.createDiary(diaryData)
-        return DiaryResponsedata(
-            createdDiary.postedAt,
-            diaryPropertydataFactory.construct(createdDiary)
-        )
     }
 }

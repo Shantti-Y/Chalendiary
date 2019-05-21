@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/v1/tags")
-class TagController(
+class TagApiV1Controller(
     @Autowired
     private val tagUsecaseBoundary: TagUsecaseBoundary,
     @Autowired

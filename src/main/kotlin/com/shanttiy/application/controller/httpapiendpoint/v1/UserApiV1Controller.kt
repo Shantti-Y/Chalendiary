@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/v1/users")
-class UserController(
+class UserApiV1Controller(
     @Autowired
     private val userUsecaseBoundary: UserUsecaseBoundary,
     @Autowired
