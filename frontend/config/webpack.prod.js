@@ -4,7 +4,7 @@ const merge = require('webpack-merge');
 const common = require('./webpack.config.js');
 const MinifyPlugin = require("babel-minify-webpack-plugin");
 
-const entryDir = '../../src/main/resources/static/javascript'
+const entryDir = '../../build/classes/java/main/static/javascript';
 
 module.exports = merge(common, {
   mode: 'production',

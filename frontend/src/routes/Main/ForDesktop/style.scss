@@ -1,0 +1,19 @@
+body {
+  min-width: 1000px;
+  main {
+    overflow: hidden;
+    height: calc(100% - 64px);
+
+    .left-column {
+      float: left;
+      width: 70%;
+      height: 100%;
+    }
+
+    .right-column {
+      float: right;
+      width: 30%;
+      height: 100%;
+    }
+  }
+}

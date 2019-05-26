@@ -1,0 +1,36 @@
+.diary-table {
+  width: 100%;
+  overflow: scroll;
+  height: 100%;
+
+  .table-wrapper {}
+
+  .table {
+    height: 100%;
+
+    .table-head {
+      .table-cell {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background-color: #fff;
+      }
+
+      .first-column {
+        left: 0;
+        z-index: 3;
+      }
+    }
+
+    .table-body {
+      .table-cell {}
+
+      .first-column {
+        position: sticky;
+        left: 0;
+        z-index: 1;
+        background-color: #fff;
+      }
+    }
+  }
+}
