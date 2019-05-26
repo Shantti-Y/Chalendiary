@@ -16,4 +16,13 @@ class ReplyInteractor(
         if (diaryId === null) throw InvalidParameterException()
         return replyInfrastructureBoundary.selectRepliesByDiaryId(diaryId)
     }
+
+    override fun postReply(reply: Reply): Reply {
+        return replyInfrastructureBoundary.insertReply(reply)
+    }
+
+    override fun patchReply(reply: Reply): Reply {
+        val searchedReply = replyInfrastructureBoundary.selectReplyById(reply.id!!)
+        if (searchedReply != null) return replyInfrastructureBoundary.updateReply(reply) else throw InvalidParameterException()
+    }
 }

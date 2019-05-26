@@ -9,5 +9,9 @@ interface DiaryUsecaseBoundary {
 
     fun findDiariesInMonth(date: String?): List<Diary>
 
-    fun createDiary(diary: Diary): Diary
+    fun findDiaryById(diaryId: Int): Diary
+
+    fun postDiary(diary: Diary): Diary
+
+    fun patchDiary(diary: Diary): Diary
 }

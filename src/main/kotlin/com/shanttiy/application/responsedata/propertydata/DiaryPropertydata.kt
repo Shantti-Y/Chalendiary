@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 import java.time.LocalDate
 import java.time.LocalDateTime
 
-data class FullDiaryPropertydata(
+data class DiaryPropertydata(
     val id: Int,
     val user: SimplifiedUserPropertydata,
     val contentText: String,
@@ -19,7 +19,7 @@ data class FullDiaryPropertydata(
 )
 
 @Component
-class FullDiaryPropertydataFactory(
+class DiaryPropertydataFactory(
     @Autowired
     private val userUsecaseBoundary: UserUsecaseBoundary,
     @Autowired
@@ -29,11 +29,11 @@ class FullDiaryPropertydataFactory(
     @Autowired
     private val replyPropertydataFactory: ReplyPropertydataFactory
 ){
-    fun construct(diary: Diary): FullDiaryPropertydata{
+    fun construct(diary: Diary): DiaryPropertydata{
         val user = userUsecaseBoundary.findUserById(diary.userId)
         val replies = replyUsecaseBoundary.findRepliesByDiaryId(diary.id)
 
-        return FullDiaryPropertydata(
+        return DiaryPropertydata(
             id = diary.id!!,
             user = simplifiedUserPropertydataFactory.construct(user),
             contentText = diary.contentText,

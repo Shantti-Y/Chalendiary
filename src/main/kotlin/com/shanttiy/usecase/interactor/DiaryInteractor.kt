@@ -4,6 +4,7 @@ import com.shanttiy.application.usecaseboundary.DiaryUsecaseBoundary
 import com.shanttiy.domain.model.Diary
 import com.shanttiy.domain.model.User
 import com.shanttiy.usecase.exception.AccessForbiddenException
+import com.shanttiy.usecase.exception.RecordNotfoundException
 import com.shanttiy.usecase.infrastructureboundary.DiaryInfrastructureBoundary
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.format.datetime.DateFormatter
@@ -35,7 +36,17 @@ class DiaryInteractor(
         return diaryInfrastructureBoundary.selectDiariesByDate(from, to)
     }
 
-    override fun createDiary(diary: Diary): Diary {
+    override fun findDiaryById(diaryId: Int): Diary {
+        val diary = diaryInfrastructureBoundary.selectDiaryById(diaryId)
+        if(diary != null) return diary else throw RecordNotfoundException()
+    }
+
+    override fun postDiary(diary: Diary): Diary {
         return diaryInfrastructureBoundary.insertDiary(diary)
+    }
+
+    override fun patchDiary(diary: Diary): Diary {
+        val searchedDiary = diaryInfrastructureBoundary.selectDiaryByUserIdAndPostedAt(diary.userId, diary.postedAt)
+        if (searchedDiary != null) return diaryInfrastructureBoundary.updateDiary(diary) else throw InvalidParameterException()
     }
 }

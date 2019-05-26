@@ -28,8 +28,18 @@ class DiaryRepository(
         if(diaryEntity != null) return diaryObjectMapper.mapEntityToDomain(diaryEntity) else return null
     }
 
+    override fun selectDiaryByUserIdAndPostedAt(userId: Int, postedAt: LocalDate): Diary? {
+        val diaryEntity = diaryDao.selectByUserIdAndPostedAt(userId, Date.valueOf(postedAt))
+        if(diaryEntity != null) return diaryObjectMapper.mapEntityToDomain(diaryEntity) else return null
+    }
+
     override fun insertDiary(diary: Diary): Diary {
         val diaryEntity = diaryDao.insert(diaryObjectMapper.mapDomainToEntity(diary)).entity
+        return diaryObjectMapper.mapEntityToDomain(diaryEntity)
+    }
+
+    override fun updateDiary(diary: Diary): Diary {
+        val diaryEntity = diaryDao.update(diaryObjectMapper.mapDomainToEntity(diary)).entity
         return diaryObjectMapper.mapEntityToDomain(diaryEntity)
     }
 }

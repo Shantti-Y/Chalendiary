@@ -24,22 +24,24 @@ class DiaryWebSocketV1Controller(
     private val diaryPropertydataFactory: DiaryPropertydataFactory
 ){
     @MessageMapping("/diaries/new")
-    @SendTo("/socket/diaries")
+    @SendTo("/socket/diaries/new")
     fun postNewDiary(diaryRequestData: DiaryRequestdata): DiaryResponsedata {
-
         val diaryData = diaryPropertydataAdapter.construct(diaryRequestData.diary)
 
-        //val createdDiary = diaryUsecaseBoundary.createDiary(diaryData)
+        val createdDiary = diaryUsecaseBoundary.postDiary(diaryData)
         return DiaryResponsedata(
-            date = diaryData.postedAt,
-            diary = diaryPropertydataFactory.construct(Diary(
-                id = 1,
-                userId = diaryData.userId,
-                contentText = diaryData.contentText,
-                postedAt = diaryData.postedAt,
-                createdAt = diaryData.createdAt,
-                updatedAt = diaryData.updatedAt
-            ))
+            diary = diaryPropertydataFactory.construct(createdDiary)
+        )
+    }
+
+    @MessageMapping("/diaries/edit")
+    @SendTo("/socket/diaries/edit")
+    fun putDiary(diaryRequestData: DiaryRequestdata): DiaryResponsedata {
+        val diaryData = diaryPropertydataAdapter.construct(diaryRequestData.diary)
+
+        val createdDiary = diaryUsecaseBoundary.patchDiary(diaryData)
+        return DiaryResponsedata(
+            diary = diaryPropertydataFactory.construct(createdDiary)
         )
     }
 }

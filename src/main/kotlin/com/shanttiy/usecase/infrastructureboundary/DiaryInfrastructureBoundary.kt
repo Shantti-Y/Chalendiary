@@ -8,5 +8,9 @@ interface DiaryInfrastructureBoundary {
 
     fun selectDiaryById(diaryId: Int): Diary?
 
+    fun selectDiaryByUserIdAndPostedAt(userId: Int, postedAt: LocalDate): Diary?
+
     fun insertDiary(diary: Diary): Diary
+
+    fun updateDiary(diary: Diary): Diary
 }
