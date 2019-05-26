@@ -14,7 +14,7 @@ const functions = {
     tags: payload.tags
   }),
   setCurrentTagId: (state, payload) => ({
-      ...state,
+    ...state,
     currentTagId: payload.tagId
   }),
   updateTag: (state, payload) => {
