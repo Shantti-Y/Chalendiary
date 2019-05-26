@@ -21,4 +21,10 @@ class RootController(
         //teamUsecaseBoundary.getTeamByDomain(teamDomain, user)
         return "index"
     }
+
+    @GetMapping("/login")
+    fun login(
+    ): String{
+        return "index"
+    }
 }
