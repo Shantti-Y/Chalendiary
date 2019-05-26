@@ -40,38 +40,13 @@ class Main extends React.Component{
   }
 
   render(){
-    const {
-      me,
-      currentDate,
-      tags,
-      currentTagId,
-      users,
-      diaries
-    } = this.props;
-
     return(
       <div id="main">
-        <ForDesktop
-          me={me}
-          currentDate={currentDate}
-          tags={tags}
-          currentTagId={currentTagId}
-          users={users}
-          diaries={diaries}
-        />
+        <ForDesktop />
       </div>
     )
   }
 }
-
-const mapStateToProps = state => ({
-  me: state.me.me,
-  currentDate: state.date.currentDate,
-  users: state.user.users,
-  tags: state.tag.tags,
-  currentTagId: state.tag.currentTagId,
-  diaries: state.diary.diaries
-});
 
 const mapDispatchToProps = dispatch => ({
   onInitialize: () => {
@@ -87,4 +62,4 @@ const mapDispatchToProps = dispatch => ({
   onReceiveEditReply: data => dispatch(receiveEditReply({ data }))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(null, mapDispatchToProps)(Main);
