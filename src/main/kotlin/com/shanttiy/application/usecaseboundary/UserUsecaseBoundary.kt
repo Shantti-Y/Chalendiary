@@ -7,7 +7,7 @@ interface UserUsecaseBoundary {
 
     fun findUserById(userId: Int?): User
 
-    fun findUserByUniqueId(uniqueId: String?): User
+    fun findUserByToken(authorization: String): User
 
     fun findUsersByTagId(tagId: Int?): List<User>
 }

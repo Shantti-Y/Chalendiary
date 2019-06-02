@@ -19,9 +19,9 @@ class MeApiV1Controller(
 ){
     @GetMapping("")
     fun getMyInformation(
-        @RequestHeader("uid") uniqueId: String
+        @RequestHeader("Authorization") authorization: String
     ): UserResponsedata{
-        val user = userUsecaseBoundary.findUserByUniqueId(uniqueId)
+        val user = userUsecaseBoundary.findUserByToken(authorization)
         val userPropertydata = fullUserPropertydataFactory.construct(user)
         return UserResponsedata(userPropertydata)
     }

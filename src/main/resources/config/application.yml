@@ -13,3 +13,5 @@ server:
   port: 3000
 doma:
   dialect: postgres
+firebase:
+  authpath: ${GOOGLE_APPLICATION_CREDENTIALS:}

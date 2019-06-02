@@ -2,11 +2,14 @@ package com.shanttiy.usecase.interactor
 
 import com.shanttiy.application.usecaseboundary.UserUsecaseBoundary
 import com.shanttiy.domain.model.User
+import com.shanttiy.infrastructure.firebase.FirebaseAppInstance
+import com.shanttiy.usecase.exception.AccessForbiddenException
 import com.shanttiy.usecase.exception.RecordNotfoundException
 import com.shanttiy.usecase.infrastructureboundary.UserInfrastructureBoundary
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.crossstore.ChangeSetPersister
 import org.springframework.stereotype.Service
+import java.lang.IllegalArgumentException
 import java.security.InvalidParameterException
 
 @Service
@@ -23,10 +26,16 @@ class UserInteractor(
         if(user != null) return user else throw RecordNotfoundException()
     }
 
-    override fun findUserByUniqueId(uniqueId: String?): User {
-        if (uniqueId === null) throw InvalidParameterException()
-        val user = userInfrastructureBoundary.selectUserByUniqueId(uniqueId)
-        if(user != null) return user else throw RecordNotfoundException()
+    override fun findUserByToken(authorization: String): User {
+        try {
+            val token = authorization.substring("Bearer".length).trim()
+            val decodedToken = FirebaseAppInstance.auth().verifyIdToken(token)
+            val uniqueId = decodedToken.uid
+            val user = userInfrastructureBoundary.selectUserByUniqueId(uniqueId)
+            if(user != null) return user else throw AccessForbiddenException() // TODO: Authはあるがユーザがない場合は403以外のステータスを返す
+        } catch(e: IllegalArgumentException){
+            throw AccessForbiddenException()
+        }
     }
 
     override fun findUsersByTagId(tagId: Int?): List<User> {

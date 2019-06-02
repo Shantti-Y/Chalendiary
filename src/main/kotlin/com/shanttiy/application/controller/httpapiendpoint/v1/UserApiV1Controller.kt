@@ -16,9 +16,9 @@ class UserApiV1Controller(
 ){
     @GetMapping("")
     fun getAllUsers(
-        @RequestHeader("uid") uniqueId: String
+        @RequestHeader("Authorization") authorization: String
     ): UsersResponsedata{
-        val user = userUsecaseBoundary.findUserByUniqueId(uniqueId)
+        val user = userUsecaseBoundary.findUserByToken(authorization)
         val users = userUsecaseBoundary.findAllUsers()
         val userPropertydatas = users.map { user -> fullUserPropertydataFactory.construct(user) }
         return UsersResponsedata(userPropertydatas)

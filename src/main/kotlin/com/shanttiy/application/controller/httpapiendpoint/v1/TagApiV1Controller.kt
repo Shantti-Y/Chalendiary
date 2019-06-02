@@ -20,9 +20,9 @@ class TagApiV1Controller(
 
     @GetMapping("")
     fun getMyTags(
-        @RequestHeader("uid") uniqueId: String
+        @RequestHeader("Authorization") authorization: String
     ): TagsResponsedata {
-        val user = userUsecaseBoundary.findUserByUniqueId(uniqueId)
+        val user = userUsecaseBoundary.findUserByToken(authorization)
 
         val tags = tagUsecaseBoundary.findTagsByUserId(user.id)
 

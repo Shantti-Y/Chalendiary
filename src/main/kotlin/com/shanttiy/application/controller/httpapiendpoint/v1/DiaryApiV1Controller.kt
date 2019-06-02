@@ -31,9 +31,9 @@ class DiaryApiV1Controller(
     @GetMapping("/date")
     fun getDiariesInDay(
         @RequestParam(name = "date") date: String,
-        @RequestHeader("uid") uniqueId: String
+        @RequestHeader("Authorization") authorization: String
     ): DiariesInDayResponsedata {
-        val user = userUsecaseBoundary.findUserByUniqueId(uniqueId)
+        val user = userUsecaseBoundary.findUserByToken(authorization)
 
         val diaries = diaryUsecaseBoundary.findDiariesInDay(date)
 
@@ -47,9 +47,9 @@ class DiaryApiV1Controller(
     @GetMapping("/month")
     fun getDiariesInMonth(
         @RequestParam(name = "date") date: String,
-        @RequestHeader("uid") uniqueId: String
+        @RequestHeader("Authorization") authorization: String
     ): DiariesInMonthResponsedata {
-        val user = userUsecaseBoundary.findUserByUniqueId(uniqueId)
+        val user = userUsecaseBoundary.findUserByToken(authorization)
 
         val diaries = diaryUsecaseBoundary.findDiariesInMonth(date)
 
