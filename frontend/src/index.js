@@ -1,24 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route } from 'react-router-dom';
-
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 
 import store from '@store';
-import Main from '@routes/Main';
-import Login from '@routes/Login';
+import Routes from '@routes/root';
 
-import '@assets/stylesheets/reset.scss';
+import firebase from '@utils/firebase';
 
-const App = () => {
-  return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <Route path="/" exact component={Main} />
-        <Route path="/login" exact component={Login} />
-      </BrowserRouter>
-    </Provider>
-  );
-};
+const initializeApp = () => {
+  const App = () => {
+    return (
+      <Provider store={store}>
+        <Routes />
+      </Provider>
+    );
+  };
+  ReactDOM.render(<App />, document.getElementById('app'));
+}
 
-ReactDOM.render(<App />, document.getElementById('app'));
+firebase.onAuthStateChanged(() => initializeApp());

@@ -8,11 +8,11 @@ import Info from '@material-ui/icons/Info';
 import * as actions from '@store/actions/ui/snackbar';
 
 // TODO Use Enum when TypeScript is applied
-const variants = {
-  success: { color: 'success', icon: <CheckCircle /> },
-  warning: { color: 'warning', icon: <Warning /> },
-  error: { color: 'error', icon: <Error /> },
-  info: { color: 'info', icon: <Info /> }
+export const snackbarVariants = {
+  SUCCESS: { color: 'success', icon: <CheckCircle /> },
+  WARNING: { color: 'warning', icon: <Warning /> },
+  DANGER: { color: 'danger', icon: <Error /> },
+  INFO: { color: 'info', icon: <Info /> }
 }
 
 const initialState = {
@@ -38,8 +38,7 @@ const functions = {
   setVariant: (state, payload) => {
     return {
       ...state,
-      icon: variants[payload.variant].icon,
-      color: variants[payload.variant].color
+      ...snackbarVariants[payload.variant]
     }
   }
 }

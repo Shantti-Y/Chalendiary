@@ -1,4 +1,4 @@
-import { put, all, takeLatest, call, select } from 'redux-saga/effects';
+import { put, all, takeLatest, select } from 'redux-saga/effects';
 import {
   OPEN_SNACKBAR,
   CLOSE_SNACKBAR,
@@ -6,6 +6,13 @@ import {
   setMessage,
   setVariant
 } from '@store/actions/ui/snackbar';
+
+import { applyStatus } from '@store/actions/util/appStatus';
+
+import { snackbarVariants } from '@store/reducers/ui/snackbar';
+import { appStatuses } from '@store/reducers/util/appStatus';
+
+const getState = state => state.ui.snackbar;
 
 // APIs
 function* invokeOpenSnackbar(action) {
@@ -16,6 +23,11 @@ function* invokeOpenSnackbar(action) {
 }
 
 function* invokeCloseSnackbar(action) {
+  const { color } = yield select(getState);
+  if (color === snackbarVariants.DANGER.color) {
+    yield put(applyStatus({ status: appStatuses.DANGER }));
+  }
+
   yield put(setMessage({ message: '' }));
   yield put(setOpened({ opened: false }));
 }
@@ -26,7 +38,7 @@ function* watchAsyncTriggers() {
   yield takeLatest(CLOSE_SNACKBAR, invokeCloseSnackbar);
 }
 
-export default function* uiSnackbarSaga() {
+export default function* snackbarSaga() {
   yield all([
     watchAsyncTriggers()
   ]);

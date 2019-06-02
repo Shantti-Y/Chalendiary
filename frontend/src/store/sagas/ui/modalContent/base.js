@@ -32,7 +32,7 @@ function* watchAsyncTriggers() {
   yield takeLatest(SET_REPLY_FORM_CONTENT, invokeSetReplyFormContent);
 }
 
-export default function* uiModalContentSaga() {
+export default function* baseSaga() {
   yield all([
     watchAsyncTriggers()
   ]);

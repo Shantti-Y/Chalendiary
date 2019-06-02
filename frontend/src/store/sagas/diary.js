@@ -1,6 +1,4 @@
-import { put, all, takeLatest, call, select } from 'redux-saga/effects';
-import httpClient from '@client/http';
-import stompClient from '@client/stomp';
+import { put, all, takeLatest, select } from 'redux-saga/effects';
 
 import {
   SEARCH_DIARIES_IN_DATE,
@@ -14,19 +12,26 @@ import {
   setCurrentDiaryId
 } from '@store/actions/diary';
 
+import { applyHttpGet } from '@store/actions/util/http';
+import { client } from '@utils/client/stomp';
+
 const getState = state => state.diary;
 
 // APIs
 function* invokeSearchDiariesInDate(action){
   const { date } = action.payload;
-  const { data } = yield call(httpClient.get, `/diaries/month`, { params: { date: date.format('YYYY-MM-DD') } });
-  yield put(setDiaries(data));
+  const url = `/diaries/month`;
+  const options = { params: { date: date.format('YYYY-MM-DD') } };
+  const callback = function* (data) { yield put(setDiaries(data)) };
+  yield put(applyHttpGet({ url, options, callback }));
 }
 
 function* invokeSearchDiariesInMonth(action){
   const { date } = action.payload;
-  const { data } = yield call(httpClient.get, `/diaries/month`, { params: { date: date.format('YYYY-MM') } });
-  yield put(setDiaries(data));
+  const url = `/diaries/month`;
+  const options = { params: { date: date.format('YYYY-MM') } };
+  const callback = function* (data) { yield put(setDiaries(data)) };
+  yield put(applyHttpGet({ url, options, callback }));
 }
 
 function* invokeSetCurrentDiaryId(action) {
@@ -37,12 +42,12 @@ function* invokeSetCurrentDiaryId(action) {
 
 function* invokeAddNewDiary(action) {
   const { diary } = action.payload;
-  stompClient.send('/portal/v1/diaries/new', ...[{}, JSON.stringify({ diary })]);
+  client().send('/portal/v1/diaries/new', ...[{}, JSON.stringify({ diary })]);
 }
 
 function* invokeUpdateDiary(action) {
   const { diary } = action.payload;
-  stompClient.send('/portal/v1/diaries/edit', ...[{}, JSON.stringify({ diary })]);
+  client().send('/portal/v1/diaries/edit', ...[{}, JSON.stringify({ diary })]);
 }
 
 function* invokeReceiveNewDiary(action) {

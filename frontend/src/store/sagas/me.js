@@ -1,17 +1,17 @@
-import { put, all, takeLatest, call } from 'redux-saga/effects';
+import { put, all, takeLatest } from 'redux-saga/effects';
 
-import httpClient from '@client/http';
 import {
   FETCH_ME,
-  succeedFetchMe,
-  failFetchMe,
   setMe
 } from '@store/actions/me';
+import { applyHttpGet } from '@store/actions/util/http';
 
 // APIs
 function* invokeFetchMe(action){
-  const { data } = yield call(httpClient.get, `/me`);
-  yield put(setMe(data));
+  const url = '/me';
+  const options = {};
+  const callback = function*(data) { yield put(setMe(data)) };
+  yield put(applyHttpGet({ url, options, callback }));
 }
 
 // Bundle api functions to watcher and saga

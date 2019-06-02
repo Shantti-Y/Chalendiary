@@ -1,7 +1,5 @@
 import { put, all, takeLatest, call } from 'redux-saga/effects';
 
-import httpClient from '@client/http';
-import stompClient from '@client/stomp';
 import {
   FETCH_REPLIES,
   ADD_NEW_REPLY,
@@ -15,21 +13,26 @@ import {
   receiveEditDiary
 } from '@store/actions/diary';
 
+import { applyHttpGet } from '@store/actions/util/http';
+import { client } from '@utils/client/stomp';
+
 // APIs
 function* invokeFetchReplies(action){
   const { postId } = action.payload;
-  const { data } = yield call(httpClient.get, `/replies/${postId}`);
-  yield put(setReplies(data));
+  const url = `/replies/${postId}`;
+  const options = {};
+  const callback = function* (data) { yield put(setReplies(data)) };
+  yield put(applyHttpGet({ url, options, callback }));
 }
 
 function* invokeAddNewReply(action) {
   const { reply } = action.payload;
-  stompClient.send('/portal/v1/replies/new', ...[{}, JSON.stringify({ reply })]);
+  client().send('/portal/v1/replies/new', ...[{}, JSON.stringify({ reply })]);
 }
 
 function* invokeUpdateReply(action) {
   const { reply } = action.payload;
-  stompClient.send('/portal/v1/replies/edit', ...[{}, JSON.stringify({ reply })]);
+  client().send('/portal/v1/replies/edit', ...[{}, JSON.stringify({ reply })]);
 }
 
 function* invokeReceiveNewReply(action) {

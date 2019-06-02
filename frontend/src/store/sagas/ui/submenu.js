@@ -20,7 +20,7 @@ function* watchAsyncTriggers() {
   yield takeLatest(SET_DIARY_DETAIL_COMPONENT, invokeSetCurrentComponentName);
 }
 
-export default function* uiSubmenuSaga() {
+export default function* submenuSaga() {
   yield all([
     watchAsyncTriggers()
   ]);

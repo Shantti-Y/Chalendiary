@@ -42,7 +42,7 @@ function* watchAsyncTriggers() {
   yield takeLatest(CHANGE_INPUT_ATTRIBUTES, invokeChangeInputAttributes)
 }
 
-export default function* uiDiaryFormSaga() {
+export default function* diaryFormSaga() {
   yield all([
     watchAsyncTriggers()
   ]);

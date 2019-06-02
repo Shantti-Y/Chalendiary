@@ -1,22 +1,23 @@
 import { put, all, takeLatest, call, select } from 'redux-saga/effects';
 
-import httpClient from '@client/http';
 import {
   FETCH_TAGS,
   CHANGE_CURRENT_TAG_ID,
   fetchTags,
-  succeedFetchTags,
-  failFetchTags,
   setTags,
   setCurrentTagId
 } from '@store/actions/tag';
+
+import { applyHttpGet } from '@store/actions/util/http';
 
 const getState = state => state.tag;
 
 // APIs
 function* invokeFetchTags(){
-  const { data } = yield call(httpClient.get, `/tags`);
-  yield put(setTags(data));
+  const url = `/tags`;
+  const options = {};
+  const callback = function* (data) { yield put(setTags(data)) };
+  yield put(applyHttpGet({ url, options, callback }));
 }
 
 function* invokeChangeCurrentTagId(action){

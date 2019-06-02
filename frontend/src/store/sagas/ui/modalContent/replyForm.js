@@ -14,6 +14,7 @@ import {
   addNewReply,
   updateReply
 } from '@store/actions/reply';
+import { snackbarVariants } from '@store/reducers/ui/snackbar';
 
 // APIs
 function* invokeChangeInputAttributes(action) {
@@ -26,11 +27,11 @@ function* invokeSubmitInput(action) {
   if (input.id) {
     yield put(updateReply({ reply: newInput }));
     // TODO handle actions depending on result of adding new diary
-    yield put(openSnackbar({ message: "Updated The New Reply!", variant: 'success' }));
+    yield put(openSnackbar({ message: "Updated The New Reply!", variant: snackbarVariants.SUCCESS }));
   } else {
     yield put(addNewReply({ reply: newInput }));
     // TODO handle actions depending on result of adding new diary
-    yield put(openSnackbar({ message: "Posted A Reply!", variant: 'success' }));
+    yield put(openSnackbar({ message: "Posted A Reply!", variant: snackbarVariants.SUCCESS }));
   }
 
   yield put(closeModalContent());
@@ -42,7 +43,7 @@ function* watchAsyncTriggers() {
   yield takeLatest(CHANGE_INPUT_ATTRIBUTES, invokeChangeInputAttributes)
 }
 
-export default function* uiReplyFormSaga() {
+export default function* replyFormSaga() {
   yield all([
     watchAsyncTriggers()
   ]);

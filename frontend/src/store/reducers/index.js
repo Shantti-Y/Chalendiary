@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
 import ui from '@store/reducers/ui';
+import util from '@store/reducers/util';
 
 import date from '@store/reducers/date';
 import diary from '@store/reducers/diary';
@@ -11,6 +12,7 @@ import reply from '@store/reducers/reply';
 
 const reducer = combineReducers({
   ui,
+  util,
   date,
   diary,
   me,
@@ -19,4 +21,4 @@ const reducer = combineReducers({
   reply
 });
 
-export default reducer
+export default reducer;

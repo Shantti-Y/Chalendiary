@@ -1,5 +1,6 @@
 import { all } from 'redux-saga/effects';
 
+import utilSaga from '@store/sagas/util';
 import uiSaga from '@store/sagas/ui';
 
 import dateSaga from '@store/sagas/date';
@@ -11,6 +12,7 @@ import userSaga from '@store/sagas/user';
 
 export default function* rootSaga(){
   yield all([
+    ...utilSaga(),
     ...uiSaga(),
     ...dateSaga(),
     ...diarySaga(),
