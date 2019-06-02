@@ -67,7 +67,6 @@ dependencies {
     // Returning response as JSON
     compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.8"
 
-
     //Building in Kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
@@ -76,12 +75,8 @@ dependencies {
     testCompile "org.springframework.boot:spring-boot-starter-test"
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
-    // Websocket on client side
-    compile "org.webjars:webjars-locator-core"
-    compile "org.webjars:sockjs-client:1.0.2"
-    compile "org.webjars:stomp-websocket:2.3.3"
-    compile "org.webjars:bootstrap:3.3.7"
-    compile "org.webjars:jquery:3.1.0"
+    // Authentication
+    implementation 'com.google.firebase:firebase-admin:6.8.1'
 }
 
 flyway {

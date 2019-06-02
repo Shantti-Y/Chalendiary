@@ -1,10 +1,11 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import './style.scss';
 
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import stompClient from '@client/stomp';
+import { connectWebSocketToServer, subscribeReceivedEvent } from '@utils/client/stomp';
 
 import { fetchMe } from '@store/actions/me';
 import { fetchUsers } from '@store/actions/user';
@@ -14,6 +15,9 @@ import { fetchTags } from '@store/actions/tag';
 
 import ForDesktop from '@routes/Main/ForDesktop';
 
+import { appStatuses } from '@store/reducers/util/appStatus';
+
+
 class Main extends React.Component{
 
   constructor(props){
@@ -22,31 +26,37 @@ class Main extends React.Component{
 
   componentDidMount(){
     this.props.onInitialize();
-    stompClient.connect('1', 'password', async frame => {
-      console.log('Connected: ' + frame);
-      stompClient.subscribe('/socket/diaries/new', response => {
-        this.props.onReceiveNewDiary(JSON.parse(response.body));
-      });
-      stompClient.subscribe('/socket/diaries/edit', response => {
-        this.props.onReceiveEditDiary(JSON.parse(response.body));
-      });
-      stompClient.subscribe('/socket/replies/new', response => {
-        this.props.onReceiveNewReply(JSON.parse(response.body));
-      });
-      stompClient.subscribe('/socket/replies/edit', response => {
-        this.props.onReceiveEditReply(JSON.parse(response.body));
-      });
-    });
+  }
+
+  componentDidUpdate(prevProps){
+    if(prevProps.me.id !== this.props.me.id){
+      connectWebSocketToServer(this.props.me.id,  () => {
+        subscribeReceivedEvent('/socket/diaries/new', this.props.onReceiveNewDiary);
+        subscribeReceivedEvent('/socket/diaries/edit', this.props.onReceiveEditDiary);
+        subscribeReceivedEvent('/socket/replies/new', this.props.onReceiveNewReply);
+        subscribeReceivedEvent('/socket/replies/edit', this.props.onReceiveEditReply);
+      })
+    }
   }
 
   render(){
-    return(
-      <div id="main">
-        <ForDesktop />
-      </div>
-    )
+    if (this.props.appStatus === appStatuses.DANGER){
+      return <Redirect to="/signin" />;
+    }else{
+      return (
+        <div id="main">
+          <ForDesktop />
+        </div>
+      )
+    }
+
   }
 }
+
+const mapStateToProps = state => ({
+  appStatus: state.util.appStatus.status,
+  me: state.me.me
+});
 
 const mapDispatchToProps = dispatch => ({
   onInitialize: () => {
@@ -62,4 +72,4 @@ const mapDispatchToProps = dispatch => ({
   onReceiveEditReply: data => dispatch(receiveEditReply({ data }))
 });
 
-export default connect(null, mapDispatchToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

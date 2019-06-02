@@ -8,3 +8,4 @@ gen
 .classpath
 .project
 .env
+firebase.json
