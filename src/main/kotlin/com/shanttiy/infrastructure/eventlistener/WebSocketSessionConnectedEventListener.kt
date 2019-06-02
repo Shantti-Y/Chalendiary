@@ -1,5 +1,6 @@
 package com.shanttiy.infrastructure.eventlistener
 
+import com.shanttiy.infrastructure.firebase.FirebaseAppInstance
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationListener
 import org.springframework.messaging.simp.SimpMessagingTemplate
@@ -18,10 +19,6 @@ class WebSocketSessionConnectedEventListener(
 
     override fun onApplicationEvent(event: SessionConnectEvent) {
         println("Session Connected\n")
-        val headers = StompHeaderAccessor.wrap(event.getMessage())
-        println("Activities increased!!")
-        println(userRegistry.getUsers())
-        val loginId = headers.getNativeHeader("login")
-        messagingTemplate.convertAndSend("/chat/activities", loginId)
+        val headers = StompHeaderAccessor.wrap(event.message)
     }
 }

@@ -8,9 +8,10 @@ import org.springframework.web.socket.messaging.SessionDisconnectEvent
 class WebSocketSessionDisconnectedEventListener(): ApplicationListener<SessionDisconnectEvent> {
 
     override fun onApplicationEvent(event: SessionDisconnectEvent) {
-        println("Session Connected\n")
-        println("Message: ${event.getMessage()}\n")
-        println("User: ${event.getUser()}\n")
-        println("Source: ${event.getSource()}\n")
+        println("Session DisConnected\n")
+        println("Message: ${event.message}\n")
+        println("User: ${event.user}\n")
+        println("Source: ${event.source}\n")
+        println("SessionId: ${event.sessionId}\n")
     }
 }
