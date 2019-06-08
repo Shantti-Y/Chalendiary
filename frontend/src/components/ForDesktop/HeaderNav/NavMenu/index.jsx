@@ -4,7 +4,7 @@ import './style.scss';
 import { connect } from 'react-redux';
 
 import { closeMenu } from '@store/actions/ui/headerNav/navMenu';
-import { setTagFormContent } from '@store/actions/ui/modalContent/base';
+import { setTagFormContent, setUserFormContent } from '@store/actions/ui/modalContent/base';
 
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -17,7 +17,8 @@ const NavMenu = ({
   anchorEl,
   onClose,
   onChoose,
-  onOpenTagForm
+  onOpenTagForm,
+  onOpenUserForm
 }) => {
 
   // TODO: try to move to another directory location
@@ -40,7 +41,7 @@ const NavMenu = ({
     >
       <MenuItem onClick={onChoose}>About Team</MenuItem>
       <MenuItem onClick={() => onOpenTagForm(me)}>Create New Tag</MenuItem>
-      <MenuItem onClick={onChoose}>Profile</MenuItem>
+      <MenuItem onClick={() => onOpenUserForm(me)}>Profile</MenuItem>
       <MenuItem onClick={logout}>Logout</MenuItem>
     </Menu>
   )
@@ -55,9 +56,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onClose: () => dispatch(closeMenu()),
   onChoose: () => dispatch(closeMenu()),
-  onOpenTagForm: ownerUser => {
-    dispatch(setTagFormContent({ tag: { ownerUser }, userIds: [] }));
-  }
+  onOpenTagForm: ownerUser => dispatch(setTagFormContent({ tag: { ownerUser }, userIds: [] })),
+  onOpenUserForm: user => dispatch(setUserFormContent({ user }))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavMenu);
