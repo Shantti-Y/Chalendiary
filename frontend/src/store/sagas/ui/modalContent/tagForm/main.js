@@ -3,12 +3,11 @@ import {
   INITIALIZE_INPUT_ATTRIBUTES,
   CHANGE_INPUT_ATTRIBUTES,
   SUBMIT_INPUT,
-  SUBMIT_DELETE,
   ADD_USER_ID,
   REMOVE_USER_ID,
   setInput,
   setUserIds
-} from '@store/actions/ui/modalContent/tagForm';
+} from '@store/actions/ui/modalContent/tagForm/main';
 import {
   openSnackbar
 } from '@store/actions/ui/snackbar';
@@ -17,12 +16,11 @@ import {
 } from '@store/actions/ui/modalContent/base';
 import {
   addNewTag,
-  updateTag,
-  deleteTag
+  updateTag
 } from '@store/actions/tag';
 import { snackbarVariants } from '@store/reducers/ui/snackbar';
 
-const getState = state => state.ui.modalContent.tagForm;
+const getState = state => state.ui.modalContent.tagForm.main;
 
 // APIs
 function* invokeInitializeInputAttributes(action) {
@@ -50,32 +48,25 @@ function* invokeSubmitInput(action) {
   const newInput = Object.assign({}, input);
   if (input.id) {
     yield put(updateTag({ tag: newInput, userIds }));
-    // TODO handle actions depending on result of adding new diary
+    // TODO: create handling succeeded action into appstatus state
     yield put(openSnackbar({ message: `Updated ${input.name}!`, variant: snackbarVariants.SUCCESS }));
   } else {
     yield put(addNewTag({ tag: newInput, userIds }));
-    // TODO handle actions depending on result of adding new diary
     yield put(openSnackbar({ message: `Created ${input.name}!`, variant: snackbarVariants.SUCCESS }));
   }
 
   yield put(closeModalContent());
 }
 
-function* invokeSubmitDelete(action) {
-  const { input, userIds } = action.payload;
-
-  yield put(deleteTag({ tag: input, userIds }));
-}
-
 function* invokeAddUserId(action) {
   const { userId } = action.payload;
   const { userIds } = yield select(getState);
 
-  if(!userIds.some(id => id === userId)){
+  if (!userIds.some(id => id === userId)) {
     const newUserIds = Object.assign([], userIds);
     newUserIds.push(userId);
     yield put(setUserIds({ userIds: newUserIds }));
-  }else{
+  } else {
     yield put(setUserIds({ userIds }));
   }
 }
@@ -93,13 +84,12 @@ function* invokeRemoveUserId(action) {
 function* watchAsyncTriggers() {
   yield takeLatest(INITIALIZE_INPUT_ATTRIBUTES, invokeInitializeInputAttributes);
   yield takeLatest(SUBMIT_INPUT, invokeSubmitInput);
-  yield takeLatest(SUBMIT_DELETE, invokeSubmitDelete);
   yield takeLatest(CHANGE_INPUT_ATTRIBUTES, invokeChangeInputAttributes);
   yield takeLatest(ADD_USER_ID, invokeAddUserId);
   yield takeLatest(REMOVE_USER_ID, invokeRemoveUserId);
 }
 
-export default function* tagFormSaga() {
+export default function* mainSaga() {
   yield all([
     watchAsyncTriggers()
   ]);

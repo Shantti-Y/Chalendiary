@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 
-import * as actions from '@store/actions/ui/modalContent/tagForm';
+import * as actions from '@store/actions/ui/modalContent/tagForm/main';
 
 const initialState = {
   input: {
