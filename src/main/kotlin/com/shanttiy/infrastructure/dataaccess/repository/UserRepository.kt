@@ -33,4 +33,14 @@ class UserRepository(
         val userEntities = userDao.selectByTagId(tagId)
         return userEntities.map { entity -> userObjectMapper.mapEntityToDomain(entity) }
     }
+
+    override fun updateUser(user: User): User {
+        val userEntity = userDao.update(userObjectMapper.mapDomainToEntity(user)).entity
+        return userObjectMapper.mapEntityToDomain(userEntity)
+    }
+
+    override fun deleteUser(user: User): User {
+        val userEntity = userDao.delete(userObjectMapper.mapDomainToEntity(user)).entity
+        return userObjectMapper.mapEntityToDomain(userEntity)
+    }
 }

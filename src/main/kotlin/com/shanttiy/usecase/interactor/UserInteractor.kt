@@ -42,4 +42,14 @@ class UserInteractor(
         if (tagId === null) throw InvalidParameterException()
         return userInfrastructureBoundary.selectUserByTagId(tagId)
     }
+
+    override fun patchUser(user: User): User {
+        val searchedUser = userInfrastructureBoundary.selectUserById(user.id!!)
+        if (searchedUser != null) return userInfrastructureBoundary.updateUser(user) else throw InvalidParameterException()
+    }
+
+    override fun deleteUser(userId: Int): User {
+        val searchedUser = userInfrastructureBoundary.selectUserById(userId)
+        if (searchedUser != null) return userInfrastructureBoundary.deleteUser(searchedUser) else throw InvalidParameterException()
+    }
 }
