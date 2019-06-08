@@ -18,9 +18,6 @@ data class TagEntity(
     @Column(name = "name")
     val name: String,
 
-    @Column(name = "description")
-    val description: String,
-
     @Column(name = "public_flag")
     val publicFlag: Boolean,
 

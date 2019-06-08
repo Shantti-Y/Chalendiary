@@ -7,9 +7,8 @@ import { connect } from 'react-redux';
 import ForDesktop from './ForDesktop';
 import firebase, { googleAuthProvider } from '@utils/firebase';
 
-const Signin = ({}) => {
+const Signin = () => {
   const login = () => {
-    
     firebase.signInWithRedirect(googleAuthProvider)
       .then(a => {})
       .catch(error => {

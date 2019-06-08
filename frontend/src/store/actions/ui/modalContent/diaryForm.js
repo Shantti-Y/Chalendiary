@@ -1,5 +1,8 @@
 import { createAction } from 'redux-actions';
 
+export const INITIALIZE_INPUT_ATTRIBUTES = 'ui/modalContent/diaryForm/INITIALIZE_INPUT_ATTRIBUTES';
+export const initializeInputAttributes = createAction(INITIALIZE_INPUT_ATTRIBUTES);
+
 export const CHANGE_INPUT_ATTRIBUTES = 'ui/modalContent/diaryForm/CHANGE_INPUT_ATTRIBUTES';
 export const changeInputAttributes = createAction(CHANGE_INPUT_ATTRIBUTES);
 

@@ -17,7 +17,7 @@ const DiaryForm = ({
   onChangeValue,
   onSubmit
 }) => {
-  
+
   return(
     <>
       <DialogContent>
@@ -31,7 +31,7 @@ const DiaryForm = ({
           value={form.contentText}
           multiline
           fullWidth
-          onChange={e => onChangeValue(e.target.value)}
+          onChange={e => onChangeValue('contentText', e.target.value)}
         />
       </DialogContent>
       <DialogActions>
@@ -47,12 +47,12 @@ const DiaryForm = ({
 }
 
 const mapStateToProps = state => ({
-  form: state.ui.modalContent.diaryForm
+  form: state.ui.modalContent.diaryForm.input
 });
 
 const mapDispatchToProps = dispatch => ({
-  onChangeValue: contentText => dispatch(changeInputAttributes({ contentText })),
-  onSubmit: input => dispatch(submitInput({ input }))
+  onChangeValue: (key, value)  => dispatch(changeInputAttributes({ key, value })),
+  onSubmit: () => dispatch(submitInput())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DiaryForm);

@@ -31,7 +31,7 @@ const diaryDetail = ({
         {diary.replies.map(reply => <ReplyDetail reply={reply} />)}
       </ul>
       <div>
-        <Button><Create onClick={() => onOpenReplyModal(diary)} /></Button>
+        <Button><Create onClick={() => onOpenReplyModal(me.id, diary)} /></Button>
       </div>
     </div>
   )
@@ -44,11 +44,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onOpenDiaryModal: diary => {
-    diary.postedAt = moment(diary.postedAt);
-    dispatch(setDiaryFormContent({ diary }));
+    const newDiary = Object.assign({}, diary, { userId: diary.user.id, postedAt: moment(diary.postedAt) });
+    dispatch(setDiaryFormContent({ diary: newDiary }));
   },
-  onOpenReplyModal: diary => {
-    const reply = { id: null, diaryId: diary.id, contentText: '' };
+  onOpenReplyModal: (userId, diary) => {
+    const reply = { userId, diaryId: diary.id };
     dispatch(setReplyFormContent({ reply }));
   }
 });

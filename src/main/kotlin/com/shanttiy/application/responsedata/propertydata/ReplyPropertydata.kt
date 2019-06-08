@@ -8,6 +8,7 @@ import java.time.LocalDateTime
 
 class ReplyPropertydata(
     val id: Int?,
+    val diaryId: Int,
     val user: SimplifiedUserPropertydata,
     val contentText: String,
     val createdAt: LocalDateTime?,
@@ -25,6 +26,7 @@ class ReplyPropertydataFactory(
         val user = userUsecaseBoundary.findUserById(reply.userId)
         return ReplyPropertydata(
             id = reply.id,
+            diaryId = reply.diaryId,
             user = userPropertydataFactory.construct(user),
             contentText = reply.contentText,
             createdAt = reply.createdAt,

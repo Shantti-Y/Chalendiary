@@ -30,7 +30,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onModal: reply => dispatch(setReplyFormContent({ reply }))
+  onModal: reply => {
+    const newReply = Object.assign({}, reply, { diaryId: reply.diaryId, userId: reply.user.id });
+    dispatch(setReplyFormContent({ reply: newReply }));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(diaryDetail);

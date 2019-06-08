@@ -17,18 +17,16 @@ import Paper from '@material-ui/core/Paper';
 import DiaryCell from './DiaryCell';
 
 const DiaryTable = ({
-  me, currentDate, currentTagId, users, diaries, onInitialize
+  currentDate, currentTag, users, diaries, tags
 }) => {
-  onInitialize(me.id);
-
   const daysInMonth = currentDate.daysInMonth();
   const members = () => {
-    if (currentTagId === null) {
-      return users;
+    // TODO: currentTagIdを起動時にデフォルト値を設定してusersをpropsに渡さないようにする
+    if (currentTag) {
+      return currentTag.users;
+    } else {
+      return users
     }
-    return users.filter(user => {
-      return user.tags.map(tag => tag.id).includes(currentTagId)
-    });
   }
 
   const diaryTable = () => members().map(member => {
@@ -82,18 +80,15 @@ const DiaryTable = ({
 }
 
 const mapStateToProps = state => ({
-  me: state.me.me,
   currentDate: state.date.currentDate,
-  currentTagId: state.tag.currentTagId,
+  currentTag: state.tag.tags.find(tag => {
+    return tag.id === state.tag.currentTagId
+  }),
   users: state.user.users,
   diaries: state.diary.diaries
 });
 
 const mapDispatchToProps = dispatch => ({
-  onInitialize: userId => {
-    dispatch(changeReplyInputAttributes({ userId }));
-    dispatch(changeDiaryInputAttributes({ userId }))
-  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DiaryTable);

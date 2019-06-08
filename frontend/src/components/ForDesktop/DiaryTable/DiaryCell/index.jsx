@@ -31,7 +31,7 @@ const DiaryCell = ({
 
   const handleOpeningFormModal = () => {
     if (isYourDiary){
-      onOpenModal(postedAt, diaryText);
+      onOpenModal(me.id, postedAt, diaryText);
     }
   }
 
@@ -55,8 +55,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onOpenModal: (postedAt, contentText) => {
-    const diary = { id: null, postedAt, contentText }
+  onOpenModal: (userId, postedAt, contentText) => {
+    const diary = { userId, postedAt, contentText }
     dispatch(setDiaryFormContent({ diary }));
   },
   onOpenDiaryDetail: diaryId => {

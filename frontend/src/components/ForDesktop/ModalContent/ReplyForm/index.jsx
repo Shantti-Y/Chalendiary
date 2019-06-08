@@ -32,7 +32,7 @@ const ReplyForm = ({
           value={form.contentText}
           multiline
           fullWidth
-          onChange={e => onChangeValue(e.target.value)}
+          onChange={e => onChangeValue('contentText', e.target.value)}
         />
       </DialogContent>
       <DialogActions>
@@ -48,12 +48,12 @@ const ReplyForm = ({
 }
 
 const mapStateToProps = state => ({
-  form: state.ui.modalContent.replyForm,
+  form: state.ui.modalContent.replyForm.input,
   diary: state.diary.diaries.map(item => item.diaries).flat().find(diary => diary.id === state.diary.currentDiaryId)
 });
 
 const mapDispatchToProps = dispatch => ({
-  onChangeValue: contentText => dispatch(changeInputAttributes({ contentText })),
+  onChangeValue: (key, value) => dispatch(changeInputAttributes({ key, value })),
   onSubmit: input => dispatch(submitInput({ input }))
 });
 

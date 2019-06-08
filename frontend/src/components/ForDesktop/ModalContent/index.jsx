@@ -9,6 +9,7 @@ import { closeModalContent } from '@store/actions/ui/modalContent/base';
 
 import DiaryForm from './DiaryForm';
 import ReplyForm from './ReplyForm';
+import TagForm from './TagForm';
 
 const ModalContent = ({
   currentContentName,
@@ -17,7 +18,8 @@ const ModalContent = ({
 
   const contents = {
     'diaryForm': <DiaryForm onClose={onCloseModal} />,
-    'replyForm': <ReplyForm onClose={onCloseModal} />
+    'replyForm': <ReplyForm onClose={onCloseModal} />,
+    'tagForm': <TagForm onClose={onCloseModal} />
   }
 
   const opened = currentContentName !== null;

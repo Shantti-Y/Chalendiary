@@ -4,22 +4,23 @@ import moment from 'moment';
 import * as actions from '@store/actions/ui/modalContent/diaryForm';
 
 const initialState = {
-  id: null,
-  userId: null,
-  contentText: '',
-  postedAt: moment()
+  input: {
+    id: null,
+    userId: null,
+    contentText: '',
+    postedAt: moment()
+  }
 };
 
 const functions = {
-  setForm: (state, payload) => {
-    const newInput = Object.assign({}, state.input, payload);
+  setInput: (state, payload) => {
     return {
       ...state,
-      ...newInput
+      input: payload.input
     }
   }
 }
 
 export default handleActions({
-  [actions.SET_INPUT]: (state, action) => functions.setForm(state, action.payload)
+  [actions.SET_INPUT]: (state, action) => functions.setInput(state, action.payload)
 }, initialState);

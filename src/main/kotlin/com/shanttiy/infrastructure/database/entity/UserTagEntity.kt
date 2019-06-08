@@ -13,10 +13,10 @@ data class UserTagEntity(
     val id: Int? = null,
 
     @Column(name = "user_id")
-    val diaryId: Int,
+    val userId: Int,
 
     @Column(name = "tag_id")
-    val userId: Int,
+    val tagId: Int,
 
     @Column(name = "created_at")
     val createdAt: Timestamp? = null

@@ -5,4 +5,12 @@ import com.shanttiy.domain.model.User
 
 interface TagUsecaseBoundary {
     fun findTagsByUserId(userId: Int?): List<Tag>
+
+    fun postTag(tag: Tag): Tag
+
+    fun patchTag(tag: Tag): Tag
+
+    fun deleteTag(tag: Tag): Tag
+
+    fun associateUsersToTag(tagId: Int, inputUserIds: List<Int>): Boolean
 }

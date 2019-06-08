@@ -1,5 +1,7 @@
-import { put, all, takeLatest, call, select } from 'redux-saga/effects';
+import { put, all, takeLatest, select } from 'redux-saga/effects';
+import moment from 'moment';
 import {
+  INITIALIZE_INPUT_ATTRIBUTES,
   CHANGE_INPUT_ATTRIBUTES,
   SUBMIT_INPUT,
   setInput
@@ -15,13 +17,30 @@ import {
   updateDiary
 } from '@store/actions/diary';
 
+const getState = state => state.ui.modalContent.diaryForm;
+
 // APIs
+function* invokeInitializeInputAttributes(action) {
+  const { diary } = action.payload;
+  const newInput = Object.assign({}, {
+    id: null,
+    userId: null,
+    contentText: '',
+    postedAt: moment()
+  }, diary);
+  yield put(setInput({ input: newInput }));
+}
+
 function* invokeChangeInputAttributes(action) {
-  yield put(setInput({ ...action.payload }));
+  const { key, value } = action.payload;
+
+  const { input } = yield select(getState);
+  const newInput = Object.assign({}, input, { [key]: value });
+  yield put(setInput({ input: newInput }));
 }
 
 function* invokeSubmitInput(action) {
-  const { input } = action.payload;
+  const { input } = yield select(getState);
   const newInput = Object.assign({}, input, { postedAt: input.postedAt.format("YYYY-MM-DD") });
   if(input.id){
     yield put(updateDiary({ diary: newInput }));
@@ -38,8 +57,9 @@ function* invokeSubmitInput(action) {
 
 // Bundle api functions to watcher and saga
 function* watchAsyncTriggers() {
+  yield takeLatest(INITIALIZE_INPUT_ATTRIBUTES, invokeInitializeInputAttributes);
   yield takeLatest(SUBMIT_INPUT, invokeSubmitInput);
-  yield takeLatest(CHANGE_INPUT_ATTRIBUTES, invokeChangeInputAttributes)
+  yield takeLatest(CHANGE_INPUT_ATTRIBUTES, invokeChangeInputAttributes);
 }
 
 export default function* diaryFormSaga() {
