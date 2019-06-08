@@ -1,5 +1,6 @@
 package com.shanttiy.application.controller.websocketapiendpoint.v1
 
+import com.shanttiy.application.requestdata.OnlyIdRequestdata
 import com.shanttiy.application.requestdata.TagRequestdata
 import com.shanttiy.application.requestdata.propertydata.TagPropertydataAdapter
 import com.shanttiy.application.responsedata.TagResponsedata
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.messaging.handler.annotation.SendTo
 import org.springframework.stereotype.Controller
+import org.springframework.transaction.annotation.Transactional
 
 @Controller
 class TagWebSocketV1Controller(
@@ -22,6 +24,7 @@ class TagWebSocketV1Controller(
 ){
     @MessageMapping("/tags/new")
     @SendTo("/socket/tags/new")
+    @Transactional
     fun postNewTag(tagRequestdata: TagRequestdata): TagResponsedata {
         val tagData = tagPropertydataAdapter.construct(tagRequestdata.tag)
         val createdTag = tagUsecaseBoundary.postTag(tagData)
@@ -34,7 +37,8 @@ class TagWebSocketV1Controller(
 
     @MessageMapping("/tags/edit")
     @SendTo("/socket/tags/edit")
-    fun putNewTag(tagRequestdata: TagRequestdata): TagResponsedata {
+    @Transactional
+    fun putTag(tagRequestdata: TagRequestdata): TagResponsedata {
         val tagData = tagPropertydataAdapter.construct(tagRequestdata.tag)
         val updatedTag = tagUsecaseBoundary.patchTag(tagData)
 
@@ -46,11 +50,11 @@ class TagWebSocketV1Controller(
 
     @MessageMapping("/tags/destroy")
     @SendTo("/socket/tags/destroy")
-    fun deleteNewTag(tagRequestdata: TagRequestdata): TagResponsedata {
-        val tagData = tagPropertydataAdapter.construct(tagRequestdata.tag)
-        val deletedTag = tagUsecaseBoundary.deleteTag(tagData)
-        tagUsecaseBoundary.associateUsersToTag(deletedTag.id!!, listOf())
-
+    @Transactional
+    fun deleteTag(onlyIdRequestdata: OnlyIdRequestdata): TagResponsedata {
+        val tagId = onlyIdRequestdata.id
+        tagUsecaseBoundary.associateUsersToTag(tagId, listOf())
+        val deletedTag = tagUsecaseBoundary.deleteTag(tagId)
         return TagResponsedata(fullTagPropertydataFactory.construct(deletedTag))
     }
 }

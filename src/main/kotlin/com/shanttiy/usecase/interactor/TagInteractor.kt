@@ -31,12 +31,11 @@ class TagInteractor(
         if (searchedTag != null) return tagInfrastructureBoundary.updateTag(tag) else throw InvalidParameterException()
     }
 
-    override fun deleteTag(tag: Tag): Tag {
-        val searchedTag = tagInfrastructureBoundary.selectTagById(tag.id!!)
-        if (searchedTag != null) return tagInfrastructureBoundary.deleteTag(tag) else throw InvalidParameterException()
+    override fun deleteTag(tagId: Int): Tag {
+        val searchedTag = tagInfrastructureBoundary.selectTagById(tagId)
+        if (searchedTag != null) return tagInfrastructureBoundary.deleteTag(searchedTag) else throw InvalidParameterException()
     }
 
-    @Transactional
     override fun associateUsersToTag(tagId: Int, inputUserIds: List<Int>): Boolean {
         val searchedTag = tagInfrastructureBoundary.selectTagById(tagId)
         if (searchedTag != null) {

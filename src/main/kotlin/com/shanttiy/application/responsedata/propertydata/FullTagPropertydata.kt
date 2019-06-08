@@ -25,7 +25,7 @@ class FullTagPropertydataFactory(
 ){
     fun construct(tag: Tag): FullTagPropertydata{
         val users = userUsecaseBoundary.findUsersByTagId(tag.id)
-        val ownerUser = users.find { it.id === tag.ownerUserId }!!
+        val ownerUser = users.find { it.id === tag.ownerUserId } ?: userUsecaseBoundary.findUserById(tag.ownerUserId)
         return FullTagPropertydata(
             id = tag.id,
             name = tag.name,

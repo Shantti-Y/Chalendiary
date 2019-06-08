@@ -10,7 +10,7 @@ interface TagUsecaseBoundary {
 
     fun patchTag(tag: Tag): Tag
 
-    fun deleteTag(tag: Tag): Tag
+    fun deleteTag(tagId: Int): Tag
 
     fun associateUsersToTag(tagId: Int, inputUserIds: List<Int>): Boolean
 }
