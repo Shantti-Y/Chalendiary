@@ -9,6 +9,9 @@ export const changeTags = createAction(CHANGE_TAGS);
 export const CHANGE_CURRENT_TAG_ID = 'tag/CHANGE_CURRENT_TAG_ID';
 export const changeCurrentTagId = createAction(CHANGE_CURRENT_TAG_ID);
 
+export const CHANGE_TO_DEFAULT_TAG_ID = 'tag/CHANGE_TO_DEFAULT_TAG_ID';
+export const changeToDefaultTagId = createAction(CHANGE_TO_DEFAULT_TAG_ID);
+
 export const ADD_NEW_TAG = 'tag/ADD_NEW_TAG';
 export const addNewTag = createAction(ADD_NEW_TAG);
 

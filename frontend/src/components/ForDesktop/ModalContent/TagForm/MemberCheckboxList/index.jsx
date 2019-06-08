@@ -14,7 +14,7 @@ import Avatar from '@material-ui/core/Avatar';
 import {
   addUserId,
   removeUserId
-} from '@store/actions/ui/modalContent/tagForm';
+} from '@store/actions/ui/modalContent/tagForm/main';
 
 const MemberCheckboxList = ({
   userIds,
@@ -45,7 +45,7 @@ const MemberCheckboxList = ({
 }
 
 const mapStateToProps = state => ({
-  userIds: state.ui.modalContent.tagForm.userIds,
+  userIds: state.ui.modalContent.tagForm.main.userIds,
   users: state.user.users
 });
 

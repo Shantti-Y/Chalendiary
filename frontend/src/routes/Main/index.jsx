@@ -38,7 +38,7 @@ class Main extends React.Component{
 
         subscribeReceivedEvent('/socket/tags/new', this.props.onReceiveNewTag);
         subscribeReceivedEvent('/socket/tags/edit', this.props.onReceiveEditTag);
-        subscribeReceivedEvent('/socket/tags/delete', this.props.onReceiveDeleteTag);
+        subscribeReceivedEvent('/socket/tags/destroy', this.props.onReceiveDeleteTag);
       })
     }
   }

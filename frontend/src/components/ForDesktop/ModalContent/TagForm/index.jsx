@@ -15,18 +15,23 @@ import Checkbox from '@material-ui/core/Checkbox';
 import {
   changeInputAttributes,
   submitInput
-} from '@store/actions/ui/modalContent/tagForm';
+} from '@store/actions/ui/modalContent/tagForm/main';
+import { openDeleteconfirmation } from '@store/actions/ui/modalContent/tagForm/deleteConfirmation';
 
+import DeleteConfirmation from './DeleteConfirmation';
 import MemberCheckboxList from './MemberCheckboxList';
 
 const TagForm = ({
   form,
   onClose,
   onChangeValue,
-  onSubmit
+  onSubmit,
+  onOpenDeleteForm
 }) => {
 
-  const dialogName = form.id ? `Edit Tag` : 'Create New Tag';
+  const isEdit = form.id
+
+  const dialogName = isEdit ? `Edit Tag` : 'Create New Tag';
 
   return (
     <>
@@ -57,18 +62,23 @@ const TagForm = ({
       <DialogActions>
         <Button onClick={onClose} color="primary">Cancel</Button>
         <Button onClick={() => onSubmit(form)} color="primary">Submit</Button>
+        {
+          isEdit ? <Button onClick={() => onOpenDeleteForm(form.id)}>Delete</Button> : null
+        }
       </DialogActions>
+      <DeleteConfirmation />
     </>
   )
 }
 
 const mapStateToProps = state => ({
-  form: state.ui.modalContent.tagForm.input
+  form: state.ui.modalContent.tagForm.main.input
 });
 
 const mapDispatchToProps = dispatch => ({
   onChangeValue: (key, value) => dispatch(changeInputAttributes({ key, value })),
-  onSubmit: () => dispatch(submitInput())
+  onSubmit: () => dispatch(submitInput()),
+  onOpenDeleteForm: tagId => dispatch(openDeleteconfirmation({ tagId }))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TagForm);

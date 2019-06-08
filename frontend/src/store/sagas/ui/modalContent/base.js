@@ -8,7 +8,7 @@ import {
 } from '@store/actions/ui/modalContent/base';
 import { initializeInputAttributes as initializeDiaryAttributes } from '@store/actions/ui/modalContent/diaryForm';
 import { initializeInputAttributes as initializeReplyAttributes } from '@store/actions/ui/modalContent/replyForm';
-import { initializeInputAttributes as initializeTagAttributes } from '@store/actions/ui/modalContent/tagForm';
+import { initializeInputAttributes as initializeTagAttributes } from '@store/actions/ui/modalContent/tagForm/main';
 
 // APIs
 function* invokeCloseDiaryFormContent() {
