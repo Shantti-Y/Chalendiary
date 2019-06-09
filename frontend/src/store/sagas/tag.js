@@ -51,7 +51,6 @@ function* invokeChangeToDefaultTagId(action) {
 
 function* invokeAddNewTag(action) {
   const { tag, userIds } = action.payload;
-  
   client().send('/portal/v1/tags/new', ...[{}, JSON.stringify({ tag, userIds })]);
 }
 

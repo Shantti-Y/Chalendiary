@@ -10,4 +10,10 @@ interface UserUsecaseBoundary {
     fun findUserByToken(authorization: String): User
 
     fun findUsersByTagId(tagId: Int?): List<User>
+
+    fun authenticateUser(authorization: String): String
+
+    fun patchUser(user: User): User
+
+    fun deleteUser(userId: Int): User
 }

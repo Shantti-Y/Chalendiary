@@ -32,4 +32,9 @@ class RootController(
     fun signin(): String{
         return "index"
     }
+
+    @GetMapping("/activation")
+    fun activation(): String{
+        return "index"
+    }
 }

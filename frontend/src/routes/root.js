@@ -9,25 +9,56 @@ import '@assets/stylesheets/reset.scss';
 
 import firebase from '@utils/firebase';
 
-const Root = () => {
-  const currentUser = firebase.currentUser;
-  const RouteWithAuth = Component => {
-    if(currentUser){
-      return <Component />
-    } else {
-      return <Redirect to="/signin" />
+import { applyStatus, authenticateSession } from '@store/actions/util/sessionStatus';
+import { sessionStatuses } from '@store/reducers/util/sessionStatus';
+class Root extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    if(firebase.currentUser){
+      this.props.onAuthenticate();
+    }else{
+      this.props.onLoggedOut();
     }
   }
 
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/" exact render={() => RouteWithAuth(Main)} />
-        <Route path="/signin" exact render={() => <Signin />} />
-      </Switch>
-    </BrowserRouter>
-  )
-};
+  render(){
+    const { sessionStatus } = this.props;
+    const RouteWithAuth = Component => {
+      if (sessionStatus === sessionStatuses.LOGGED_IN) {
+        return <Component />
+      } else {
+        return <Redirect to="/signin" />
+      }
+    }
+
+    if (sessionStatus !== sessionStatuses.START_UP){
+      return (
+        <BrowserRouter>
+          <Switch>
+            <Route path="/" exact render={() => RouteWithAuth(Main)} />
+            <Route path="/signin" exact render={() => <Signin />} />
+          </Switch>
+        </BrowserRouter>
+      )
+    }else{
+      return (
+        <div>waiting...</div>
+      )
+    }
+  }
+}
+
+const mapStateToProps = state => ({
+  sessionStatus: state.util.sessionStatus.status
+});
+
+const mapDispatchToProps = dispatch => ({
+  onAuthenticate: () => dispatch(authenticateSession()),
+  onLoggedOut: () => dispatch(applyStatus({ status: sessionStatuses.LOGGED_OUT }))
+});
 
 
-export default connect(null, null)(Root);
+export default connect(mapStateToProps, mapDispatchToProps)(Root);
