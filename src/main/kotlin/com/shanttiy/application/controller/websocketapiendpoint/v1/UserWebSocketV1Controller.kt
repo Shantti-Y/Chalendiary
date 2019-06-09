@@ -1,15 +1,10 @@
 package com.shanttiy.application.controller.websocketapiendpoint.v1
 
 import com.shanttiy.application.requestdata.OnlyIdRequestdata
-import com.shanttiy.application.requestdata.TagRequestdata
 import com.shanttiy.application.requestdata.UserRequestdata
-import com.shanttiy.application.requestdata.propertydata.TagPropertydataAdapter
 import com.shanttiy.application.requestdata.propertydata.UserPropertydataAdapter
-import com.shanttiy.application.responsedata.TagResponsedata
-import com.shanttiy.application.responsedata.UserResponsedata
-import com.shanttiy.application.responsedata.propertydata.FullTagPropertydataFactory
+import com.shanttiy.application.responsedata.FullUserResponsedata
 import com.shanttiy.application.responsedata.propertydata.FullUserPropertydataFactory
-import com.shanttiy.application.usecaseboundary.TagUsecaseBoundary
 import com.shanttiy.application.usecaseboundary.UserUsecaseBoundary
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.messaging.handler.annotation.MessageMapping
@@ -27,23 +22,24 @@ class UserWebSocketV1Controller(
     private val fullUserPropertydataFactory: FullUserPropertydataFactory
 
 ){
+
     @MessageMapping("/users/edit")
     @SendTo("/socket/users/edit")
     @Transactional
-    fun putUser(userRequestdata: UserRequestdata): UserResponsedata {
+    fun putUser(userRequestdata: UserRequestdata): FullUserResponsedata {
         val userData = userPropertydataAdapter.construct(userRequestdata.user)
         val updatedUser = userUsecaseBoundary.patchUser(userData)
 
-        return UserResponsedata(fullUserPropertydataFactory.construct(updatedUser))
+        return FullUserResponsedata(fullUserPropertydataFactory.construct(updatedUser))
     }
 
     @MessageMapping("/users/destroy")
     @SendTo("/socket/users/destroy")
     @Transactional
-    fun deleteUser(onlyIdRequestdata: OnlyIdRequestdata): UserResponsedata {
+    fun deleteUser(onlyIdRequestdata: OnlyIdRequestdata): FullUserResponsedata {
         val userId = onlyIdRequestdata.id
         val deletedUser = userUsecaseBoundary.deleteUser(userId)
 
-        return UserResponsedata(fullUserPropertydataFactory.construct(deletedUser))
+        return FullUserResponsedata(fullUserPropertydataFactory.construct(deletedUser))
     }
 }

@@ -30,14 +30,6 @@ const UserForm = ({
           margin="normal"
         />
         <TextField
-          id="email"
-          label="email"
-          value={form.email}
-          onChange={e => onChangeValue('email', e.target.value)}
-          type="email"
-          margin="normal"
-        />
-        <TextField
           id="phone"
           label="phone"
           value={form.phone}

@@ -6,7 +6,7 @@ export const getAuthorizationValue = async () => {
   return await firebase.currentUser.getIdToken().then(token => token);
 }
 
-const httpClient = async () => {
+const httpClientWithAuth = async () => {
   return await axios.create({
     baseURL: process.env.apiUrl,
     timeout: 4000,
@@ -18,7 +18,13 @@ const httpClient = async () => {
 }
 
 export const applyHttpGet = async (url, options) => {
-  const client = await httpClient();
+  const client = await httpClientWithAuth();
   return await client.get(url, options)
+    .catch(e => e.response);
+}
+
+export const applyHttpPost = async (url, data, options) => {
+  const client = await httpClientWithAuth();
+  return await client.post(url, data, options)
     .catch(e => e.response);
 }

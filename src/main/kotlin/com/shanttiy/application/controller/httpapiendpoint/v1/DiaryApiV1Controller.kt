@@ -1,10 +1,8 @@
 package com.shanttiy.application.controller.httpapiendpoint.v1
 
-import com.shanttiy.application.requestdata.DiaryRequestdata
 import com.shanttiy.application.requestdata.propertydata.DiaryPropertydataAdapter
 import com.shanttiy.application.responsedata.DiariesInDayResponsedata
 import com.shanttiy.application.responsedata.DiariesInMonthResponsedata
-import com.shanttiy.application.responsedata.DiaryResponsedata
 import com.shanttiy.application.responsedata.propertydata.DiaryPropertydataFactory
 import com.shanttiy.application.usecaseboundary.DiaryUsecaseBoundary
 import com.shanttiy.application.usecaseboundary.UserUsecaseBoundary

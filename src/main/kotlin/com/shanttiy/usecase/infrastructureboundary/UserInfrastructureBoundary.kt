@@ -11,6 +11,8 @@ interface UserInfrastructureBoundary {
 
     fun selectUserByTagId(tagId: Int): List<User>
 
+    fun createUser(user: User): User
+
     fun updateUser(user: User): User
 
     fun deleteUser(user: User): User

@@ -7,10 +7,11 @@ import { connect } from 'react-redux';
 import ForDesktop from './ForDesktop';
 import firebase, { googleAuthProvider } from '@utils/firebase';
 
-const Signin = () => {
+import { sessionStatuses } from '@store/reducers/util/sessionStatus';
+
+const Signin = ({ sessionStatus }) => {
   const login = () => {
     firebase.signInWithRedirect(googleAuthProvider)
-      .then(a => {})
       .catch(error => {
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -21,7 +22,7 @@ const Signin = () => {
       })
   }
 
-  if(firebase.currentUser){
+  if (sessionStatus === sessionStatuses.LOGGED_IN) {
     return <Redirect to="/" />
   } else {
     return (
@@ -32,4 +33,9 @@ const Signin = () => {
     )
   }
 }
-export default connect(null, null)(Signin);
+
+const mapStateToProps = state => ({
+  sessionStatus: state.util.sessionStatus.status
+});
+
+export default connect(mapStateToProps, null)(Signin);

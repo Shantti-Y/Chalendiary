@@ -17,7 +17,7 @@ import { fetchTags } from '@store/actions/tag';
 
 import ForDesktop from '@routes/Main/ForDesktop';
 
-import { appStatuses } from '@store/reducers/util/appStatus';
+import { sessionStatuses } from '@store/reducers/util/sessionStatus';
 
 class Main extends React.Component{
 
@@ -50,7 +50,7 @@ class Main extends React.Component{
   }
 
   render(){
-    if (this.props.appStatus === appStatuses.DANGER){
+    if (this.props.sessionStatus === sessionStatuses.LOGGED_OUT){
       return <Redirect to="/signin" />;
     }else{
       return (
@@ -63,7 +63,7 @@ class Main extends React.Component{
 }
 
 const mapStateToProps = state => ({
-  appStatus: state.util.appStatus.status,
+  sessionStatus: state.util.sessionStatus.status,
   me: state.me.me
 });
 

@@ -1,10 +1,7 @@
 package com.shanttiy.infrastructure.database.dao;
 
 import com.shanttiy.infrastructure.database.entity.UserEntity;
-import org.seasar.doma.Dao;
-import org.seasar.doma.Delete
-import org.seasar.doma.Select;
-import org.seasar.doma.Update
+import org.seasar.doma.*
 import org.seasar.doma.boot.ConfigAutowireable;
 import org.seasar.doma.jdbc.Result
 
@@ -22,6 +19,9 @@ interface UserDao {
 
     @Select
     fun selectByTagId(tagId: Int): List<UserEntity>
+
+    @Insert
+    fun insert(userEntity: UserEntity): Result<UserEntity>
 
     @Update(sqlFile = true)
     fun update(userEntity: UserEntity): Result<UserEntity>
