@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 
-import * as actions from '@store/actions/ui/submenu';
+import * as actions from '@store/actions/ui/submenu/main';
 
 const initialState = {
   currentComponentName: ''

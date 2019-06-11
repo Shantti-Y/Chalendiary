@@ -2,9 +2,9 @@ import React from 'react';
 import './style.scss';
 
 import { connect } from 'react-redux';
-import moment from 'moment';
 
-import { setDiaryFormContent, setReplyFormContent } from '@store/actions/ui/modalContent/base';
+import { setReplyFormContent } from '@store/actions/ui/modalContent/base';
+import { setDiaryMenu } from '@store/actions/ui/submenu/popperMenu/main';
 
 import Button from '@material-ui/core/Button';
 
@@ -15,7 +15,7 @@ import ReplyDetail from './ReplyDetail';
 const diaryDetail = ({
   me,
   diary,
-  onOpenDiaryModal,
+  onOpenMenu,
   onOpenReplyModal
 }) => {
   const isYourDiary = diary.user.id === me.id; 
@@ -23,7 +23,7 @@ const diaryDetail = ({
   return (
     <div>
       <div>
-        {isYourDiary ? <Button><Create onClick={() => onOpenDiaryModal(diary)} /></Button>: null}
+        {isYourDiary ? <Button><Create onClick={e => onOpenMenu(diary, e.currentTarget)} /></Button>: null}
         {diary.user.screenName}
         {diary.contentText}
       </div>
@@ -43,10 +43,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onOpenDiaryModal: diary => {
-    const newDiary = Object.assign({}, diary, { userId: diary.user.id, postedAt: moment(diary.postedAt) });
-    dispatch(setDiaryFormContent({ diary: newDiary }));
-  },
+  onOpenMenu: (diary, anchorEl) => dispatch(setDiaryMenu({ diary, anchorEl })),
   onOpenReplyModal: (userId, diary) => {
     const reply = { userId, diaryId: diary.id };
     dispatch(setReplyFormContent({ reply }));

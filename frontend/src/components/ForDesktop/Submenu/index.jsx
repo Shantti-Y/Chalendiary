@@ -4,24 +4,26 @@ import './style.scss';
 import { connect } from 'react-redux';
 
 import DiaryDetail from './DiaryDetail';
-
-const components = {
-  'diaryDetail': <DiaryDetail />
-}
+import PopperMenu from './PopperMenu';
 
 const Submenu = ({
   currentComponentName
 }) => {
+  const components = {
+    'diaryDetail': <DiaryDetail />
+  }
+
   const currentComponent = components[currentComponentName];
   return (
     <div>
+      <PopperMenu />
       {currentComponent}
     </div>
   )
 }
 
 const mapStateToProps = state => ({
-  currentComponentName: state.ui.submenu.currentComponentName
+  currentComponentName: state.ui.submenu.main.currentComponentName
 });
 
 const mapDispatchToProps = dispatch => ({

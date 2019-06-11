@@ -2,6 +2,7 @@ import { put, all, takeLatest, call } from 'redux-saga/effects';
 
 import {
   FETCH_REPLIES,
+  CHANGE_REPLIES,
   ADD_NEW_REPLY,
   UPDATE_REPLY,
   RECEIVE_NEW_REPLY,
@@ -23,6 +24,11 @@ function* invokeFetchReplies(action){
   const options = {};
   const callback = function* (data) { yield put(setReplies(data)) };
   yield put(applyHttpGet({ url, options, callback }));
+}
+
+function* invokeChangeReplies(action) {
+  const { replies } = action.payload;
+  yield put(setReplies({ replies }));
 }
 
 function* invokeAddNewReply(action) {
@@ -48,6 +54,7 @@ function* invokeReceiveEditReply(action) {
 // Bundle api functions to watcher and saga
 function* watchAsyncTriggers(){
   yield takeLatest(FETCH_REPLIES, invokeFetchReplies);
+  yield takeLatest(CHANGE_REPLIES, invokeChangeReplies);
   yield takeLatest(ADD_NEW_REPLY, invokeAddNewReply);
   yield takeLatest(UPDATE_REPLY, invokeUpdateReply);
 

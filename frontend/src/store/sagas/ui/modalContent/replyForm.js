@@ -5,12 +5,9 @@ import {
   SUBMIT_INPUT,
   setInput
 } from '@store/actions/ui/modalContent/replyForm';
-import {
-  openSnackbar
-} from '@store/actions/ui/snackbar';
-import {
-  closeModalContent
-} from '@store/actions/ui/modalContent/base';
+import { closeMenu } from '@store/actions/ui/submenu/popperMenu/main';
+import { openSnackbar } from '@store/actions/ui/snackbar';
+import { closeModalContent } from '@store/actions/ui/modalContent/base';
 import {
   addNewReply,
   updateReply
@@ -24,11 +21,11 @@ function* invokeInitializeInputAttributes(action) {
   const { reply } = action.payload;
   
   const newInput = Object.assign({}, {
-    id: null,
-    userId: null,
-    diaryId: null,
-    contentText: ''
-  }, reply);
+    id: reply.id,
+    userId: reply.user.id,
+    diaryId: reply.diaryId,
+    contentText: reply.contentText || ''
+  });
   yield put(setInput({ input: newInput }));
 }
 
@@ -54,6 +51,7 @@ function* invokeSubmitInput(action) {
   }
 
   yield put(closeModalContent());
+  yield put(closeMenu());
 }
 
 // Bundle api functions to watcher and saga

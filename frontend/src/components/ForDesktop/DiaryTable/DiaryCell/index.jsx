@@ -4,7 +4,7 @@ import './style.scss';
 import { connect } from 'react-redux';
 
 import { setDiaryFormContent } from '@store/actions/ui/modalContent/base';
-import { setDiaryDetailComponent } from '@store/actions/ui/submenu';
+import { setDiaryDetailComponent } from '@store/actions/ui/submenu/main';
 
 import TableCell from '@material-ui/core/TableCell';
 import Button from '@material-ui/core/Button';
@@ -25,7 +25,7 @@ const DiaryCell = ({
 
   const handleOpeningDiary = () => {
     if(diary){
-      onOpenDiaryDetail(diary.id);
+      onOpenDiaryDetail(diary);
     }
   }
 
@@ -59,8 +59,8 @@ const mapDispatchToProps = dispatch => ({
     const diary = { userId, postedAt, contentText }
     dispatch(setDiaryFormContent({ diary }));
   },
-  onOpenDiaryDetail: diaryId => {
-    dispatch(setDiaryDetailComponent({ diaryId }));
+  onOpenDiaryDetail: diary => {
+    dispatch(setDiaryDetailComponent({ diary }));
   }
 });
 

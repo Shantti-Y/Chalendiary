@@ -6,12 +6,9 @@ import {
   SUBMIT_INPUT,
   setInput
 } from '@store/actions/ui/modalContent/diaryForm';
-import {
-  openSnackbar
-} from '@store/actions/ui/snackbar';
-import {
-  closeModalContent
-} from '@store/actions/ui/modalContent/base';
+import { closeMenu } from '@store/actions/ui/submenu/popperMenu/main';
+import { openSnackbar } from '@store/actions/ui/snackbar';
+import { closeModalContent } from '@store/actions/ui/modalContent/base';
 import {
   addNewDiary,
   updateDiary
@@ -23,11 +20,11 @@ const getState = state => state.ui.modalContent.diaryForm;
 function* invokeInitializeInputAttributes(action) {
   const { diary } = action.payload;
   const newInput = Object.assign({}, {
-    id: null,
-    userId: null,
-    contentText: '',
-    postedAt: moment()
-  }, diary);
+    id: diary.id,
+    userId: diary.user.id,
+    contentText: diary.contentText || '',
+    postedAt: moment(diary.postedAt)
+  });
   yield put(setInput({ input: newInput }));
 }
 
@@ -53,6 +50,7 @@ function* invokeSubmitInput(action) {
   }
 
   yield put(closeModalContent());
+  yield put(closeMenu());
 }
 
 // Bundle api functions to watcher and saga
