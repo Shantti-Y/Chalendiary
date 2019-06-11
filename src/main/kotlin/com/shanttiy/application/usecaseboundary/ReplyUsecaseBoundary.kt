@@ -8,4 +8,6 @@ interface ReplyUsecaseBoundary {
     fun postReply(reply: Reply): Reply
 
     fun patchReply(reply: Reply): Reply
+
+    fun deleteReply(replyId: Int): Reply
 }

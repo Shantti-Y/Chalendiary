@@ -1,5 +1,6 @@
 package com.shanttiy.application.controller.websocketapiendpoint.v1
 
+import com.shanttiy.application.requestdata.OnlyIdRequestdata
 import com.shanttiy.application.requestdata.ReplyRequestdata
 import com.shanttiy.application.requestdata.propertydata.ReplyPropertydataAdapter
 import com.shanttiy.application.responsedata.ReplyResponsedata
@@ -52,6 +53,21 @@ class ReplyWebSocketV1Controller(
         return ReplyResponsedata(
             diary = diaryPropertydataFactory.construct(diary),
             reply = replyPropertydataFactory.construct(createdReply)
+        )
+    }
+
+    @MessageMapping("/replies/destroy")
+    @SendTo("/socket/replies/destroy")
+    fun deleteReply(idRequestdata: OnlyIdRequestdata): ReplyResponsedata{
+        val replyId = idRequestdata.id
+
+        val deletedReply = replyUsecaseBoundary.deleteReply(replyId)
+
+        val diary = diaryUsecaseBoundary.findDiaryById(deletedReply.diaryId)
+
+        return ReplyResponsedata(
+            diary = diaryPropertydataFactory.construct(diary),
+            reply = replyPropertydataFactory.construct(deletedReply)
         )
     }
 }

@@ -22,7 +22,14 @@ class ReplyInteractor(
     }
 
     override fun patchReply(reply: Reply): Reply {
+        // TODO: Use try and catch to reduce number of invoking query
         val searchedReply = replyInfrastructureBoundary.selectReplyById(reply.id!!)
         if (searchedReply != null) return replyInfrastructureBoundary.updateReply(reply) else throw InvalidParameterException()
+    }
+
+    override fun deleteReply(replyId: Int): Reply {
+        // TODO: Use try and catch to reduce number of invoking query
+        val searchedReply = replyInfrastructureBoundary.selectReplyById(replyId)
+        if (searchedReply != null) return replyInfrastructureBoundary.deleteReply(searchedReply) else throw InvalidParameterException()
     }
 }

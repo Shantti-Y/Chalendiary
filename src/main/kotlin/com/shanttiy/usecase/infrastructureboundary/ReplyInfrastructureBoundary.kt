@@ -10,4 +10,6 @@ interface ReplyInfrastructureBoundary {
     fun insertReply(reply: Reply): Reply
 
     fun updateReply(reply: Reply): Reply
+
+    fun deleteReply(reply: Reply): Reply
 }

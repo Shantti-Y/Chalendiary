@@ -33,4 +33,9 @@ class ReplyRepository(
         val replyEntity = replyDao.update(replyObjectMapper.mapDomainToEntity(reply)).entity
         return replyObjectMapper.mapEntityToDomain(replyEntity)
     }
+
+    override fun deleteReply(reply: Reply): Reply {
+        val replyEntity = replyDao.delete(replyObjectMapper.mapDomainToEntity(reply)).entity
+        return replyObjectMapper.mapEntityToDomain(replyEntity)
+    }
 }

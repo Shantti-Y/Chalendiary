@@ -1,10 +1,7 @@
 package com.shanttiy.infrastructure.database.dao;
 
 import com.shanttiy.infrastructure.database.entity.ReplyEntity;
-import org.seasar.doma.Dao;
-import org.seasar.doma.Insert
-import org.seasar.doma.Select;
-import org.seasar.doma.Update
+import org.seasar.doma.*
 import org.seasar.doma.boot.ConfigAutowireable;
 import org.seasar.doma.jdbc.Result
 
@@ -22,4 +19,7 @@ interface ReplyDao {
 
     @Update(sqlFile = true)
     fun update(replyEntity: ReplyEntity): Result<ReplyEntity>
+
+    @Delete
+    fun delete(replyEntity: ReplyEntity): Result<ReplyEntity>
 }
