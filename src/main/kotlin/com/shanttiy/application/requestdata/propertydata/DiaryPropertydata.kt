@@ -22,8 +22,10 @@ class DiaryPropertydataAdapter {
             userId = diaryPropertydata.userId,
             contentText = diaryPropertydata.contentText,
             postedAt = LocalDate.parse(diaryPropertydata.postedAt, localdateFormatter),
+            // TODO: set these properties into client side
             createdAt = null,
-            updatedAt = null
+            updatedAt = null,
+            deletedAt = null
         )
     }
 }

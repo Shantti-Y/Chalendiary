@@ -1,10 +1,7 @@
 package com.shanttiy.infrastructure.database.dao;
 
 import com.shanttiy.infrastructure.database.entity.DiaryEntity;
-import org.seasar.doma.Dao;
-import org.seasar.doma.Insert;
-import org.seasar.doma.Select;
-import org.seasar.doma.Update
+import org.seasar.doma.*
 import org.seasar.doma.boot.ConfigAutowireable;
 import org.seasar.doma.jdbc.Result;
 
@@ -28,4 +25,7 @@ interface DiaryDao {
 
     @Update(sqlFile = true)
     fun update(diaryEntity: DiaryEntity): Result<DiaryEntity>
+
+    @Delete(sqlFile = true)
+    fun delete(diaryEntity: DiaryEntity): Result<DiaryEntity>
 }

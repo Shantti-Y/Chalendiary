@@ -16,7 +16,8 @@ class DiaryObjectMapper{
             contentText = diaryEntity.contentText,
             postedAt = diaryEntity.postedAt.toLocalDate(),
             createdAt = diaryEntity.createdAt?.toLocalDateTime(),
-            updatedAt = diaryEntity.updatedAt?.toLocalDateTime()
+            updatedAt = diaryEntity.updatedAt?.toLocalDateTime(),
+            deletedAt = diaryEntity.deletedAt?.toLocalDateTime()
         )
     }
 
@@ -35,6 +36,11 @@ class DiaryObjectMapper{
                 Timestamp.valueOf(diary.updatedAt)
             } else if(diary.id != null && diary.id > 0) {
                 Timestamp.valueOf(LocalDateTime.now())
+            } else {
+                null
+            },
+            deletedAt = if (diary.deletedAt != null){
+                Timestamp.valueOf(diary.deletedAt)
             } else {
                 null
             }

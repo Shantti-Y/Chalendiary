@@ -15,6 +15,7 @@ data class DiaryPropertydata(
     val postedAt: LocalDate,
     val createdAt: LocalDateTime?,
     val updatedAt: LocalDateTime?,
+    val deletedAt: LocalDateTime?,
     val replies: List<ReplyPropertydata>
 )
 
@@ -40,6 +41,7 @@ class DiaryPropertydataFactory(
             postedAt = diary.postedAt,
             createdAt = diary.createdAt,
             updatedAt = diary.updatedAt,
+            deletedAt = diary.deletedAt,
             replies = replies.map { replyPropertydataFactory.construct(it) }
         )
     }

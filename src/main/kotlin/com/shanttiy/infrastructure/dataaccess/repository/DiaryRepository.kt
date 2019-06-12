@@ -42,4 +42,9 @@ class DiaryRepository(
         val diaryEntity = diaryDao.update(diaryObjectMapper.mapDomainToEntity(diary)).entity
         return diaryObjectMapper.mapEntityToDomain(diaryEntity)
     }
+
+    override fun deleteDiary(diary: Diary): Diary {
+        val diaryEntity = diaryDao.delete(diaryObjectMapper.mapDomainToEntity(diary)).entity
+        return diaryObjectMapper.mapEntityToDomain(diaryEntity)
+    }
 }

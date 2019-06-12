@@ -14,4 +14,6 @@ interface DiaryUsecaseBoundary {
     fun postDiary(diary: Diary): Diary
 
     fun patchDiary(diary: Diary): Diary
+
+    fun deleteDiary(diaryId: Int): Diary
 }

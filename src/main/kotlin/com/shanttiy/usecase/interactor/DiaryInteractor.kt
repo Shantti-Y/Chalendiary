@@ -49,4 +49,9 @@ class DiaryInteractor(
         val searchedDiary = diaryInfrastructureBoundary.selectDiaryByUserIdAndPostedAt(diary.userId, diary.postedAt)
         if (searchedDiary != null) return diaryInfrastructureBoundary.updateDiary(diary) else throw InvalidParameterException()
     }
+
+    override fun deleteDiary(diaryId: Int): Diary {
+        val searchedDiary = diaryInfrastructureBoundary.selectDiaryById(diaryId)
+        if (searchedDiary != null) return diaryInfrastructureBoundary.deleteDiary(searchedDiary) else throw InvalidParameterException()
+    }
 }

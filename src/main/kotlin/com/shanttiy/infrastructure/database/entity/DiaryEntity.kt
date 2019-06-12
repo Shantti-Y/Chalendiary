@@ -27,5 +27,8 @@ data class DiaryEntity(
     val createdAt: Timestamp? = Timestamp.valueOf(LocalDateTime.now()),
 
     @Column(name = "updated_at")
-    val updatedAt: Timestamp? = null
+    val updatedAt: Timestamp? = null,
+
+    @Column(name = "deleted_at")
+    val deletedAt: Timestamp? = null
 )

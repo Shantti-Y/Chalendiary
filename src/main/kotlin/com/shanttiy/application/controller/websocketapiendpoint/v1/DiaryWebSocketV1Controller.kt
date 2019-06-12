@@ -1,6 +1,7 @@
 package com.shanttiy.application.controller.websocketapiendpoint.v1
 
 import com.shanttiy.application.requestdata.DiaryRequestdata
+import com.shanttiy.application.requestdata.OnlyIdRequestdata
 import com.shanttiy.application.requestdata.propertydata.DiaryPropertydataAdapter
 import com.shanttiy.application.responsedata.DiaryResponsedata
 import com.shanttiy.application.responsedata.propertydata.DiaryPropertydataFactory
@@ -42,6 +43,18 @@ class DiaryWebSocketV1Controller(
         val createdDiary = diaryUsecaseBoundary.patchDiary(diaryData)
         return DiaryResponsedata(
             diary = diaryPropertydataFactory.construct(createdDiary)
+        )
+    }
+
+    @MessageMapping("/diaries/destroy")
+    @SendTo("/socket/diaries/destroy")
+    fun deleteDiary(idRequestdata: OnlyIdRequestdata): DiaryResponsedata {
+        val diaryId = idRequestdata.id
+
+        val deletedDiary = diaryUsecaseBoundary.deleteDiary(diaryId)
+
+        return DiaryResponsedata(
+            diary = diaryPropertydataFactory.construct(deletedDiary)
         )
     }
 }

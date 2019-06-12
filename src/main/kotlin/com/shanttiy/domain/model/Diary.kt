@@ -9,5 +9,6 @@ data class Diary(
     val contentText: String,
     val postedAt: LocalDate,
     val createdAt: LocalDateTime?,
-    val updatedAt: LocalDateTime?
+    val updatedAt: LocalDateTime?,
+    val deletedAt: LocalDateTime?
 )
