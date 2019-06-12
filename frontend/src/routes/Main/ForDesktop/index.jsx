@@ -3,6 +3,7 @@ import './style.scss';
 
 import { connect } from 'react-redux';
 
+import DeleteConfirmation from '@components/ForDesktop/DeleteConfirmation';
 import HeaderNav from '@components/ForDesktop/HeaderNav';
 import DiaryTable from '@components/ForDesktop/DiaryTable';
 import Submenu from '@components/ForDesktop/Submenu';
@@ -12,6 +13,7 @@ import NotifierSnackbar from '@components/ForDesktop/NotifierSnackbar';
 const ForDesktop = ({}) => {
   return (
     <div id="for-desktop" className="layout-container">
+      <DeleteConfirmation />
       <NotifierSnackbar />
       <ModalContent />
       <HeaderNav />

@@ -3,41 +3,34 @@ import './style.scss';
 
 import { connect } from 'react-redux';
 
-import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 
-import {
-  closeDeleteconfirmation,
-  submitDelete
-} from '@store/actions/ui/modalContent/tagForm/deleteConfirmation';
+import { closeDeleteConfirmation } from '@store/actions/ui/deleteConfirmation/base';
+
+import DiaryConfirmation from '@components/ForDesktop/DeleteConfirmation/DiaryConfirmation';
+import ReplyConfirmation from '@components/ForDesktop/DeleteConfirmation/ReplyConfirmation';
 
 const Deleteconfirmation = ({
-  tag,
-  opened,
-  onClose,
-  onSubmit
+  currentContentName,
+  onCloseConfirmation
 }) => {
+
+  const contents = {
+    'diaryConfirmation': <DiaryConfirmation onClose={onCloseConfirmation} />,
+    'replyConfirmation': <ReplyConfirmation onClose={onCloseConfirmation} />
+  }
+
+  const opened = currentContentName !== null;
 
   if (opened) {
     return (
       <Dialog
         open={opened}
-        onClose={onClose}
+        onClose={onCloseConfirmation}
         maxWidth="sm"
         fullWidth
       >
-        <DialogContent>
-          <DialogTitle>Delete Message</DialogTitle>
-          <DialogContentText>Are you sure you want to delete this message? This cannot be undone.</DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={onClose} color="primary">Cancel</Button>
-          <Button onClick={() => onSubmit(tag.id)} color="primary">Submit</Button>
-        </DialogActions>
+        {contents[currentContentName]}
       </Dialog>
     )
   } else {
@@ -46,13 +39,11 @@ const Deleteconfirmation = ({
 }
 
 const mapStateToProps = state => ({
-  opened: state.ui.modalContent.tagForm.deleteConfirmation.opened,
-  tag: state.ui.modalContent.tagForm.deleteConfirmation.tag
+  currentContentName: state.ui.deleteConfirmation.base.currentContentName
 });
 
 const mapDispatchToProps = dispatch => ({
-  onClose: () => dispatch(closeDeleteconfirmation()),
-  onSubmit: tagId => dispatch(submitDelete({ tagId }))
+  onCloseConfirmation: () => dispatch(closeDeleteConfirmation())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Deleteconfirmation);

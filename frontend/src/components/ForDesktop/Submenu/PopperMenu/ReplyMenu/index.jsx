@@ -3,6 +3,7 @@ import './style.scss';
 
 import { connect } from 'react-redux';
 
+import { setReplyConfirmation } from '@store/actions/ui/deleteConfirmation/base';
 import { setReplyFormContent } from '@store/actions/ui/modalContent/base';
 
 import MenuItem from '@material-ui/core/MenuItem';
@@ -26,7 +27,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onOpenEditModal: reply => dispatch(setReplyFormContent({ reply }))
+  onOpenEditModal: reply => {
+    const newReply = Object.assign({}, reply, { userId: reply.user.id })
+    dispatch(setReplyFormContent({ reply: newReply }))
+  },
+  onOpenDeleteConfirmation: reply => dispatch(setReplyConfirmation({ reply }))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReplyMenu);

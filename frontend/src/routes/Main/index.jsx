@@ -10,7 +10,7 @@ import { connectWebSocketToServer, subscribeReceivedEvent } from '@utils/client/
 import { fetchMe } from '@store/actions/me';
 import { fetchUsers } from '@store/actions/user';
 import { searchDiariesInMonth, receiveNewDiary, receiveEditDiary } from '@store/actions/diary';
-import { receiveNewReply, receiveEditReply } from '@store/actions/reply';
+import { receiveNewReply, receiveEditReply, receiveDeleteReply } from '@store/actions/reply';
 import { receiveNewTag, receiveEditTag, receiveDeleteTag } from '@store/actions/tag';
 import { receiveNewUser, receiveEditUser, receiveDeleteUser } from '@store/actions/user';
 import { fetchTags } from '@store/actions/tag';
@@ -37,6 +37,7 @@ class Main extends React.Component{
 
         subscribeReceivedEvent('/socket/replies/new', this.props.onReceiveNewReply);
         subscribeReceivedEvent('/socket/replies/edit', this.props.onReceiveEditReply);
+        subscribeReceivedEvent('/socket/replies/destroy', this.props.onReceiveDeleteReply);
 
         subscribeReceivedEvent('/socket/tags/new', this.props.onReceiveNewTag);
         subscribeReceivedEvent('/socket/tags/edit', this.props.onReceiveEditTag);
@@ -75,10 +76,12 @@ const mapDispatchToProps = dispatch => ({
     const date = moment();
     dispatch(searchDiariesInMonth({ date }));
   },
+  // TODO: change response structure to reduce received actions below
   onReceiveNewDiary: data => dispatch(receiveNewDiary({ data })),
   onReceiveEditDiary: data => dispatch(receiveEditDiary({ data })),
   onReceiveNewReply: data => dispatch(receiveNewReply({ data })),
   onReceiveEditReply: data => dispatch(receiveEditReply({ data })),
+  onReceiveDeleteReply: data => dispatch(receiveDeleteReply({ data })),
   onReceiveNewTag: data => dispatch(receiveNewTag({ data })),
   onReceiveEditTag: data => dispatch(receiveEditTag({ data })),
   onReceiveDeleteTag: data => dispatch(receiveDeleteTag({ data })),

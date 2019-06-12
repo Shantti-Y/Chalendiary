@@ -9,38 +9,27 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import {
-  closeDeleteconfirmation,
-  submitDelete
-} from '@store/actions/ui/modalContent/tagForm/deleteConfirmation';
-
-const Deleteconfirmation = ({
-  tag,
-  onClose,
-  onSubmit
+const DiaryConfirmation = ({
+  diary
 }) => {
   return (
     <>
       <DialogContent>
-        <DialogTitle>Delete Message</DialogTitle>
+        <DialogTitle>Delete Diary</DialogTitle>
         <DialogContentText>Are you sure you want to delete this message? This cannot be undone.</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="primary">Cancel</Button>
-        <Button onClick={() => onSubmit(tag.id)} color="primary">Submit</Button>
+        <Button color="primary">Cancel</Button>
       </DialogActions>
     </>
   )
 }
 
 const mapStateToProps = state => ({
-  opened: state.ui.modalContent.tagForm.deleteConfirmation.opened,
-  tag: state.ui.modalContent.tagForm.deleteConfirmation.tag
+  diary: state.ui.deleteConfirmation.diaryConfirmation.diary
 });
 
 const mapDispatchToProps = dispatch => ({
-  onClose: () => dispatch(closeDeleteconfirmation()),
-  onSubmit: tagId => dispatch(submitDelete({ tagId }))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Deleteconfirmation);
+export default connect(mapStateToProps, mapDispatchToProps)(DiaryConfirmation);

@@ -5,8 +5,10 @@ import {
   CHANGE_REPLIES,
   ADD_NEW_REPLY,
   UPDATE_REPLY,
+  DELETE_REPLY,
   RECEIVE_NEW_REPLY,
   RECEIVE_EDIT_REPLY,
+  RECEIVE_DELETE_REPLY,
   setReplies
 } from '@store/actions/reply';
 import {
@@ -41,6 +43,11 @@ function* invokeUpdateReply(action) {
   client().send('/portal/v1/replies/edit', ...[{}, JSON.stringify({ reply })]);
 }
 
+function* invokeDeleteReply(action) {
+  const { reply } = action.payload;
+  client().send('/portal/v1/replies/destroy', ...[{}, JSON.stringify({ id: reply.id })]);
+}
+
 function* invokeReceiveNewReply(action) {
   const { data } = action.payload;
   yield put(receiveNewDiary({ data }));
@@ -51,15 +58,22 @@ function* invokeReceiveEditReply(action) {
   yield put(receiveEditDiary({ data }));
 }
 
+function* invokeReceiveDeleteReply(action) {
+  const { data } = action.payload;
+  yield put(receiveEditDiary({ data }));
+}
+
 // Bundle api functions to watcher and saga
 function* watchAsyncTriggers(){
   yield takeLatest(FETCH_REPLIES, invokeFetchReplies);
   yield takeLatest(CHANGE_REPLIES, invokeChangeReplies);
   yield takeLatest(ADD_NEW_REPLY, invokeAddNewReply);
   yield takeLatest(UPDATE_REPLY, invokeUpdateReply);
+  yield takeLatest(DELETE_REPLY, invokeDeleteReply);
 
   yield takeLatest(RECEIVE_NEW_REPLY, invokeReceiveNewReply);
   yield takeLatest(RECEIVE_EDIT_REPLY, invokeReceiveEditReply);
+  yield takeLatest(RECEIVE_DELETE_REPLY, invokeReceiveDeleteReply);
 }
 
 export default function* replySaga(){

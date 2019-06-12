@@ -21,11 +21,11 @@ function* invokeInitializeInputAttributes(action) {
   const { reply } = action.payload;
   
   const newInput = Object.assign({}, {
-    id: reply.id,
-    userId: reply.user.id,
-    diaryId: reply.diaryId,
-    contentText: reply.contentText || ''
-  });
+    id: null,
+    userId: null,
+    diaryId: null,
+    contentText: ''
+  }, reply);
   yield put(setInput({ input: newInput }));
 }
 
