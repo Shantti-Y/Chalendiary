@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import MainLayout from '@layouts/Main';
+
 import Main from '@routes/Main';
 import Signin from '@routes/Signin';
 
@@ -38,8 +40,10 @@ class Root extends React.Component {
       return (
         <BrowserRouter>
           <Switch>
-            <Route path="/" exact render={() => RouteWithAuth(Main)} />
             <Route path="/signin" exact render={() => <Signin />} />
+            <MainLayout>
+              <Route path="/" exact render={() => RouteWithAuth(Main)} />
+            </MainLayout>
           </Switch>
         </BrowserRouter>
       )

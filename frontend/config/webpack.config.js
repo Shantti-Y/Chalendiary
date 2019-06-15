@@ -70,6 +70,7 @@ module.exports = {
       '@assets': path.resolve(__dirname, `${entryDir}/assets`),
       '@client': path.resolve(__dirname, `${entryDir}/client`),
       '@components': path.resolve(__dirname, `${entryDir}/components`),
+      '@layouts': path.resolve(__dirname, `${entryDir}/layouts`),
       '@routes': path.resolve(__dirname, `${entryDir}/routes`),
       '@store': path.resolve(__dirname, `${entryDir}/store`),
       '@utils': path.resolve(__dirname, `${entryDir}/utils`)
