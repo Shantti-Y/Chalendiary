@@ -25,7 +25,4 @@ interface DiaryDao {
 
     @Update(sqlFile = true)
     fun update(diaryEntity: DiaryEntity): Result<DiaryEntity>
-
-    @Delete(sqlFile = true)
-    fun delete(diaryEntity: DiaryEntity): Result<DiaryEntity>
 }

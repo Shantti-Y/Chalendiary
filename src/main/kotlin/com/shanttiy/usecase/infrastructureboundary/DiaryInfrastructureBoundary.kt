@@ -13,6 +13,4 @@ interface DiaryInfrastructureBoundary {
     fun insertDiary(diary: Diary): Diary
 
     fun updateDiary(diary: Diary): Diary
-
-    fun deleteDiary(diary: Diary): Diary
 }

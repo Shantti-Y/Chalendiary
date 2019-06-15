@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.format.datetime.DateFormatter
 import org.springframework.stereotype.Service
 import java.security.InvalidParameterException
+import java.sql.Timestamp
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 
@@ -52,6 +54,11 @@ class DiaryInteractor(
 
     override fun deleteDiary(diaryId: Int): Diary {
         val searchedDiary = diaryInfrastructureBoundary.selectDiaryById(diaryId)
-        if (searchedDiary != null) return diaryInfrastructureBoundary.deleteDiary(searchedDiary) else throw InvalidParameterException()
+        if (searchedDiary != null) {
+            val diary = searchedDiary.copy(deletedAt = LocalDateTime.now())
+            return diaryInfrastructureBoundary.updateDiary(diary)
+        } else {
+            throw InvalidParameterException()
+        }
     }
 }
