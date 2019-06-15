@@ -7,6 +7,7 @@ import {
 } from '@store/actions/ui/deleteConfirmation/base';
 
 import { deleteConfirmations } from '@store/reducers/ui/deleteConfirmation/base';
+import { changeDiary } from '@store/actions/ui/deleteConfirmation/diaryConfirmation';
 import { changeReply } from '@store/actions/ui/deleteConfirmation/replyConfirmation';
 
 // APIs
@@ -16,6 +17,7 @@ function* invokeCloseDeleteConfirmation() {
 
 function* invokeSetDiaryConfirmation(action) {
   const { diary } = action.payload;
+  yield put(changeDiary({ diary }));
   yield put(setCurrentComponentName({ currentContentName: deleteConfirmations.DIARY_CONFIRMATION }));
 }
 

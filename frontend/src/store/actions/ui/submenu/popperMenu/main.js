@@ -9,6 +9,9 @@ export const setDiaryMenu = createAction(SET_DIARY_MENU);
 export const SET_REPLY_MENU = 'ui/submenu/popperMenu/main/SET_REPLY_MENU';
 export const setReplyMenu = createAction(SET_REPLY_MENU);
 
+export const SET_RECOVER_DIARY_MENU = 'ui/submenu/popperMenu/main/SET_RECOVER_DIARY_MENU';
+export const setRecoverDiaryMenu = createAction(SET_RECOVER_DIARY_MENU);
+
 export const SET_CURRENT_MENU_NAME = 'ui/submenu/popperMenu/main/SET_CURRENT_MENU_NAME';
 export const setCurrentMenuName = createAction(SET_CURRENT_MENU_NAME);
 

@@ -4,7 +4,8 @@ import * as actions from '@store/actions/ui/submenu/popperMenu/main';
 
 export const popperMenus = {
   DIARY_MENU: 'diaryMenu',
-  REPLY_MENU: 'replyMenu'
+  REPLY_MENU: 'replyMenu',
+  RECOVER_DIARY_MENU: 'recoverDiaryMenu'
 }
 
 const initialState = {

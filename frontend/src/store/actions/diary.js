@@ -18,12 +18,18 @@ export const addNewDiary = createAction(ADD_NEW_DIARY);
 export const UPDATE_DIARY = 'diary/UPDATE_DIARY';
 export const updateDiary = createAction(UPDATE_DIARY);
 
+export const DELETE_DIARY = 'diary/DELETE_DIARY';
+export const deleteDiary = createAction(DELETE_DIARY);
+
 // for handling receiving messages in websocker
 export const RECEIVE_NEW_DIARY = 'diary/RECEIVE_NEW_DIARY';
 export const receiveNewDiary = createAction(RECEIVE_NEW_DIARY);
 
 export const RECEIVE_EDIT_DIARY = 'diary/RECEIVE_EDIT_DIARY';
 export const receiveEditDiary = createAction(RECEIVE_EDIT_DIARY);
+
+export const RECEIVE_DELETE_DIARY = 'diary/RECEIVE_DELETE_DIARY';
+export const receiveDeleteDiary = createAction(RECEIVE_DELETE_DIARY);
 
 // for calling reducers
 export const SET_DIARIES = 'diary/SET_DIARIES';

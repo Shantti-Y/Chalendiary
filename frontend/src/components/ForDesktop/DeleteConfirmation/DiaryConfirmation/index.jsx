@@ -9,16 +9,20 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+import { submitDelete } from '@store/actions/ui/deleteConfirmation/diaryConfirmation';
+
 const DiaryConfirmation = ({
-  diary
+  diary,
+  onSubmit
 }) => {
   return (
     <>
       <DialogContent>
         <DialogTitle>Delete Diary</DialogTitle>
-        <DialogContentText>Are you sure you want to delete this message? This cannot be undone.</DialogContentText>
+        <DialogContentText>Are you sure you want to delete this diary message?</DialogContentText>
       </DialogContent>
       <DialogActions>
+        <Button color="danger" onClick={() => onSubmit(diary)}>Delete</Button>
         <Button color="primary">Cancel</Button>
       </DialogActions>
     </>
@@ -30,6 +34,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  onSubmit: diary => dispatch(submitDelete({ diary }))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DiaryConfirmation);

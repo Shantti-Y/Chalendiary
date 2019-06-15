@@ -6,8 +6,11 @@ import {
   CHANGE_CURRENT_DIARY_ID,
   ADD_NEW_DIARY,
   UPDATE_DIARY,
+  DELETE_DIARY,
   RECEIVE_NEW_DIARY,
   RECEIVE_EDIT_DIARY,
+  RECEIVE_DELETE_DIARY,
+  receiveEditDiary,
   setDiaries,
   setCurrentDiaryId
 } from '@store/actions/diary';
@@ -50,6 +53,11 @@ function* invokeUpdateDiary(action) {
   client().send('/portal/v1/diaries/edit', ...[{}, JSON.stringify({ diary })]);
 }
 
+function* invokeDeleteDiary(action) {
+  const { diary } = action.payload;
+  client().send('/portal/v1/diaries/destroy', ...[{}, JSON.stringify({ id: diary.id })]);
+}
+
 function* invokeReceiveNewDiary(action) {
   const { data } = action.payload;
   const { diaries } = yield select(getState);
@@ -68,6 +76,11 @@ function* invokeReceiveEditDiary(action) {
   yield put(setDiaries({ items: newDiaries }));
 }
 
+function* invokeReceiveDeleteDiary(action) {
+  const { data } = action.payload;
+  yield put(receiveEditDiary({ data }));
+}
+
 // Bundle api functions to watcher and saga
 function* watchAsyncTriggers(){
   yield takeLatest(SEARCH_DIARIES_IN_DATE, invokeSearchDiariesInDate);
@@ -75,9 +88,11 @@ function* watchAsyncTriggers(){
   yield takeLatest(CHANGE_CURRENT_DIARY_ID, invokeSetCurrentDiaryId);
   yield takeLatest(ADD_NEW_DIARY, invokeAddNewDiary);
   yield takeLatest(UPDATE_DIARY, invokeUpdateDiary);
+  yield takeLatest(DELETE_DIARY, invokeDeleteDiary);
 
   yield takeLatest(RECEIVE_NEW_DIARY, invokeReceiveNewDiary);
   yield takeLatest(RECEIVE_EDIT_DIARY, invokeReceiveEditDiary);
+  yield takeLatest(RECEIVE_DELETE_DIARY, invokeReceiveDeleteDiary);
 }
 
 export default function* diarySaga(){

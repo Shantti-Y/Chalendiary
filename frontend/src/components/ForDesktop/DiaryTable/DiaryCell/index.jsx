@@ -2,6 +2,7 @@ import React from 'react';
 import './style.scss';
 
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 import { setDiaryFormContent } from '@store/actions/ui/modalContent/base';
 import { setDiaryDetailComponent } from '@store/actions/ui/submenu/main';
@@ -56,7 +57,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onOpenModal: (userId, postedAt, contentText) => {
-    const diary = { userId, postedAt, contentText }
+    const diary = { userId, postedAt: moment(postedAt), contentText }
     dispatch(setDiaryFormContent({ diary }));
   },
   onOpenDiaryDetail: diary => {

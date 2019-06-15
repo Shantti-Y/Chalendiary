@@ -10,6 +10,7 @@ import Fade from '@material-ui/core/Fade';
 
 import DiaryMenu from '@components/ForDesktop/Submenu/PopperMenu/DiaryMenu';
 import ReplyMenu from '@components/ForDesktop/Submenu/PopperMenu/ReplyMenu';
+import RecoverDiaryMenu from '@components/ForDesktop/Submenu/PopperMenu/RecoverDiaryMenu';
 
 const PopperMenu = ({
   currentMenuName,
@@ -19,7 +20,8 @@ const PopperMenu = ({
 
   const menuComponents = {
     diaryMenu: <DiaryMenu onClose={onClose} />,
-    replyMenu: <ReplyMenu onClose={onClose} />
+    replyMenu: <ReplyMenu onClose={onClose} />,
+    recoverDiaryMenu: <RecoverDiaryMenu onClose={onClose} />
   }
 
   const opened = currentMenuName !== null;

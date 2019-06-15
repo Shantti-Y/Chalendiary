@@ -20,11 +20,11 @@ const getState = state => state.ui.modalContent.diaryForm;
 function* invokeInitializeInputAttributes(action) {
   const { diary } = action.payload;
   const newInput = Object.assign({}, {
-    id: diary.id,
-    userId: diary.user.id,
-    contentText: diary.contentText || '',
-    postedAt: moment(diary.postedAt)
-  });
+    id: null,
+    userId: null,
+    contentText: '',
+    postedAt: null
+  }, diary);
   yield put(setInput({ input: newInput }));
 }
 
