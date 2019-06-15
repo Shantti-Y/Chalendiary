@@ -19,6 +19,8 @@ import ForDesktop from '@routes/Main/ForDesktop';
 
 import { sessionStatuses } from '@store/reducers/util/sessionStatus';
 
+import firebase from '@utils/firebase';
+
 class Main extends React.Component{
 
   constructor(props){
@@ -49,6 +51,18 @@ class Main extends React.Component{
         subscribeReceivedEvent('/socket/users/destroy', this.props.onReceiveDeleteUser);
       })
     }
+
+    if(
+      prevProps.users.some(user => user.id === this.props.me.id)
+      && this.props.users.every(user => user.id !== this.props.me.id)){
+      firebase.signOut()
+        .then(a => { })
+        .catch(error => {
+          const credential = error.credential;
+          console.log("ERROR!!!!!!")
+          console.log(credential)
+        })
+    }
   }
 
   render(){
@@ -66,7 +80,8 @@ class Main extends React.Component{
 
 const mapStateToProps = state => ({
   sessionStatus: state.util.sessionStatus.status,
-  me: state.me.me
+  me: state.me.me,
+  users: state.user.users
 });
 
 const mapDispatchToProps = dispatch => ({

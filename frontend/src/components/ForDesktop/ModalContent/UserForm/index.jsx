@@ -10,12 +10,14 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { changeInputAttributes, submitInput } from '@store/actions/ui/modalContent/userForm/main';
+import { setUserConfirmation } from '@store/actions/ui/deleteConfirmation/base';
 
 const UserForm = ({
   form,
   onClose,
   onChangeValue,
-  onSubmit
+  onSubmit,
+  onOpenDeleteForm
 }) => {
 
   return (
@@ -39,12 +41,9 @@ const UserForm = ({
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="primary">
-          Cancel
-        </Button>
-        <Button onClick={() => onSubmit(form)} color="primary">
-          Submit
-        </Button>
+        <Button onClick={onClose} color="primary">Cancel</Button>
+        <Button onClick={() => onSubmit(form)} color="primary">Submit</Button>
+        <Button onClick={() => onOpenDeleteForm(form.id)}>Delete</Button>
       </DialogActions>
     </>
   )
@@ -56,7 +55,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onChangeValue: (key, value) => dispatch(changeInputAttributes({ key, value })),
-  onSubmit: input => dispatch(submitInput({ input }))
+  onSubmit: input => dispatch(submitInput({ input })),
+  onOpenDeleteForm: userId => dispatch(setUserConfirmation({ userId }))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserForm);

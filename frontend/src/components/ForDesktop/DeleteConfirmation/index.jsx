@@ -9,6 +9,7 @@ import { closeDeleteConfirmation } from '@store/actions/ui/deleteConfirmation/ba
 
 import DiaryConfirmation from '@components/ForDesktop/DeleteConfirmation/DiaryConfirmation';
 import ReplyConfirmation from '@components/ForDesktop/DeleteConfirmation/ReplyConfirmation';
+import UserConfirmation from '@components/ForDesktop/DeleteConfirmation/UserConfirmation';
 
 const Deleteconfirmation = ({
   currentContentName,
@@ -17,7 +18,8 @@ const Deleteconfirmation = ({
 
   const contents = {
     'diaryConfirmation': <DiaryConfirmation onClose={onCloseConfirmation} />,
-    'replyConfirmation': <ReplyConfirmation onClose={onCloseConfirmation} />
+    'replyConfirmation': <ReplyConfirmation onClose={onCloseConfirmation} />,
+    'userConfirmation': <UserConfirmation onClose={onCloseConfirmation} />
   }
 
   const opened = currentContentName !== null;
