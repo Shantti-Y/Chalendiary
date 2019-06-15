@@ -38,8 +38,8 @@ function* invokeUpdateUser(action) {
 }
 
 function* invokeDeleteUser(action) {
-  const { userId } = action.payload;
-  client().send('/portal/v1/users/destroy', ...[{}, JSON.stringify({ id: userId })]);
+  const { user } = action.payload;
+  client().send('/portal/v1/users/destroy', ...[{}, JSON.stringify({ id: user.id })]);
 }
 
 function* invokeReceiveNewUser(action) {
@@ -70,7 +70,11 @@ function* invokeReceiveEditUser(action) {
 }
 
 function* invokeReceiveDeleteUser(action) {
-  // TODO: Logout after user is deleted with confirming deleted user is equal to logged yourself
+  const { data } = action.payload;
+
+  const { users } = yield select(getState);
+  const newUsers = Object.assign([], users.filter(user => user.id !== data.user.id));
+  yield put(setUsers({ users: newUsers }));
 }
 
 // Bundle api functions to watcher and saga

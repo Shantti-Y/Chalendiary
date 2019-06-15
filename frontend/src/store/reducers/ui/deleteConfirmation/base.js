@@ -4,7 +4,8 @@ import * as actions from '@store/actions/ui/deleteConfirmation/base';
 
 export const deleteConfirmations = {
   DIARY_CONFIRMATION: 'diaryConfirmation',
-  REPLY_CONFIRMATION: 'replyConfirmation'
+  REPLY_CONFIRMATION: 'replyConfirmation',
+  USER_CONFIRMATION: 'userConfirmation'
 }
 
 const initialState = {

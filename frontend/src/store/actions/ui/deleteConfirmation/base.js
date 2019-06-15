@@ -9,5 +9,8 @@ export const setDiaryConfirmation = createAction(SET_DIARY_CONFIRMATION);
 export const SET_REPLY_CONFIRMATION = 'ui/deleteConfirmation/base/SET_REPLY_CONFIRMATION';
 export const setReplyConfirmation = createAction(SET_REPLY_CONFIRMATION);
 
+export const SET_USER_CONFIRMATION = 'ui/deleteConfirmation/base/SET_USER_CONFIRMATION';
+export const setUserConfirmation = createAction(SET_USER_CONFIRMATION);
+
 export const SET_CURRENT_COMPONENT_NAME = 'ui/deleteConfirmation/base/SET_CURRENT_COMPONENT_NAME';
 export const setCurrentComponentName = createAction(SET_CURRENT_COMPONENT_NAME);

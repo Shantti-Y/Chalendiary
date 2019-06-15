@@ -5,7 +5,6 @@ import {
   setCurrentComponentName,
 } from '@store/actions/ui/submenu/main';
 import { changeCurrentDiaryId } from '@store/actions/diary';
-import { changeReplies } from '@store/actions/reply';
 
 // APIs
 function* invokeSetCurrentComponentName(action) {
