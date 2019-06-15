@@ -44,9 +44,10 @@ class FirebaseUserManager: FirebaseUserInfrastructureBoundary{
         return userRecord.uid
     }
 
-//    override fun deleteUser(user: User): User {
-//
-//    }
+    override fun deleteUser(user: User): String {
+        FirebaseAppInstance.auth().deleteUser(user.uniqueId)
+        return user.uniqueId
+    }
 
     private fun mapRecordToUserDomain(record: UserRecord): User {
         return User(

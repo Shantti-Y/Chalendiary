@@ -14,5 +14,5 @@ interface FirebaseUserInfrastructureBoundary {
 
     fun updateUser(user: User): String
 
-    //fun deleteUser(user: User): User
+    fun deleteUser(user: User): String
 }

@@ -64,8 +64,6 @@ class UserInteractor(
         }
     }
 
-
-
     // TODO: add authentication for preventing from a user updating another one's profile
     override fun patchUser(user: User): User {
         val searchedUser = userInfrastructureBoundary.selectUserById(user.id!!)
@@ -79,6 +77,11 @@ class UserInteractor(
 
     override fun deleteUser(userId: Int): User {
         val searchedUser = userInfrastructureBoundary.selectUserById(userId)
-        if (searchedUser != null) return userInfrastructureBoundary.deleteUser(searchedUser) else throw InvalidParameterException()
+        if (searchedUser != null) {
+            firebaseUserInfrastructureBoundary.deleteUser(searchedUser)
+            return userInfrastructureBoundary.deleteUser(searchedUser)
+        } else {
+            throw InvalidParameterException()
+        }
     }
 }
