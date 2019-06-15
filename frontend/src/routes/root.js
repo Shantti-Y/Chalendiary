@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import MainLayout from '@layouts/Main';
+import Dashboard from '@layouts/Dashboard';
 
 import Main from '@routes/Main';
 import Signin from '@routes/Signin';
@@ -41,9 +41,9 @@ class Root extends React.Component {
         <BrowserRouter>
           <Switch>
             <Route path="/signin" exact render={() => <Signin />} />
-            <MainLayout>
+            <Dashboard>
               <Route path="/" exact render={() => RouteWithAuth(Main)} />
-            </MainLayout>
+            </Dashboard>
           </Switch>
         </BrowserRouter>
       )

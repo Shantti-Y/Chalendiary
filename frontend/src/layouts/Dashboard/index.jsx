@@ -1,7 +1,8 @@
 import React from 'react';
+import style from './style';
 import { Redirect } from 'react-router-dom';
-import './style.scss';
 
+import { withStyles } from '@material-ui/styles';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
@@ -17,10 +18,12 @@ import { fetchTags } from '@store/actions/tag';
 
 import { sessionStatuses } from '@store/reducers/util/sessionStatus';
 
+import MenuBar from '@components/MenuBar';
+import MenuNav from '@components/MenuNav';
+
 import firebase from '@utils/firebase';
 
 class Main extends React.Component {
-
   constructor(props) {
     super(props);
   }
@@ -64,13 +67,18 @@ class Main extends React.Component {
   }
 
   render() {
-    const { sessionStatus, children } = this.props;
+    const { sessionStatus, children, classes } = this.props;
     if (sessionStatus === sessionStatuses.LOGGED_OUT) {
       return <Redirect to="/signin" />;
     } else {
       return (
-        <div id="main">
-          {children}
+        <div id="dashboard" className={classes.root}>
+          <MenuBar />
+          
+          <main className={classes.main}>
+            <MenuNav />
+            {children}
+          </main>
         </div>
       )
     }
@@ -106,4 +114,7 @@ const mapDispatchToProps = dispatch => ({
   onReceiveDeleteUser: data => dispatch(receiveDeleteUser({ data })),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(style)(Main));
