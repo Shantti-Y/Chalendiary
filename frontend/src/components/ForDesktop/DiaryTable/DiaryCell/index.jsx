@@ -10,6 +10,7 @@ import { setDiaryDetailComponent } from '@store/actions/ui/submenu/main';
 import TableCell from '@material-ui/core/TableCell';
 import Button from '@material-ui/core/Button';
 
+import Delete from '@material-ui/icons/Delete';
 import Create from '@material-ui/icons/Create';
 
 const DiaryCell = ({
@@ -38,7 +39,9 @@ const DiaryCell = ({
 
   if(diary){
     return (
-      <TableCell className="table-cell" onClick={handleOpeningDiary}>{diaryText}</TableCell>
+      <TableCell className="table-cell" onClick={handleOpeningDiary}>
+        {diary.deletedAt === null ? diaryText : <Delete />}
+      </TableCell>
     )
   } else if (isYourDiary){
     return (
