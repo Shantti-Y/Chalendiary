@@ -9,11 +9,13 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+import { closeDeleteConfirmation } from '@store/actions/ui/deleteConfirmation/base';
 import { submitDelete } from '@store/actions/ui/deleteConfirmation/diaryConfirmation';
 
 const DiaryConfirmation = ({
   diary,
-  onSubmit
+  onSubmit,
+  onCancel
 }) => {
   return (
     <>
@@ -23,7 +25,7 @@ const DiaryConfirmation = ({
       </DialogContent>
       <DialogActions>
         <Button color="danger" onClick={() => onSubmit(diary)}>Delete</Button>
-        <Button color="primary">Cancel</Button>
+        <Button color="primary" onClick={onCancel}>Cancel</Button>
       </DialogActions>
     </>
   )
@@ -34,7 +36,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSubmit: diary => dispatch(submitDelete({ diary }))
+  onSubmit: diary => dispatch(submitDelete({ diary })),
+  onCancel: () => dispatch(closeDeleteConfirmation())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DiaryConfirmation);

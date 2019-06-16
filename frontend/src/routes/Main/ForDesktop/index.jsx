@@ -18,12 +18,7 @@ const ForDesktop = ({}) => {
       <ModalContent />
       <HeaderNav />
       <main>
-        <div className="left-column">
-          <DiaryTable />
-        </div>
-        <div className="right-column">
-          <Submenu />
-        </div>
+        <DiaryTable />
       </main>
     </div>
   )

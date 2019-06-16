@@ -15,6 +15,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 import DiaryCell from './DiaryCell';
+import DiaryDetail from './DiaryDetail';
 
 const DiaryTable = ({
   currentDate, currentTag, users, diaries, tags
@@ -38,6 +39,7 @@ const DiaryTable = ({
 
   return(
     <Paper className = "diary-table" >
+      <DiaryDetail />
       <div className="table-wrapper">
         <Table className="table">
           <TableHead className="table-head">

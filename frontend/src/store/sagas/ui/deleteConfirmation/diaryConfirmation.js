@@ -6,9 +6,9 @@ import {
   setDiary,
 } from '@store/actions/ui/deleteConfirmation/diaryConfirmation';
 
+import { closeDetail } from '@store/actions/ui/workspace/diaryTable/diaryDetail/base';
 import { closeDeleteConfirmation } from '@store/actions/ui/deleteConfirmation/base';
 import { openSnackbar } from '@store/actions/ui/snackbar';
-import { closeMenu } from '@store/actions/ui/submenu/popperMenu/main';
 import { deleteDiary } from '@store/actions/diary';
 
 // APIs
@@ -21,8 +21,8 @@ function* invokeSubmitDelete(action) {
   const { diary } = action.payload;
   yield put(deleteDiary({ diary }));
   yield put(openSnackbar({ message: "Deleted a Diary!", variant: 'warning' }));
-  yield put(closeMenu());
   yield put(closeDeleteConfirmation());
+  yield put(closeDetail());
 }
 
 // Bundle api functions to watcher and saga
