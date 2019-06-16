@@ -2,12 +2,13 @@ import React from 'react';
 import style from './style';
 
 import { connect } from 'react-redux';
-import { setReplyFormContent } from '@store/actions/ui/modalContent/base';
-import { setReplyMenu } from '@store/actions/ui/submenu/popperMenu/main';
+import { openMenu } from '@store/actions/ui/popperMenu';
 
 import Button from '@material-ui/core/Button';
 
-import Create from '@material-ui/icons/Create';
+import MoreVert from '@material-ui/icons/MoreVert';
+
+import EditPopperMenu from './EditPopperMenu';
 
 const ReplyArticle = ({
   me,
@@ -19,7 +20,7 @@ const ReplyArticle = ({
   return (
     <li key={reply.id}>
       {reply.user.screenName}: {reply.contentText}
-      {isYourReply ? <Button><Create onClick={e => onOpenMenu(reply, e.currentTarget)} /></Button> : null}
+      {isYourReply ? <Button><MoreVert onClick={e => onOpenMenu(e.currentTarget, <EditPopperMenu reply={reply} />)} /></Button> : null}
     </li>
   )
 }
@@ -29,11 +30,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onModal: reply => {
-    const newReply = Object.assign({}, reply, { diaryId: reply.diaryId, userId: reply.user.id });
-    dispatch(setReplyFormContent({ reply: newReply }));
-  },
-  onOpenMenu: (reply, anchorEl) => dispatch(setReplyMenu({ reply, anchorEl }))
+  onOpenMenu: (anchorEl, component) => dispatch(openMenu({ anchorEl, component }))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReplyArticle);

@@ -1,4 +1,4 @@
-import { put, all, takeLatest, call, select } from 'redux-saga/effects';
+import { put, all, takeLatest, select } from 'redux-saga/effects';
 import {
   INITIALIZE_INPUT_ATTRIBUTES,
   CHANGE_INPUT_ATTRIBUTES,

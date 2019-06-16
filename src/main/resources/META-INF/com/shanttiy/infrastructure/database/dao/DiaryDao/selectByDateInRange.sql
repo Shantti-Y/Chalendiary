@@ -8,4 +8,6 @@ BETWEEN
   /* from */'2019-01-01'
 AND
   /* to */'2019-01-30'
+ORDER BY
+  d.posted_at
 ;

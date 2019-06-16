@@ -2,7 +2,6 @@ import React from 'react';
 import style from './style';
 
 import { connect } from 'react-redux';
-
 import { openMenu } from '@store/actions/ui/popperMenu';
 
 import Button from '@material-ui/core/Button';
