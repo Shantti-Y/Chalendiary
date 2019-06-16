@@ -8,10 +8,12 @@ import { openMenuBar } from '@store/actions/ui/layout/menuBar';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar'
 import Hidden from '@material-ui/core/Hidden';
+import Divider from '@material-ui/core/Divider';
 
 import Menu from '@material-ui/icons/Menu';
 
 const MenuNav = ({
+  component,
   onClickMenu
 }) => {
 
@@ -21,15 +23,24 @@ const MenuNav = ({
         <AppBar position="static">
           <Toolbar>
             <Menu onClick={() => onClickMenu()} />
-            <h2># channelName</h2>
+            {component}
           </Toolbar>
         </AppBar>
+      </Hidden>
+      <Hidden xsDown implementation="css">
+        <>
+          <Toolbar>
+            {component}
+          </Toolbar>
+          <Divider />
+        </>
       </Hidden>
     </div>
   )
 };
 
 const mapStateToProps = state => ({
+  component: state.ui.layout.menuNav.component
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -44,19 +44,15 @@ const HeaderNav = ({
   }
 
   return (
-    <div>
-      <AppBar position="static">
-        <Toolbar>
-          <h2 onClick={e => onClickTagList(e.currentTarget)}># {currentTagName}</h2>
-          <ChevronLeft onClick={subtractCurrentMonth} />
-          <h2># {formattedCurrentDate}</h2>
-          <ChevronRight onClick={addCurrentMonth} />
-          <MoreVert onClick={e => onClickMenu(e.currentTarget)} />
-        </Toolbar>
-      </AppBar>
+    <>
+      <h2 onClick={e => onClickTagList(e.currentTarget)}># {currentTagName}</h2>
+      <ChevronLeft onClick={subtractCurrentMonth} />
+      <h2># {formattedCurrentDate}</h2>
+      <ChevronRight onClick={addCurrentMonth} />
+      <MoreVert onClick={e => onClickMenu(e.currentTarget)} />
       <TagList />
       <NavMenu />
-    </div>
+    </>
   )
 };
 
