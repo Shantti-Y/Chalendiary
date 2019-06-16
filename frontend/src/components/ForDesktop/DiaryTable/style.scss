@@ -1,7 +1,7 @@
 .diary-table {
   width: 100%;
+  max-height: calc(100% - 65px);
   overflow: scroll;
-  height: 100vh;
 
   .table-wrapper {}
 
