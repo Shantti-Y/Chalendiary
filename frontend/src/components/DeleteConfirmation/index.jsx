@@ -7,9 +7,9 @@ import Dialog from '@material-ui/core/Dialog';
 
 import { closeDeleteConfirmation } from '@store/actions/ui/deleteConfirmation/base';
 
-import DiaryConfirmation from '@components/ForDesktop/DeleteConfirmation/DiaryConfirmation';
-import ReplyConfirmation from '@components/ForDesktop/DeleteConfirmation/ReplyConfirmation';
-import UserConfirmation from '@components/ForDesktop/DeleteConfirmation/UserConfirmation';
+import DiaryConfirmation from '@components/DeleteConfirmation/DiaryConfirmation';
+import ReplyConfirmation from '@components/DeleteConfirmation/ReplyConfirmation';
+import UserConfirmation from '@components/DeleteConfirmation/UserConfirmation';
 
 const Deleteconfirmation = ({
   currentContentName,

@@ -4,7 +4,7 @@ import style from './style';
 import { connect } from 'react-redux';
 import { recoverDiary } from '@store/actions/ui/workspace/diaryTable/diaryDetail/article';
 
-import PopperItem from '@components/ForDesktop/PopperMenu/PopperItem';
+import PopperItem from '@components/PopperMenu/PopperItem';
 
 const RecoverMenu = ({
   diary,

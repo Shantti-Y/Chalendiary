@@ -10,9 +10,6 @@ import { changeCurrentMonth } from '@store/actions/date';
 import { openMenu as openTagList } from '@store/actions/ui/headerNav/tagList';
 import { openMenu as openNavMenu } from '@store/actions/ui/headerNav/navMenu';
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar'
-
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import MoreVert from '@material-ui/icons/MoreVert';

@@ -4,8 +4,11 @@ import './style.scss';
 import { connect } from 'react-redux';
 import { changeComponent } from '@store/actions/ui/layout/menuNav';
 
-import ForDesktop from '@routes/Main/ForDesktop';
-import HeaderNav from '@components/ForDesktop/HeaderNav';
+import HeaderNav from '@components/HeaderNav';
+import DeleteConfirmation from '@components/DeleteConfirmation';
+import DiaryTable from '@components/DiaryTable';
+import ModalContent from '@components/ModalContent';
+import NotifierSnackbar from '@components/NotifierSnackbar';
 
 const Main = ({
   onInitialize
@@ -14,7 +17,12 @@ const Main = ({
 
   return (
     <div id="main">
-      <ForDesktop />
+      <DeleteConfirmation />
+      <NotifierSnackbar />
+      <ModalContent />
+      <main>
+        <DiaryTable />
+      </main>
     </div>
   )
 }

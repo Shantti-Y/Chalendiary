@@ -8,9 +8,9 @@ import { closeMenu } from '@store/actions/ui/submenu/popperMenu/main';
 import Menu from '@material-ui/core/Menu';
 import Fade from '@material-ui/core/Fade';
 
-import DiaryMenu from '@components/ForDesktop/Submenu/PopperMenu/DiaryMenu';
-import ReplyMenu from '@components/ForDesktop/Submenu/PopperMenu/ReplyMenu';
-import RecoverDiaryMenu from '@components/ForDesktop/Submenu/PopperMenu/RecoverDiaryMenu';
+import DiaryMenu from '@components/Submenu/PopperMenu/DiaryMenu';
+import ReplyMenu from '@components/Submenu/PopperMenu/ReplyMenu';
+import RecoverDiaryMenu from '@components/Submenu/PopperMenu/RecoverDiaryMenu';
 
 const PopperMenu = ({
   currentMenuName,

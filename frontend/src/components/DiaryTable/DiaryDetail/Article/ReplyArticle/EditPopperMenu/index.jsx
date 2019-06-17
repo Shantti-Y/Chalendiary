@@ -7,7 +7,7 @@ import { changeReplyForm } from '@store/actions/ui/workspace/diaryTable/diaryDet
 import { closeMenu } from '@store/actions/ui/popperMenu';
 import { setReplyConfirmation } from '@store/actions/ui/deleteConfirmation/base';
 
-import PopperItem from '@components/ForDesktop/PopperMenu/PopperItem';
+import PopperItem from '@components/PopperMenu/PopperItem';
 
 const EditPopperMenu = ({
   reply,

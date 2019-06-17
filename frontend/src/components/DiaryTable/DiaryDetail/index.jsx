@@ -15,7 +15,7 @@ import DiaryForm from './DiaryForm';
 import ReplyForm from './ReplyForm';
 import Article from './Article';
 
-import PopperMenu from '@components/ForDesktop/PopperMenu';
+import PopperMenu from '@components/PopperMenu';
 
 const DiaryDetail = ({
   classes,
