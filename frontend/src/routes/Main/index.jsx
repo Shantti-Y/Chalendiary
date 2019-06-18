@@ -4,7 +4,7 @@ import './style.scss';
 import { connect } from 'react-redux';
 import { changeComponent } from '@store/actions/ui/layout/menuNav';
 
-import HeaderNav from '@components/HeaderNav';
+import HeaderNav from '@components/HeaderNav/Main';
 import DeleteConfirmation from '@components/DeleteConfirmation';
 import DiaryTable from '@components/DiaryTable';
 import ModalContent from '@components/ModalContent';

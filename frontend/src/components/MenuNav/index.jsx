@@ -1,6 +1,7 @@
 import React from 'react';
-import './style.scss';
+import style from './style';
 
+import { withStyles } from '@material-ui/styles';
 import { connect } from 'react-redux';
 
 import { openMenuBar } from '@store/actions/ui/layout/menuBar';
@@ -47,4 +48,7 @@ const mapDispatchToProps = dispatch => ({
   onClickMenu: () => dispatch(openMenuBar())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MenuNav);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(style)(MenuNav));
