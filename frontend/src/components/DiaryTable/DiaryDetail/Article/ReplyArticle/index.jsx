@@ -19,7 +19,14 @@ const ReplyArticle = ({
 
   return (
     <li key={reply.id}>
-      {isYourReply ? <IconButton className={style.iconButton}><MoreVert className={style.moveVertIcon} onClick={e => onOpenMenu(e.currentTarget, <EditPopperMenu reply={reply} />)} /></IconButton> : null}
+      {isYourReply ? (
+        <IconButton
+          className={style.iconButton}
+          onClick={e => onOpenMenu(e.currentTarget, <EditPopperMenu reply={reply} />)}
+        >
+          <MoreVert className={style.moveVertIcon} />
+        </IconButton>
+      ) : null}
       <p className={style.screenName}>{reply.user.screenName}</p>
       <p className={style.contentText}>{reply.contentText}</p>
     </li>

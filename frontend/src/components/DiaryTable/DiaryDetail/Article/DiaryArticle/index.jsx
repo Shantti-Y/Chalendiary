@@ -23,13 +23,27 @@ const DiaryArticle = ({
       {
         diary.deletedAt === null ? (
           <>
-            {isYourDiary ? <IconButton className={style.iconButton}><MoreVert className={style.moveVertIcon} onClick={e => onOpenMenu(e.currentTarget, <EditPopperMenu diary={diary} />)} /></IconButton> : null}
+            {isYourDiary ? (
+              <IconButton
+                className={style.iconButton}
+                onClick={e => onOpenMenu(e.currentTarget, <EditPopperMenu diary={diary} />)}
+              >
+                <MoreVert className={style.moveVertIcon} />
+              </IconButton>
+            ) : null}
             <p className={style.title}>Diary</p>
             <p className={style.contentText}>{diary.contentText}</p>
           </>
         ) : (
             <>
-              {diary.deletedAt ? <IconButton className={style.iconButton}><MoreVert className={style.moveVertIcon} onClick={e => onOpenMenu(e.currentTarget, <RecoverPopperMenu diary={diary} />)} /></IconButton> : null}
+              {diary.deletedAt ? (
+                <IconButton
+                  className={style.iconButton}
+                  onClick={e => onOpenMenu(e.currentTarget, <RecoverPopperMenu diary={diary} />)}
+                >
+                  <MoreVert className={style.moveVertIcon} />
+                </IconButton>
+              ) : null}
               <p className={style.title}>Deleted Post</p>
             </>
           )
