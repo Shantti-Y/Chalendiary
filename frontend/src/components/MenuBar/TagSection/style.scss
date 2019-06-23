@@ -1,11 +1,17 @@
 .listSubheader {
-  line-height: 20px;
+  line-height: 100% !important;
   color: white !important;
-  height: 36px;
+  font-weight: 300 !important;
+  font-size: 15px !important;
+  padding: 12px 24px 8px 24px !important;
 }
 
 .currentTag {
   margin-bottom: 12px !important;
+}
+
+.listCategory {
+  margin-bottom: 16px;
 }
 
 .listItem {
@@ -14,10 +20,11 @@
 
 .typography {
   font-size: 14px !important;
-  font-weight: 500 !important;
+  font-weight: 300 !important;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  line-height: 125% !important;
 }
 
 .icon {

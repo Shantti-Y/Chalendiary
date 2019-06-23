@@ -25,12 +25,9 @@ const TagSection = ({
   onClickTagEdit
 }) => {
 
-  const currentTag = tags.find(tag => tag.id === currentTagId);
-  const otherTags = tags.filter(tag => tag.id !== currentTagId);
-
   const TagItem = ({ tag, clickable, onClick }) => (
     <SectionItem onClick={onClick} clickable={clickable}>
-      <ListItemText className={style.listItem} primary={<Typography variant="h3" className={style.typography}>{tag.name}</Typography>} />
+      <ListItemText className={style.listItem} primary={<Typography variant="h3" className={style.typography}># {tag.name}</Typography>} />
       {tag.ownerUser.id === me.id ? (
         <Button className={style.button}>
           <Edit className={style.icon} onClick={() => onClickTagEdit(tag)} />
@@ -39,19 +36,51 @@ const TagSection = ({
     </SectionItem>
   )
 
+  const currentTag = tags.find(tag => tag.id === currentTagId);
+  const otherTags = tags.filter(tag => tag.id !== currentTag.id);
+  const categorizedTags = {
+    OWNED_TAGS: { header: 'Owned Tags', tags: [] },
+    BELONGED_TAGS: { header: 'Belonged Tags', tags: [] },
+    PUBLIC_TAGS: { header: 'Public Tags', tags: [] }
+  }
+    
+  otherTags.map(tag => {
+    if (tag.ownerUser.id === me.id){
+      categorizedTags.OWNED_TAGS.tags.push(tag);
+    } else if (tag.users.map(user => user.id).includes(me.id)){
+      categorizedTags.BELONGED_TAGS.tags.push(tag);
+    }else if(tag.publicFlag){
+      categorizedTags.PUBLIC_TAGS.tags.push(tag);
+    }
+  });
+
   return (
     <SectionContainer
       primaryIcon={<Style />}
       primaryText="Tags"
     >
-      <ListSubheader className={style.listSubheader}>Active Tag</ListSubheader>
-      {
-        currentTag ? (
-          <div className={style.currentTag}><TagItem tag={currentTag} clickable={false} onClick={() => true} /></div>
-        ) : null
-      }
-      <ListSubheader></ListSubheader>
-      {otherTags.map(tag => <TagItem tag={tag} clickable={true} onClick={() => onClickTagItem(tag.id)} />)}
+      <div className={style.listCategory}>
+        <ListSubheader className={style.listSubheader}>Active Tag</ListSubheader>
+        {
+          currentTag ? (
+            <div className={style.currentTag}><TagItem tag={currentTag} clickable={false} onClick={() => true} /></div>
+          ) : null
+        }
+      </div>
+      {Object.keys(categorizedTags).map(key => {
+        const category = categorizedTags[key];
+        if(category.tags.length > 0){
+          return (
+            <div className={style.listCategory}>
+              <ListSubheader className={style.listSubheader}>{category.header}</ListSubheader>
+              {category.tags.map(tag => <TagItem tag={tag} clickable={true} onClick={() => onClickTagItem(tag.id)} />)}
+            </div>
+          )
+        } else {
+          return null;
+        }
+        
+      })}
     </SectionContainer>
   );
 }

@@ -25,7 +25,7 @@ const UserSection = ({
       {teamMembers.map(user => (
         <SectionItem clickable={false}>
           <div className={style.activity}></div>
-          <ListItemText primary={<Typography variant="h3" className={style.typography}>{user.screenName}</Typography>} />
+          <ListItemText className={style.listItemText} primary={<Typography variant="h3" className={style.typography}>{user.screenName}</Typography>} />
         </SectionItem>
       ))}
     </SectionContainer>
