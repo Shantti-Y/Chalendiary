@@ -1,5 +1,5 @@
 
-import { put, all, takeLatest, call, select } from 'redux-saga/effects';
+import { put, all, takeLatest } from 'redux-saga/effects';
 import {
   SET_DIARY_DETAIL_COMPONENT,
   setCurrentComponentName,

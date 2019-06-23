@@ -7,6 +7,7 @@ import moment from 'moment';
 import { DEFAULT_TAG_NAME } from '@utils/defaultValues';
 
 import { changeCurrentMonth } from '@store/actions/date';
+import { closeDetail } from '@store/actions/ui/workspace/diaryTable/diaryDetail/base';
 
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
@@ -71,7 +72,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onChangeMonth: date => dispatch(changeCurrentMonth({ date }))
+  onChangeMonth: date => {
+    dispatch(closeDetail());
+    dispatch(changeCurrentMonth({ date }));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderNav);
