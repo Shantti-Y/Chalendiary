@@ -14,8 +14,10 @@ import MoreVert from '@material-ui/icons/MoreVert';
 import LibraryAdd from '@material-ui/icons/LibraryAdd';
 import AccountBox from '@material-ui/icons/AccountBox';
 import ExitToApp from '@material-ui/icons/ExitToApp';
+import Typography from '@material-ui/core/Typography';
 
 import SectionContainer from '../SectionContainer';
+import SectionItem from '../SectionItem';
 
 import firebase from '@utils/firebase';
 
@@ -38,27 +40,21 @@ const OtherSection = ({
 
   return (
     <SectionContainer
-      primaryComponent={(
-        <>
-          <ListItemIcon><MoreVert /></ListItemIcon>
-          <ListItemText primary="Actions" />
-        </>
-      )}
+      primaryIcon={<MoreVert />}
+      primaryText="Actions"
     >
-      <List component="nav">
-        <ListItem onClick={() => onOpenTagForm(me)}>
-          <ListItemIcon><LibraryAdd /></ListItemIcon>
-          <ListItemText primary="Create New Tag" />
-        </ListItem>
-        <ListItem onClick={() => onOpenUserForm(me)}>
-          <ListItemIcon><AccountBox /></ListItemIcon>
-          <ListItemText primary="Your Profile" />
-        </ListItem>
-        <ListItem onClick={logout}>
-          <ListItemIcon><ExitToApp /></ListItemIcon>
-          <ListItemText primary="Log Out" />
-        </ListItem>
-      </List>
+      <SectionItem clickable={true} onClick={() => onOpenTagForm(me)}>
+        <ListItemIcon style={style.listItemIcon}><LibraryAdd style={style.icon} /></ListItemIcon>
+        <ListItemText style={style.listItemText} primary={<Typography variant="h3" style={style.typography}>Create New Tag</Typography>} />
+      </SectionItem>
+      <SectionItem clickable={true} onClick={() => onOpenUserForm(me)}>
+        <ListItemIcon style={style.listItemIcon}><AccountBox style={style.icon} /></ListItemIcon>
+        <ListItemText style={style.listItemText} primary={<Typography variant="h3" style={style.typography}>Your Profile</Typography>} />
+      </SectionItem>
+      <SectionItem clickable={true} onClick={logout}>
+        <ListItemIcon style={style.listItemIcon}><ExitToApp style={style.icon} /></ListItemIcon>
+        <ListItemText style={style.listItemText} primary={<Typography variant="h3" style={style.typography}>Log Out</Typography>} />
+      </SectionItem>
     </SectionContainer>
   );
 }

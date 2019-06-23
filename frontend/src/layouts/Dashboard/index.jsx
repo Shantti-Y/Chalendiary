@@ -72,10 +72,10 @@ class Main extends React.Component {
       return <Redirect to="/signin" />;
     } else {
       return (
-        <div id="dashboard" className={classes.root}>
+        <div id="dashboard" style={style.root}>
           <MenuBar />
           
-          <main className={classes.main}>
+          <main style={style.main}>
             <MenuNav />
             {children}
           </main>
@@ -114,7 +114,4 @@ const mapDispatchToProps = dispatch => ({
   onReceiveDeleteUser: data => dispatch(receiveDeleteUser({ data })),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(style)(Main));
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

@@ -1,3 +1,13 @@
+.inputHead {
+  text-align: left !important;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.inputField textarea {
+  font-size: 13px !important;
+}
+
 .success {
   background-color: #007a5a !important;
   color: #ffffff !important;
@@ -7,10 +17,7 @@
 
 .warning {}
 
-.danger {
-  background-color: #e01e5a !important;
-  color: #ffffff !important;
-}
+.danger {}
 
 .plane {
   background-color: #e5e5e5 !important;
@@ -21,4 +28,8 @@
   padding: 4px 6px !important;
   font-size: 13px !important;
   margin: 0 6px !important;
+}
+
+.formActions {
+  margin-top: 8px;
 }

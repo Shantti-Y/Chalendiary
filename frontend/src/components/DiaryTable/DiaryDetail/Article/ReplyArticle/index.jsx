@@ -1,10 +1,10 @@
 import React from 'react';
-import style from './style';
+import style from './style.scss';
 
 import { connect } from 'react-redux';
 import { openMenu } from '@store/actions/ui/popperMenu';
 
-import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 
 import MoreVert from '@material-ui/icons/MoreVert';
 
@@ -19,8 +19,9 @@ const ReplyArticle = ({
 
   return (
     <li key={reply.id}>
-      {reply.user.screenName}: {reply.contentText}
-      {isYourReply ? <Button><MoreVert onClick={e => onOpenMenu(e.currentTarget, <EditPopperMenu reply={reply} />)} /></Button> : null}
+      {isYourReply ? <IconButton className={style.iconButton}><MoreVert className={style.moveVertIcon} onClick={e => onOpenMenu(e.currentTarget, <EditPopperMenu reply={reply} />)} /></IconButton> : null}
+      <p className={style.screenName}>{reply.user.screenName}</p>
+      <p className={style.contentText}>{reply.contentText}</p>
     </li>
   )
 }

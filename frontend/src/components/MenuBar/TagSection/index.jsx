@@ -1,23 +1,21 @@
 import React from 'react';
 import style from './style';
 
-import { withStyles } from '@material-ui/styles';
 import { connect } from 'react-redux';
 
 import { changeCurrentTagId } from '@store/actions/tag';
 import { setTagFormContent } from '@store/actions/ui/modalContent/base';
 
 import ListSubheader from '@material-ui/core/ListSubheader';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 import Style from '@material-ui/icons/Style';
 import Edit from '@material-ui/icons/Edit';
 
 import SectionContainer from '../SectionContainer';
+import SectionItem from '../SectionItem';
 
 const TagSection = ({
   me,
@@ -30,35 +28,30 @@ const TagSection = ({
   const currentTag = tags.find(tag => tag.id === currentTagId);
   const otherTags = tags.filter(tag => tag.id !== currentTagId);
 
-  const TagItem = ({ tag, onClick }) => (
-    <ListItem onClick={onClick}>
-      <ListItemText primary={tag.name} />
-      {tag.ownerUser.id === me.id ? <Edit onClick={() => onClickTagEdit(tag)} /> : null}
-    </ListItem>
+  const TagItem = ({ tag, clickable, onClick }) => (
+    <SectionItem onClick={onClick} clickable={clickable}>
+      <ListItemText style={style.listItem} primary={<Typography variant="h3" style={style.typography}>{tag.name}</Typography>} />
+      {tag.ownerUser.id === me.id ? (
+        <Button style={style.button}>
+          <Edit style={style.icon} onClick={() => onClickTagEdit(tag)} />
+        </Button>
+      ) : null}
+    </SectionItem>
   )
 
   return (
     <SectionContainer
-      primaryComponent={(
-        <>
-          <ListItemIcon><Style /></ListItemIcon>
-          <ListItemText primary="Tags" />
-        </>
-      )}
+      primaryIcon={<Style />}
+      primaryText="Tags"
     >
-      <List component="nav"> 
-        <ListSubheader>Active Tag</ListSubheader>
-        {
-          currentTag ? (
-            <>
-              <TagItem tag={currentTag} onClick={() => true} />
-              <Divider />
-            </>
-          ) : null
-        }
-        <ListSubheader></ListSubheader>
-        {otherTags.map(tag => <TagItem tag={tag} onClick={() => onClickTagItem(tag.id)} />)}
-      </List>
+      <ListSubheader style={style.listSubheader}>Active Tag</ListSubheader>
+      {
+        currentTag ? (
+          <div style={style.currentTag}><TagItem tag={currentTag} clickable={false} onClick={() => true} /></div>
+        ) : null
+      }
+      <ListSubheader></ListSubheader>
+      {otherTags.map(tag => <TagItem tag={tag} clickable={true} onClick={() => onClickTagItem(tag.id)} />)}
     </SectionContainer>
   );
 }
@@ -77,7 +70,4 @@ const mapDispatchToProps = dispatch => ({
   onClickTagItem: tagId => dispatch(changeCurrentTagId({ tagId }))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(style)(TagSection));
+export default connect(mapStateToProps, mapDispatchToProps)(TagSection);

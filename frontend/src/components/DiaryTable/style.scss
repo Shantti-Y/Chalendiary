@@ -1,36 +1,47 @@
-.diary-table {
-  width: 100%;
-  max-height: calc(100% - 65px);
+.root {
+  height: 100%;
   overflow: scroll;
+}
 
-  .table-wrapper {}
-
-  .table {
-    height: 100%;
-
-    .table-head {
-      .table-cell {
-        position: sticky;
-        top: 0;
-        z-index: 2;
-        background-color: #fff;
-      }
-
-      .first-column {
-        left: 0;
-        z-index: 3;
-      }
-    }
-
-    .table-body {
-      .table-cell {}
-
-      .first-column {
-        position: sticky;
-        left: 0;
-        z-index: 1;
-        background-color: #fff;
-      }
-    }
+@media all and(max-width: 600px) {
+  .root {
+    width: 100%;
   }
+}
+
+@media all and(min-width: 601px) {
+  .root {
+    width: calc(100% - 256px);
+  }
+}
+
+.table {
+  height: 100%;
+}
+
+.headCell {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: white;
+  text-align: center;
+  padding: 0;
+  width: 96px;
+}
+
+.headFirstColumn {
+  left: 0;
+  z-index: 3;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  padding: 12px 32px 12px 20px !important;
+}
+
+.bodyFirstColumn {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background-color: white;
+  padding: 12px 32px 12px 20px !important;
 }

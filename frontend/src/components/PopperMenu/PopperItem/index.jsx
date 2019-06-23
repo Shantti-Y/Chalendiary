@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './style';
+import style from './style.scss';
 
 import { connect } from 'react-redux';
 
@@ -11,7 +11,7 @@ const PopperItem = ({
 }) => {
 
   return (
-    <MenuItem onClick={onClick}>{children}</MenuItem>
+    <MenuItem className={style.menuItem} onClick={onClick}>{children}</MenuItem>
   )
 }
 

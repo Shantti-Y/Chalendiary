@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.scss';
+import style from './style.scss';
 
 import { connect } from 'react-redux';
 
@@ -19,13 +19,13 @@ const DiaryConfirmation = ({
 }) => {
   return (
     <>
+      <DialogTitle>Delete Diary</DialogTitle>
       <DialogContent>
-        <DialogTitle>Delete Diary</DialogTitle>
         <DialogContentText>Are you sure you want to delete this diary message?</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button color="danger" onClick={() => onSubmit(diary)}>Delete</Button>
-        <Button color="primary" onClick={onCancel}>Cancel</Button>
+        <Button className={`${style.modalButton} ${style.plane}`} onClick={onCancel}>Cancel</Button>
+        <Button className={`${style.modalButton} ${style.danger}`} onClick={() => onSubmit(diary)}>Delete</Button>
       </DialogActions>
     </>
   )

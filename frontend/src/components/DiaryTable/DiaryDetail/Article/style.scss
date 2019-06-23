@@ -1,0 +1,24 @@
+.repliesBorder {
+  width: calc(100% - 8px);
+  border-top: 1px solid gray;
+  position: relative;
+  margin: 16px 4px;
+}
+
+.replies {
+  position: absolute;
+  top: -7px;
+  background-color: white;
+  padding-right: 4px;
+  font-size: 12px;
+}
+
+.newDiaryButton {
+  margin-top: 8px !important;
+  font-size: 14px !important;
+}
+
+.newDiaryIcon {
+  margin-left: 4px !important;
+  font-size: 18px !important;
+}

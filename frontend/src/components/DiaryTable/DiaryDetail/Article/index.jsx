@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './style';
+import style from './style.scss';
 
 import { connect } from 'react-redux';
 
@@ -21,12 +21,15 @@ const Article = ({
   return (
     <>
       <DiaryArticle diary={diary} />
+      <div className={style.repliesBorder}>
+        <span className={style.replies}>{`${diary.replies.length} replies`}</span>
+      </div>
       <ul>{diary.replies.map(reply => <ReplyArticle reply={reply} />)}</ul>
       {
         diary.deletedAt === null ? (
-          <div>
-            <Button><Create onClick={() => onOpenReplyForm(me.id, diary)} /></Button>
-          </div>
+          <Button className={style.newDiaryButton}>
+            Comment<Create className={style.newDiaryIcon} onClick={() => onOpenReplyForm(me.id, diary)} />
+          </Button>
         ) : null
       }
     </>

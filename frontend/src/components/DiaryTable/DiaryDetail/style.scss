@@ -1,0 +1,33 @@
+.card {
+  position: absolute;
+  height: 300px;
+  width: 100%;
+  top: 0;
+  background-color: white;
+  overflow-y: scroll;
+}
+
+.iconButton {
+  margin-top: 4px;
+  float: right !important;
+  padding: 6px !important;
+  position: 'absolute';
+  top: 0;
+  right: 4px;
+}
+
+.closeIcon {
+  font-size: 14px !important;
+}
+
+.cardHeader {
+  position: 'relative';
+  padding-top: 16px;
+  // height: 30px;
+  // width: 100%;
+  // border-bottom: 1px solid rgba(224, 224, 224, 1);
+}
+
+.cardBody {
+  padding: 0 8px 16px 0;
+}

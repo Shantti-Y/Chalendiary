@@ -1,11 +1,8 @@
 import React from 'react';
-import './style.scss';
+import style from './style.scss';
 
 import { connect } from 'react-redux';
 import moment from 'moment';
-
-import { changeInputAttributes as changeDiaryInputAttributes } from '@store/actions/ui/modalContent/diaryForm';
-import { changeInputAttributes as changeReplyInputAttributes } from '@store/actions/ui/modalContent/replyForm';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -18,7 +15,7 @@ import DiaryCell from './DiaryCell';
 import DiaryDetail from './DiaryDetail';
 
 const DiaryTable = ({
-  currentDate, currentTag, users, diaries, tags
+  currentDate, currentTag, users, diaries
 }) => {
   const daysInMonth = currentDate.daysInMonth();
   const members = () => {
@@ -38,25 +35,25 @@ const DiaryTable = ({
   });
 
   return(
-    <Paper className = "diary-table" >
+    <Paper className={style.root}>
       <DiaryDetail />
-      <div className="table-wrapper">
-        <Table className="table">
-          <TableHead className="table-head">
+      <div>
+        <Table className={style.table}>
+          <TableHead>
             <TableRow>
-              <TableCell className="first-column table-cell">Members</TableCell>
+              <TableCell className={style.headFirstColumn}>Members</TableCell>
               {[...Array(daysInMonth)].map((_, i) => {
                 const day = i + 1;
-                return <TableCell className="table-cell" key={day} align="right">{day}</TableCell>
+                return <TableCell className={style.headCell} key={day} align="right">{day}</TableCell>
               })}
             </TableRow>
           </TableHead>
-          <TableBody className="table-body">
+          <TableBody>
             {
               diaryTable().map(tableRow => {
                 return (
                   <TableRow key={tableRow.member.id}>
-                    <TableCell scope="row" className="first-column table-cell">
+                    <TableCell scope="row" className={style.bodyFirstColumn}>
                       {tableRow.member.screenName}
                     </TableCell>
                     {

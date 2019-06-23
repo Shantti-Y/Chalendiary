@@ -1,11 +1,9 @@
 import React from 'react';
-import style from './style';
+import style from './style.scss';
 
-import { withStyles } from '@material-ui/styles';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import { setDiaryFormContent } from '@store/actions/ui/modalContent/base';
 import { setDiaryDetailComponent } from '@store/actions/ui/submenu/main';
 
 import { openDiaryForm, openArticle } from '@store/actions/ui/workspace/diaryTable/diaryDetail/base';
@@ -14,7 +12,7 @@ import TableCell from '@material-ui/core/TableCell';
 import Button from '@material-ui/core/Button';
 
 import Delete from '@material-ui/icons/Delete';
-import Create from '@material-ui/icons/Create';
+import Launch from '@material-ui/icons/Launch';
 
 const DiaryCell = ({
   me,
@@ -32,12 +30,6 @@ const DiaryCell = ({
 
   const container = React.useRef(null);
 
-  const handleOpeningDiary = () => {
-    if(diary){
-      onOpenDiaryDetail(diary);
-    }
-  }
-
   const handleOpeningFormModal = () => {
     if (isYourDiary){
       onOpenDiaryForm(container, me.id, postedAt, diaryText);
@@ -47,26 +39,27 @@ const DiaryCell = ({
   if(diary){
     return (
       <TableCell
-        style={currentContainer === container ? style.activeTableCell : style.tableCell}
+        className={currentContainer === container ? style.activeBodyCell : style.bodyCell}
         onClick={() => onOpenArticle(container, diary.id)}
         ref={container}
         padding="none"
         align="justify"
       >
-        {diary.deletedAt === null ? diaryText : <Delete />}
+        <span className={style.cellText}>
+          {diary.deletedAt === null ? diaryText : <span><Delete /> deleted</span>}
+        </span>
       </TableCell>
     )
   } else if (isYourDiary){
     return (
       <TableCell
-        style={currentContainer === container ? style.activeTableCell : style.tableCell}
-        className="table-cell"
+        className={currentContainer === container ? style.activeBodyCell : style.bodyCell}
         onClick={handleOpeningFormModal}
         ref={container}
         padding="none"
         align="justify"
       >
-        <Button><Create /></Button>
+        <Button>New Post<Launch /></Button>
       </TableCell>
     )
   }else{
@@ -90,7 +83,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(style)(DiaryCell));
+export default connect(mapStateToProps, mapDispatchToProps)(DiaryCell);

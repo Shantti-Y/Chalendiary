@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.scss';
+import style from './style.scss';
 
 import { connect } from 'react-redux';
 
@@ -17,13 +17,13 @@ const ReplyConfirmation = ({
 }) => {
   return (
     <>
+      <DialogTitle>Delete Reply</DialogTitle>
       <DialogContent>
-        <DialogTitle>Delete Reply</DialogTitle>
         <DialogContentText>Are you sure you want to delete this reply? This cannot be undone.</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button color="danger" onClick={() => onSubmit(reply)}>Delete</Button>
-        <Button color="primary">Cancel</Button>
+        <Button className={`${style.modalButton} ${style.plane}`} >Cancel</Button>
+        <Button className={`${style.modalButton} ${style.danger}`}  onClick={() => onSubmit(reply)}>Delete</Button>
       </DialogActions>
     </>
   )

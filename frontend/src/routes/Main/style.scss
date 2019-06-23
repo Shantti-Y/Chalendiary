@@ -1,14 +1,10 @@
-main {
-  overflow: hidden;
-}
-
 // TODO: should be moved to common css
 #app {
   height: 100%;
 }
 
 #main {
-  height: 100%;
+  height: calc(100vh - 65px);
   background-color: #f5f5f5;
 
   .drawer-container {

@@ -20,9 +20,7 @@ const Main = ({
       <DeleteConfirmation />
       <NotifierSnackbar />
       <ModalContent />
-      <main>
-        <DiaryTable />
-      </main>
+      <DiaryTable />
     </div>
   )
 }

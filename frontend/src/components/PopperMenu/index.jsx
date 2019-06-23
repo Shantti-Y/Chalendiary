@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './style';
+import style from './style.scss';
 
 import { connect } from 'react-redux';
 
@@ -19,12 +19,13 @@ const PopperMenu = ({
   if(opened){
     return (
       <Menu
-        id="fade-menu"
+        className={style.menu}
         anchorEl={anchorEl}
         keepMounted
         open={opened}
         onClose={onClose}
         TransitionComponent={Fade}
+
       >
         {component}
       </Menu>

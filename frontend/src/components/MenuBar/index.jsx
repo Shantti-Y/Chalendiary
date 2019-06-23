@@ -1,11 +1,11 @@
 import React from 'react';
 import style from './style';
 
-import { withStyles } from '@material-ui/styles';
 import { connect } from 'react-redux';
 
 import { closeMenuBar } from '@store/actions/ui/layout/menuBar'
 
+import List from '@material-ui/core/List';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import Divider from '@material-ui/core/Divider';
@@ -23,38 +23,38 @@ const MenuBar = ({
 
   const Contents = (props) => {
     return (
-      <>
+      <List style={style.list} disablePadding component="nav">
         <Header />
         <Divider />
         <TagSection />
         <UserSection /> 
         <OtherSection />
-      </>
+      </List>
     )
   }
 
   return (
     <div className="menu-bar">
       <Hidden xsUp implementation="css">
-        <div className={classes.drawerForMobile}>
+        <div style={style.drawerForMobile}>
           <Drawer
             className="drawer"
             variant="temporary"
             onClose={() => onClose()}
-            classes={{ paper: classes.drawerPaper }}
             open={opened}
             ModalProps={{ keepMounted: true }}
+            PaperProps={{ style: style.drawerPaper }}
           >
             <Contents />
           </Drawer>
         </div>
       </Hidden>
       <Hidden xsDown implementation="css">
-        <div className={classes.drawerForDesktop}>
+        <div style={style.drawerForDesktop}>
           <Drawer
             className="drawer"
             variant="permanent"
-            classes={{ paper: classes.drawerPaper }}
+            PaperProps={{ style: style.drawerPaper }}
             open={true}
           >
             <Contents />
@@ -75,7 +75,4 @@ const mapDispatchToProps = dispatch => ({
   onClose: () => dispatch(closeMenuBar())
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(style)(MenuBar));
+export default connect(mapStateToProps, mapDispatchToProps)(MenuBar);

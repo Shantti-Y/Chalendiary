@@ -1,22 +1,14 @@
 import React from 'react';
 import style from './style';
 
-import { withStyles } from '@material-ui/styles';
 import { connect } from 'react-redux';
-
-import { changeCurrentTagId } from '@store/actions/tag';
-
-import ListSubheader from '@material-ui/core/ListSubheader';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
-import Divider from '@material-ui/core/Divider';
-
-import Group from '@material-ui/icons/Group';
+import Typography from '@material-ui/core/Typography';
 
 import SectionContainer from '../SectionContainer';
+import SectionItem from '../SectionItem';
+
+import Group from '@material-ui/icons/Group';
 
 const UserSection = ({
   users,
@@ -27,20 +19,15 @@ const UserSection = ({
 
   return (
     <SectionContainer
-      primaryComponent={(
-        <>
-          <ListItemIcon><Group /></ListItemIcon>
-          <ListItemText primary="Users" />
-        </>
-      )}
+      primaryIcon={<Group />}
+      primaryText="Users"
     >
-      <List component="nav"> 
-        {teamMembers.map(user => (
-          <ListItem>
-            <ListItemText primary={user.screenName} />
-          </ListItem>
-        ))}
-      </List>
+      {teamMembers.map(user => (
+        <SectionItem clickable={false}>
+          <div style={style.activity}></div>
+          <ListItemText primary={<Typography variant="h3" style={style.typography}>{user.screenName}</Typography>} />
+        </SectionItem>
+      ))}
     </SectionContainer>
   );
 }
@@ -54,7 +41,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(style)(UserSection));
+export default connect(mapStateToProps, mapDispatchToProps)(UserSection);
