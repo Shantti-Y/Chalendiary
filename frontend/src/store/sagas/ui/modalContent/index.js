@@ -5,6 +5,7 @@ import modalContentDiaryFormSaga from '@store/sagas/ui/modalContent/diaryForm';
 import modalContentReplyFormSaga from '@store/sagas/ui/modalContent/replyForm';
 import modalContentTagFormSaga from '@store/sagas/ui/modalContent/tagForm';
 import modalContentUserFormSaga from '@store/sagas/ui/modalContent/userForm';
+import modalContentUserProfileSaga from '@store/sagas/ui/modalContent/userProfile';
 
 export default function* modalContentSaga() {
   yield all([
@@ -12,6 +13,7 @@ export default function* modalContentSaga() {
     ...modalContentDiaryFormSaga(),
     ...modalContentReplyFormSaga(),
     ...modalContentTagFormSaga(),
-    ...modalContentUserFormSaga()
+    ...modalContentUserFormSaga(),
+    ...modalContentUserProfileSaga()
   ]);
 }

@@ -1,0 +1,42 @@
+  .title {
+    padding: 0 0 20px 0 !important;
+  }
+
+
+  .itemField {
+    color: #595959;
+    font-size: 13px;
+  }
+
+  .itemValue {
+    font-size: 15px;
+  }
+
+  @media all and(max-width: 600px) {
+    .container {
+      padding: 18px !important;
+    }
+
+    .itemContent {
+      margin-bottom: 16px;
+    }
+
+    .itemField {
+      margin-bottom: 8px;
+    }
+  }
+
+  @media all and(min-width: 601px) {
+    .itemContent {
+      display: flex;
+      margin-bottom: 12px;
+    }
+
+    .itemField {
+      width: 50%;
+    }
+
+    .itemValue {
+      width: 50%;
+    }
+  }

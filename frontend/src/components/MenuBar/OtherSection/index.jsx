@@ -1,12 +1,9 @@
 import React from 'react';
 import style from './style.scss';
 
-import { withStyles } from '@material-ui/styles';
 import { connect } from 'react-redux';
-import { setTagFormContent, setUserFormContent } from '@store/actions/ui/modalContent/base';
+import { setTagFormContent, setUserProfileContent } from '@store/actions/ui/modalContent/base';
 
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
@@ -47,7 +44,7 @@ const OtherSection = ({
         <ListItemIcon className={style.listItemIcon}><LibraryAdd className={style.icon} /></ListItemIcon>
         <ListItemText className={style.listItemText} primary={<Typography variant="h3" className={style.typography}>Create New Tag</Typography>} />
       </SectionItem>
-      <SectionItem clickable={true} onClick={() => onOpenUserForm(me)}>
+      <SectionItem clickable={true} onClick={() => onOpenUserForm(me.id)}>
         <ListItemIcon className={style.listItemIcon}><AccountBox className={style.icon} /></ListItemIcon>
         <ListItemText className={style.listItemText} primary={<Typography variant="h3" className={style.typography}>Your Profile</Typography>} />
       </SectionItem>
@@ -66,10 +63,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onOpenTagForm: ownerUser => dispatch(setTagFormContent({ tag: { ownerUser }, userIds: [] })),
-  onOpenUserForm: user => dispatch(setUserFormContent({ user }))
+  onOpenUserForm: userId => dispatch(setUserProfileContent({ userId }))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(style)(OtherSection));
+export default connect(mapStateToProps, mapDispatchToProps)(OtherSection);

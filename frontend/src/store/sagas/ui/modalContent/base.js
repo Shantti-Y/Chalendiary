@@ -1,12 +1,14 @@
-import { put, all, takeLatest, call, select } from 'redux-saga/effects';
+import { put, all, takeLatest } from 'redux-saga/effects';
 import {
   SET_DIARY_FORM_CONTENT,
   SET_REPLY_FORM_CONTENT,
   SET_TAG_FORM_CONTENT,
   SET_USER_FORM_CONTENT,
+  SET_USER_PROFILE_CONTENT,
   CLOSE_MODAL_CONTENT,
   setModalContentName
 } from '@store/actions/ui/modalContent/base';
+import { changeCurrentUserId } from '@store/actions/ui/modalContent/userProfile';
 import { initializeInputAttributes as initializeDiaryAttributes } from '@store/actions/ui/modalContent/diaryForm';
 import { initializeInputAttributes as initializeReplyAttributes } from '@store/actions/ui/modalContent/replyForm';
 import { initializeInputAttributes as initializeTagAttributes } from '@store/actions/ui/modalContent/tagForm/main';
@@ -41,6 +43,12 @@ function* invokeSetUserFormContent(action) {
   yield put(setModalContentName({ currentContentName: 'userForm' }));
 }
 
+function* invokeSetUserProfileContent(action) {
+  const { userId } = action.payload;
+  yield put(changeCurrentUserId({ userId }));
+  yield put(setModalContentName({ currentContentName: 'userProfile' }));
+}
+
 // Bundle api functions to watcher and saga
 function* watchAsyncTriggers() {
   yield takeLatest(CLOSE_MODAL_CONTENT, invokeCloseDiaryFormContent);
@@ -48,6 +56,7 @@ function* watchAsyncTriggers() {
   yield takeLatest(SET_REPLY_FORM_CONTENT, invokeSetReplyFormContent);
   yield takeLatest(SET_TAG_FORM_CONTENT, invokeSetTagFormContent);
   yield takeLatest(SET_USER_FORM_CONTENT, invokeSetUserFormContent);
+  yield takeLatest(SET_USER_PROFILE_CONTENT, invokeSetUserProfileContent);
 }
 
 export default function* baseSaga() {
