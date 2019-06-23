@@ -21,11 +21,9 @@ import VpnKey from '@material-ui/icons/VpnKey';
 
 const HeaderNav = ({
   currentDate,
-  tags,
-  currentTagId,
+  currentTag,
   onChangeMonth
 }) => {
-  const currentTag = tags.find(tag => tag.id === currentTagId);
   const currentTagName = currentTag ? currentTag.name : DEFAULT_TAG_NAME;
 
   const formattedCurrentDate = currentDate.format("YYYY/MM");
@@ -67,8 +65,7 @@ const HeaderNav = ({
 
 const mapStateToProps = state => ({
   currentDate: state.date.currentDate,
-  tags: state.tag.tags,
-  currentTagId: state.tag.currentTagId,
+  currentTag: state.tag.tags.find(tag => tag.id === state.tag.currentTagId)
 });
 
 const mapDispatchToProps = dispatch => ({

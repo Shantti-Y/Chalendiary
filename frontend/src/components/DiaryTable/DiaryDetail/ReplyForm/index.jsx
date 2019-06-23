@@ -23,6 +23,7 @@ const ReplyForm = ({
     <>
       <p className={style.inputHead}>{isNew ? 'New Comment' : 'Edit Comment'}</p>
       <TextField
+        className={style.inputField}
         autoFocus
         margin="dense"
         id="name"

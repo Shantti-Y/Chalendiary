@@ -15,15 +15,16 @@ import DiaryCell from './DiaryCell';
 import DiaryDetail from './DiaryDetail';
 
 const DiaryTable = ({
-  currentDate, currentTag, users, diaries
+  currentDate, currentTag, diaries, me
 }) => {
   const daysInMonth = currentDate.daysInMonth();
   const members = () => {
-    if (currentTag) {
-      return currentTag.users;
-    } else {
-      return users
-    }
+    const users = Object.assign([], currentTag.users);
+    const meIdx = users.findIndex(user => user.id === me.id);
+    const meUser = Object.assign({}, users[meIdx]);
+    users.splice(meIdx, 1);
+    users.unshift(meUser);
+    return users;
   }
 
   const diaryTable = () => members().map(member => {
@@ -78,11 +79,11 @@ const DiaryTable = ({
 }
 
 const mapStateToProps = state => ({
+  me: state.me.me,
   currentDate: state.date.currentDate,
   currentTag: state.tag.tags.find(tag => {
     return tag.id === state.tag.currentTagId
   }),
-  users: state.user.users,
   diaries: state.diary.diaries
 });
 

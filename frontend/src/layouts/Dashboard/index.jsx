@@ -2,7 +2,6 @@ import React from 'react';
 import style from './style';
 import { Redirect } from 'react-router-dom';
 
-import { withStyles } from '@material-ui/styles';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
@@ -14,7 +13,7 @@ import { searchDiariesInMonth, receiveNewDiary, receiveEditDiary, receiveDeleteD
 import { receiveNewReply, receiveEditReply, receiveDeleteReply } from '@store/actions/reply';
 import { receiveNewTag, receiveEditTag, receiveDeleteTag } from '@store/actions/tag';
 import { receiveNewUser, receiveEditUser, receiveDeleteUser } from '@store/actions/user';
-import { fetchTags } from '@store/actions/tag';
+import { fetchTags, changeToDefaultTagId } from '@store/actions/tag';
 
 import { sessionStatuses } from '@store/reducers/util/sessionStatus';
 
@@ -53,6 +52,10 @@ class Main extends React.Component {
       })
     }
 
+    if(this.props.tags.length > 0){
+      this.props.onInitializeDefaultTag();
+    }
+
     if (
       prevProps.users.some(user => user.id === this.props.me.id)
       && this.props.users.every(user => user.id !== this.props.me.id)) {
@@ -67,10 +70,15 @@ class Main extends React.Component {
   }
 
   render() {
-    const { sessionStatus, children, classes } = this.props;
+    const { sessionStatus, me, users, tags, date, currentTagId, children } = this.props;
+
+    const isInitialized = () => {
+      return me && date && users.length > 0 && tags.length > 0 && currentTagId
+    }
+
     if (sessionStatus === sessionStatuses.LOGGED_OUT) {
       return <Redirect to="/signin" />;
-    } else {
+    } else if (isInitialized()) {
       return (
         <div id="dashboard" style={style.root}>
           <MenuBar />
@@ -81,6 +89,8 @@ class Main extends React.Component {
           </main>
         </div>
       )
+    } else {
+      return <div></div>
     }
   }
 }
@@ -88,7 +98,10 @@ class Main extends React.Component {
 const mapStateToProps = state => ({
   sessionStatus: state.util.sessionStatus.status,
   me: state.me.me,
-  users: state.user.users
+  users: state.user.users,
+  tags: state.tag.tags,
+  currentTagId: state.tag.currentTagId,
+  date: state.date.currentDate
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -99,6 +112,7 @@ const mapDispatchToProps = dispatch => ({
     const date = moment();
     dispatch(searchDiariesInMonth({ date }));
   },
+  onInitializeDefaultTag: () => dispatch(changeToDefaultTagId()),
   // TODO: change response structure to reduce received actions below
   onReceiveNewDiary: data => dispatch(receiveNewDiary({ data })),
   onReceiveEditDiary: data => dispatch(receiveEditDiary({ data })),
