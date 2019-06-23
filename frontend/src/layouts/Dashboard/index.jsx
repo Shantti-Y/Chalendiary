@@ -13,7 +13,7 @@ import { searchDiariesInMonth, receiveNewDiary, receiveEditDiary, receiveDeleteD
 import { receiveNewReply, receiveEditReply, receiveDeleteReply } from '@store/actions/reply';
 import { receiveNewTag, receiveEditTag, receiveDeleteTag } from '@store/actions/tag';
 import { receiveNewUser, receiveEditUser, receiveDeleteUser } from '@store/actions/user';
-import { fetchTags, changeToDefaultTagId } from '@store/actions/tag';
+import { fetchTags } from '@store/actions/tag';
 
 import { sessionStatuses } from '@store/reducers/util/sessionStatus';
 
@@ -50,10 +50,6 @@ class Main extends React.Component {
         subscribeReceivedEvent('/socket/users/edit', this.props.onReceiveEditUser);
         subscribeReceivedEvent('/socket/users/destroy', this.props.onReceiveDeleteUser);
       })
-    }
-
-    if(this.props.tags.length > 0){
-      this.props.onInitializeDefaultTag();
     }
 
     if (
@@ -112,7 +108,6 @@ const mapDispatchToProps = dispatch => ({
     const date = moment();
     dispatch(searchDiariesInMonth({ date }));
   },
-  onInitializeDefaultTag: () => dispatch(changeToDefaultTagId()),
   // TODO: change response structure to reduce received actions below
   onReceiveNewDiary: data => dispatch(receiveNewDiary({ data })),
   onReceiveEditDiary: data => dispatch(receiveEditDiary({ data })),
