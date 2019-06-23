@@ -3,6 +3,8 @@ import style from './style.scss';
 
 import { connect } from 'react-redux';
 
+import { DEFAULT_TAG_NAME } from '@utils/defaultValues';
+
 import { changeCurrentTagId } from '@store/actions/tag';
 import { setTagFormContent } from '@store/actions/ui/modalContent/base';
 
@@ -28,7 +30,7 @@ const TagSection = ({
   const TagItem = ({ tag, clickable, onClick }) => (
     <SectionItem onClick={onClick} clickable={clickable}>
       <ListItemText className={style.listItem} primary={<Typography variant="h3" className={style.typography}># {tag.name}</Typography>} />
-      {tag.ownerUser.id === me.id ? (
+      {tag.ownerUser.id === me.id && tag.name !== DEFAULT_TAG_NAME ? (
         <Button className={style.button}>
           <Edit className={style.icon} onClick={() => onClickTagEdit(tag)} />
         </Button>
