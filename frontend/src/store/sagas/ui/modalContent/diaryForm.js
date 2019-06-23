@@ -14,6 +14,8 @@ import {
   updateDiary
 } from '@store/actions/diary';
 
+import { snackbarVariants } from '@store/reducers/ui/snackbar';
+
 const getState = state => state.ui.modalContent.diaryForm;
 
 // APIs
@@ -42,11 +44,11 @@ function* invokeSubmitInput(action) {
   if(input.id){
     yield put(updateDiary({ diary: newInput }));
     // TODO handle actions depending on result of adding new diary
-    yield put(openSnackbar({ message: "Updated The New Diary!", variant: 'success' }));
+    yield put(openSnackbar({ message: "Updated The New Diary!", variant: snackbarVariants.SUCCESS }));
   }else{
     yield put(addNewDiary({ diary: newInput }));
     // TODO handle actions depending on result of adding new diary
-    yield put(openSnackbar({ message: "Posted A Diary!", variant: 'success' }));
+    yield put(openSnackbar({ message: "Posted A Diary!", variant: snackbarVariants.SUCCESS }));
   }
 
   yield put(closeModalContent());

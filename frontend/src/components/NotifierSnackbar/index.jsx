@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.scss';
+import style from './style.scss';
 
 import { connect } from 'react-redux';
 import { closeSnackbar } from '@store/actions/ui/snackbar';
@@ -20,7 +20,7 @@ const NotifierSnackbar = ({
 }) => {
   return (
     <Snackbar
-      className={`notifier-snackbar ${color}`}
+      className={`${style.notifierSnackbar} ${style[color]}`}
       anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       open={opened}
       onClose={onClose}
@@ -29,7 +29,7 @@ const NotifierSnackbar = ({
       ContentProps={{
         'aria-describedby': 'message-id',
       }}
-      message={<span id="message-id">{icon}{message}</span>}
+      message={<span className={style.message} id="message-id">{icon}{message}</span>}
     />
   )
 }

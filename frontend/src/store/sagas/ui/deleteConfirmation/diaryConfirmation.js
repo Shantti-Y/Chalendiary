@@ -11,6 +11,8 @@ import { closeDeleteConfirmation } from '@store/actions/ui/deleteConfirmation/ba
 import { openSnackbar } from '@store/actions/ui/snackbar';
 import { deleteDiary } from '@store/actions/diary';
 
+import { snackbarVariants } from '@store/reducers/ui/snackbar';
+
 // APIs
 function* invokeChangeDiary(action) {
   const { diary } = action.payload;
@@ -20,7 +22,7 @@ function* invokeChangeDiary(action) {
 function* invokeSubmitDelete(action) {
   const { diary } = action.payload;
   yield put(deleteDiary({ diary }));
-  yield put(openSnackbar({ message: "Deleted a Diary!", variant: 'warning' }));
+  yield put(openSnackbar({ message: "Deleted a Diary!", variant: snackbarVariants.WARNING }));
   yield put(closeDeleteConfirmation());
   yield put(closeDetail());
 }

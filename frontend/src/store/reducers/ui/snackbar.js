@@ -38,7 +38,7 @@ const functions = {
   setVariant: (state, payload) => {
     return {
       ...state,
-      ...snackbarVariants[payload.variant]
+      ...payload.variant
     }
   }
 }

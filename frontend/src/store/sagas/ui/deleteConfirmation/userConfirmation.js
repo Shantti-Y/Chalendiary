@@ -11,6 +11,8 @@ import { openSnackbar } from '@store/actions/ui/snackbar';
 import { closeMenu } from '@store/actions/ui/submenu/popperMenu/main';
 import { deleteUser } from '@store/actions/user';
 
+import { snackbarVariants } from '@store/reducers/ui/snackbar';
+
 // APIs
 function* invokeChangeUserId(action) {
   const { userId } = action.payload;
@@ -20,7 +22,7 @@ function* invokeChangeUserId(action) {
 function* invokeSubmitDelete(action) {
   const { user } = action.payload;
   yield put(deleteUser({ user }));
-  yield put(openSnackbar({ message: "Deleted a User!", variant: 'warning' }));
+  yield put(openSnackbar({ message: "Deleted a User!", variant: snackbarVariants.WARNING }));
   yield put(closeMenu());
   yield put(closeDeleteConfirmation());
 }

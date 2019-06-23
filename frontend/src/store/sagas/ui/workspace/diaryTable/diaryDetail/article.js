@@ -9,6 +9,8 @@ import { updateDiary } from '@store/actions/diary';
 import { openSnackbar } from '@store/actions/ui/snackbar';
 import { closeMenu } from '@store/actions/ui/popperMenu';
 
+import { snackbarVariants } from '@store/reducers/ui/snackbar';
+
 // APIs
 function* invokeChangeDiaryId(action) {
   const { diaryId } = action.payload;
@@ -20,7 +22,7 @@ function* invokeRecoverDiary(action) {
   const { diary } = action.payload;
   const newDiary = Object.assign({}, diary, { deletedAt: null, userId: diary.user.id });
   yield put(updateDiary({ diary: newDiary }));
-  yield put(openSnackbar({ message: "Recovered a Diary!", variant: 'success' }));
+  yield put(openSnackbar({ message: "Recovered a Diary!", variant: snackbarVariants.SUCCESS }));
   yield put(closeMenu());
   yield put(closeDetail())
 }
