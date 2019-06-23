@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.scss';
+import style from './style.scss';
 
 import { connect } from 'react-redux';
 
@@ -60,10 +60,10 @@ const TagForm = ({
         </ListItem>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="primary">Cancel</Button>
-        <Button onClick={() => onSubmit(form)} color="primary">Submit</Button>
+        <Button className={`${style.plane} ${style.modalButton}`} onClick={onClose}>Cancel</Button>
+        <Button className={`${style.success} ${style.modalButton}`} onClick={() => onSubmit(form)}>Submit</Button>
         {
-          isEdit ? <Button onClick={() => onOpenDeleteForm(form.id)}>Delete</Button> : null
+          isEdit ? <Button className={`${style.danger} ${style.modalButton}`} onClick={() => onOpenDeleteForm(form.id)}>Delete</Button> : null
         }
       </DialogActions>
       <DeleteConfirmation />

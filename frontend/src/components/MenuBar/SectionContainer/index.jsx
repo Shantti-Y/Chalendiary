@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './style';
+import style from './style.scss';
 
 import { connect } from 'react-redux';
 
@@ -39,13 +39,13 @@ class SectionContainer extends React.Component {
     const { toggleOpened } = this;
     return (
       <>
-        <ListItem style={style.listItem} button={!opened} onClick={() => toggleOpened()}>
-          <ListItemIcon style={style.listItemIcon}>{primaryIcon}</ListItemIcon>
-          <ListItemText style={style.listItemText} primary={<Typography variant="h2" style={style.typography}>{primaryText}</Typography>} />
-          {opened ? <ExpandLess /> : <ExpandMore />}
+        <ListItem className={style.listItem} button={!opened} onClick={() => toggleOpened()}>
+          <ListItemIcon className={`${style.listItemIcon} ${style.primaryIcon}`}>{primaryIcon}</ListItemIcon>
+          <ListItemText className={style.listItemText} primary={<Typography variant="h2" className={style.typography}>{primaryText}</Typography>} />
+          {opened ? <ExpandLess className={style.expandIcon} /> : <ExpandMore className={style.expandIcon} />}
         </ListItem>
         <Collapse in={opened} timeout="auto" unmountOnExit>
-          <List style={style.listContent}>
+          <List className={style.listContent}>
             {children}
           </List>
         </Collapse>

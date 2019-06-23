@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './style';
+import style from './style.scss';
 
 import { connect } from 'react-redux';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -24,8 +24,8 @@ const UserSection = ({
     >
       {teamMembers.map(user => (
         <SectionItem clickable={false}>
-          <div style={style.activity}></div>
-          <ListItemText primary={<Typography variant="h3" style={style.typography}>{user.screenName}</Typography>} />
+          <div className={style.activity}></div>
+          <ListItemText primary={<Typography variant="h3" className={style.typography}>{user.screenName}</Typography>} />
         </SectionItem>
       ))}
     </SectionContainer>

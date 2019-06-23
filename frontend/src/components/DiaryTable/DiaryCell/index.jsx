@@ -48,6 +48,7 @@ const DiaryCell = ({
         <span className={style.cellText}>
           {diary.deletedAt === null ? diaryText : <span><Delete /> deleted</span>}
         </span>
+        <span className={style.repliesText}>{`${diary.replies.length} replies`}</span>
       </TableCell>
     )
   } else if (isYourDiary){
@@ -59,11 +60,11 @@ const DiaryCell = ({
         padding="none"
         align="justify"
       >
-        <Button>New Post<Launch /></Button>
+        <Button className={style.button} disabled>Post<Launch /></Button>
       </TableCell>
     )
   }else{
-    return <TableCell className="table-cell"></TableCell>
+    return <TableCell className={style.bodyCell}></TableCell>
   }
 };
 

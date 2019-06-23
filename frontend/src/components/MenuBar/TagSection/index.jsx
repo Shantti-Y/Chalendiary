@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './style';
+import style from './style.scss';
 
 import { connect } from 'react-redux';
 
@@ -30,10 +30,10 @@ const TagSection = ({
 
   const TagItem = ({ tag, clickable, onClick }) => (
     <SectionItem onClick={onClick} clickable={clickable}>
-      <ListItemText style={style.listItem} primary={<Typography variant="h3" style={style.typography}>{tag.name}</Typography>} />
+      <ListItemText className={style.listItem} primary={<Typography variant="h3" className={style.typography}>{tag.name}</Typography>} />
       {tag.ownerUser.id === me.id ? (
-        <Button style={style.button}>
-          <Edit style={style.icon} onClick={() => onClickTagEdit(tag)} />
+        <Button className={style.button}>
+          <Edit className={style.icon} onClick={() => onClickTagEdit(tag)} />
         </Button>
       ) : null}
     </SectionItem>
@@ -44,10 +44,10 @@ const TagSection = ({
       primaryIcon={<Style />}
       primaryText="Tags"
     >
-      <ListSubheader style={style.listSubheader}>Active Tag</ListSubheader>
+      <ListSubheader className={style.listSubheader}>Active Tag</ListSubheader>
       {
         currentTag ? (
-          <div style={style.currentTag}><TagItem tag={currentTag} clickable={false} onClick={() => true} /></div>
+          <div className={style.currentTag}><TagItem tag={currentTag} clickable={false} onClick={() => true} /></div>
         ) : null
       }
       <ListSubheader></ListSubheader>

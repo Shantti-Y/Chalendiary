@@ -1,0 +1,32 @@
+.listSubheader {
+  line-height: 20px;
+  color: white !important;
+  height: 36px;
+}
+
+.currentTag {
+  margin-bottom: 12px !important;
+}
+
+.listItem {
+  display: flex;
+}
+
+.typography {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.icon {
+  font-size: 18px !important;
+}
+
+.button {
+  min-width: 18px !important;
+  padding: 3px !important;
+  border-radius: 10px !important;
+  float: right;
+}

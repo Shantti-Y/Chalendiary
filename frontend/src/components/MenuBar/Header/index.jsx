@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './style';
+import style from './style.scss';
 
 import { connect } from 'react-redux';
 
@@ -15,9 +15,9 @@ const Header = ({
 
 }) => {
   return (
-    <ListItem disableGutters style={style.listItem} >
-      <ListItemIcon style={style.listItemIcon} ><Today style={style.icon} /></ListItemIcon>
-      <ListItemText style={style.listItemText} primary={<Typography variant="h1" style={style.typography} >Nicocale</Typography>} />
+    <ListItem disableGutters className={style.listItem} >
+      <ListItemIcon className={style.listItemIcon} ><Today className={style.icon} /></ListItemIcon>
+      <ListItemText className={style.listItemText} primary={<Typography variant="h1" className={style.typography} >Nicocale</Typography>} />
     </ListItem>
   );
 }

@@ -1,4 +1,25 @@
-// TODO: should be moved to common css
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #212833;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #6e7887;
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #505863;
+}
+
 #app {
   height: 100%;
 }

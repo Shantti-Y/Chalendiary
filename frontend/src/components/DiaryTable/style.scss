@@ -11,7 +11,7 @@
 
 @media all and(min-width: 601px) {
   .root {
-    width: calc(100% - 256px);
+    width: calc(100% - 230px);
   }
 }
 
@@ -24,9 +24,11 @@
   top: 0;
   z-index: 2;
   background-color: white;
-  text-align: center;
-  padding: 0;
+  text-align: center !important;
+  vertical-align: middle !important;
+  padding: 0 !important;
   width: 96px;
+  border-right: 1px solid #c9c9c9;
 }
 
 .headFirstColumn {
@@ -36,6 +38,7 @@
   top: 0;
   background-color: white;
   padding: 12px 32px 12px 20px !important;
+  box-shadow: 1px 0 #c9c9c9;
 }
 
 .bodyFirstColumn {
@@ -44,4 +47,5 @@
   z-index: 2;
   background-color: white;
   padding: 12px 32px 12px 20px !important;
+  box-shadow: 1px 0 #c9c9c9;
 }

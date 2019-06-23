@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './style';
+import style from './style.scss';
 
 import { withStyles } from '@material-ui/styles';
 import { connect } from 'react-redux';
@@ -44,16 +44,16 @@ const OtherSection = ({
       primaryText="Actions"
     >
       <SectionItem clickable={true} onClick={() => onOpenTagForm(me)}>
-        <ListItemIcon style={style.listItemIcon}><LibraryAdd style={style.icon} /></ListItemIcon>
-        <ListItemText style={style.listItemText} primary={<Typography variant="h3" style={style.typography}>Create New Tag</Typography>} />
+        <ListItemIcon className={style.listItemIcon}><LibraryAdd className={style.icon} /></ListItemIcon>
+        <ListItemText className={style.listItemText} primary={<Typography variant="h3" className={style.typography}>Create New Tag</Typography>} />
       </SectionItem>
       <SectionItem clickable={true} onClick={() => onOpenUserForm(me)}>
-        <ListItemIcon style={style.listItemIcon}><AccountBox style={style.icon} /></ListItemIcon>
-        <ListItemText style={style.listItemText} primary={<Typography variant="h3" style={style.typography}>Your Profile</Typography>} />
+        <ListItemIcon className={style.listItemIcon}><AccountBox className={style.icon} /></ListItemIcon>
+        <ListItemText className={style.listItemText} primary={<Typography variant="h3" className={style.typography}>Your Profile</Typography>} />
       </SectionItem>
       <SectionItem clickable={true} onClick={logout}>
-        <ListItemIcon style={style.listItemIcon}><ExitToApp style={style.icon} /></ListItemIcon>
-        <ListItemText style={style.listItemText} primary={<Typography variant="h3" style={style.typography}>Log Out</Typography>} />
+        <ListItemIcon className={style.listItemIcon}><ExitToApp className={style.icon} /></ListItemIcon>
+        <ListItemText className={style.listItemText} primary={<Typography variant="h3" className={style.typography}>Log Out</Typography>} />
       </SectionItem>
     </SectionContainer>
   );

@@ -19,7 +19,6 @@ const DiaryTable = ({
 }) => {
   const daysInMonth = currentDate.daysInMonth();
   const members = () => {
-    // TODO: currentTagIdを起動時にデフォルト値を設定してusersをpropsに渡さないようにする
     if (currentTag) {
       return currentTag.users;
     } else {

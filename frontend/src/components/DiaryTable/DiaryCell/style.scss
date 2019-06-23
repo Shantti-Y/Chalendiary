@@ -1,17 +1,18 @@
 .bodyCell {
   min-width: 104px;
   max-width: 104px;
-  min-height: 90px;
-  max-height: 90px;
+  height: 100px;
   padding: 12px 20px !important;
   word-break: break-word;
-  display: table-cell;
-  vertical-align: top;
+  vertical-align: top !important;
+  position: relative;
 
   &:hover {
     cursor: pointer;
-    background-color: gray;
+    background-color: #efefef;
   }
+
+  border-right: 1px solid #c9c9c9;
 }
 
 .activeBodyCell {
@@ -26,9 +27,27 @@
 
 .cellText {
   display: -webkit-box;
-  -webkit-line-clamp: 5;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-height: 110%;
+  line-height: 135%;
+  position: absolute;
+  margin-right: 20px;
+}
+
+.repliesText {
+  margin: 4px 0 0 6px;
+  font-size: 12px;
+  position: absolute;
+  bottom: 12px;
+  margin-right: 20px;
+}
+
+.button {
+  color: black !important;
+}
+
+.button svg {
+  color: black !important;
 }

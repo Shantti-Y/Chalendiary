@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './style';
+import style from './style.scss';
 
 import { connect } from 'react-redux';
 
@@ -23,9 +23,9 @@ const MenuBar = ({
 
   const Contents = (props) => {
     return (
-      <List style={style.list} disablePadding component="nav">
+      <List className={style.list} disablePadding component="nav">
         <Header />
-        <Divider />
+        <Divider light />
         <TagSection />
         <UserSection /> 
         <OtherSection />
@@ -36,25 +36,25 @@ const MenuBar = ({
   return (
     <div className="menu-bar">
       <Hidden xsUp implementation="css">
-        <div style={style.drawerForMobile}>
+        <div className={style.drawerForMobile}>
           <Drawer
-            className="drawer"
+            className={style.drawer}
             variant="temporary"
             onClose={() => onClose()}
             open={opened}
             ModalProps={{ keepMounted: true }}
-            PaperProps={{ style: style.drawerPaper }}
+            PaperProps={{ style: { width: '230px', backgroundColor: '#2f3847' } }}
           >
             <Contents />
           </Drawer>
         </div>
       </Hidden>
       <Hidden xsDown implementation="css">
-        <div style={style.drawerForDesktop}>
+        <div className={style.drawerForDesktop}>
           <Drawer
-            className="drawer"
+            className={style.drawer}
             variant="permanent"
-            PaperProps={{ style: style.drawerPaper }}
+            PaperProps={{ style: { width: '230px', backgroundColor: '#2f3847' } }}
             open={true}
           >
             <Contents />

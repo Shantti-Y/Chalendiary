@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.scss';
+import style from './style.scss';
 
 import { connect } from 'react-redux';
 
@@ -35,8 +35,8 @@ const Deleteconfirmation = ({
           <DialogContentText>Are you sure you want to delete this message? This cannot be undone.</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClose} color="primary">Cancel</Button>
-          <Button onClick={() => onSubmit(tag.id)} color="primary">Submit</Button>
+          <Button className={`${style.plane} ${style.modalButton}`} onClick={onClose} color="primary">Cancel</Button>
+          <Button className={`${style.danger} ${style.modalButton}`} onClick={() => onSubmit(tag.id)} color="primary">Submit</Button>
         </DialogActions>
       </Dialog>
     )

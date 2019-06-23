@@ -1,0 +1,29 @@
+.success {
+  background-color: #007a5a !important;
+  color: #ffffff !important;
+}
+
+.info {}
+
+.warning {}
+
+.danger {}
+
+.plane {
+  background-color: #e5e5e5 !important;
+  color: #101010 !important;
+}
+
+.modalButton {
+  padding: 4px 6px !important;
+  font-size: 13px !important;
+  margin: 0 6px !important;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.formActions {
+  margin-top: 8px;
+}
