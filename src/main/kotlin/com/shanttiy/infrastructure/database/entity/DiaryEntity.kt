@@ -23,6 +23,9 @@ data class DiaryEntity(
     @Column(name = "posted_at")
     val postedAt: Date,
 
+    @Column(name = "emoji_id")
+    val emojiId: Int,
+
     @Column(name = "created_at")
     val createdAt: Timestamp? = Timestamp.valueOf(LocalDateTime.now()),
 

@@ -15,6 +15,7 @@ class DiaryObjectMapper{
             userId = diaryEntity.userId,
             contentText = diaryEntity.contentText,
             postedAt = diaryEntity.postedAt.toLocalDate(),
+            emojiId = diaryEntity.emojiId,
             createdAt = diaryEntity.createdAt?.toLocalDateTime(),
             updatedAt = diaryEntity.updatedAt?.toLocalDateTime(),
             deletedAt = diaryEntity.deletedAt?.toLocalDateTime()
@@ -27,6 +28,7 @@ class DiaryObjectMapper{
             userId = diary.userId,
             contentText = diary.contentText,
             postedAt = Date.valueOf(diary.postedAt),
+            emojiId = diary.emojiId,
             createdAt = if (diary.createdAt != null) {
                 Timestamp.valueOf(diary.createdAt)
             } else {

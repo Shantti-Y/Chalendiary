@@ -10,7 +10,8 @@ data class DiaryPropertydata(
     val id: Int?,
     val userId: Int,
     val contentText: String,
-    val postedAt: String
+    val postedAt: String,
+    val emojiId: Int
 ): Serializable
 
 @Component
@@ -22,6 +23,7 @@ class DiaryPropertydataAdapter {
             userId = diaryPropertydata.userId,
             contentText = diaryPropertydata.contentText,
             postedAt = LocalDate.parse(diaryPropertydata.postedAt, localdateFormatter),
+            emojiId = diaryPropertydata.emojiId,
             // TODO: set these properties into client side
             createdAt = null,
             updatedAt = null,
