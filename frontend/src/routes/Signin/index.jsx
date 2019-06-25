@@ -10,6 +10,8 @@ import { sessionStatuses } from '@store/reducers/util/sessionStatus';
 
 import Button from '@material-ui/core/Button';
 
+import Today from '@material-ui/icons/Today';
+
 const Signin = ({ sessionStatus }) => {
   const login = () => {
     firebase.signInWithRedirect(googleAuthProvider)
@@ -27,11 +29,14 @@ const Signin = ({ sessionStatus }) => {
     return <Redirect to="/" />
   } else {
     return (
-      <div id="signin">
-        <Button className={style.signinButton} variant="contained" onClick={login}>
-          <img className={style.googleLogo} src={require('@assets/images/google_logo.png')} alt="sign in with google"/>
-          <span className={style.text}>Sign in with Google</span>
-        </Button>
+      <div id="signin" className={style.page}>
+        <div className={style.container}>
+          <h1 className={style.header}><Today className={style.icon} /> Nikocale</h1>
+          <Button className={style.signinButton} variant="contained" onClick={login}>
+            <img className={style.googleLogo} src={require('@assets/images/google_logo.png')} alt="sign in with google" />
+            <span className={style.text}>Sign in with Google</span>
+          </Button>
+        </div>
       </div>
     )
   }
