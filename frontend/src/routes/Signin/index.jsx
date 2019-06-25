@@ -1,13 +1,14 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import './style.scss';
+import style from './style.scss';
 
 import { connect } from 'react-redux';
 
-import ForDesktop from './ForDesktop';
 import firebase, { googleAuthProvider } from '@utils/firebase';
 
 import { sessionStatuses } from '@store/reducers/util/sessionStatus';
+
+import Button from '@material-ui/core/Button';
 
 const Signin = ({ sessionStatus }) => {
   const login = () => {
@@ -27,8 +28,10 @@ const Signin = ({ sessionStatus }) => {
   } else {
     return (
       <div id="signin">
-        <ForDesktop />
-        <button onClick={login}>sign up</button>
+        <Button className={style.signinButton} variant="contained" onClick={login}>
+          <img className={style.googleLogo} src={require('@assets/images/google_logo.png')} alt="sign in with google"/>
+          <span className={style.text}>Sign in with Google</span>
+        </Button>
       </div>
     )
   }
