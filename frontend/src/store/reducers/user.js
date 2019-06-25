@@ -4,18 +4,8 @@ import * as actions from '@store/actions/user';
 
 // REVIEW: property would be propertyIdx that fetch a specific user from userList
 const initialState = {
-  currentUserId: 0,
-  users: [{
-    id: 0,
-    screenName: '',
-    email: '',
-    thumbnailPath: '',
-    phone: '',
-    uniqueId: '',
-    createdAt: '',
-    updatedAt: '',
-    tags: []
-  }]
+  currentUserId: null,
+  users: []
 };
 
 const functions = {

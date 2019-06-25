@@ -8,6 +8,7 @@ const initialState = {
     id: null,
     userId: null,
     contentText: '',
+    emojiId: null,
     postedAt: moment()
   }
 };
