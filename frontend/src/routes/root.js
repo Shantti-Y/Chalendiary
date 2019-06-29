@@ -8,6 +8,7 @@ import Main from '@routes/Main';
 import Signin from '@routes/Signin';
 
 import '@assets/stylesheets/reset.scss';
+import '@assets/stylesheets/emoji.scss';
 
 import firebase from '@utils/firebase';
 

@@ -9,6 +9,7 @@ import meSaga from '@store/sagas/me';
 import replySaga from '@store/sagas/reply';
 import tagSaga from '@store/sagas/tag';
 import userSaga from '@store/sagas/user';
+import emojiSaga from '@store/sagas/emoji';
 
 export default function* rootSaga(){
   yield all([
@@ -19,6 +20,7 @@ export default function* rootSaga(){
     ...meSaga(),
     ...replySaga(),
     ...tagSaga(),
-    ...userSaga()
+    ...userSaga(),
+    ...emojiSaga()
   ]);
 }
