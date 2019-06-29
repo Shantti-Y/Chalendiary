@@ -33,7 +33,7 @@ const DiaryCell = ({
   const handleOpeningFormModal = () => {
     if (isYourDiary){
       const diaryText = diary ? diary.contentText : "";
-      onOpenDiaryForm(container, me.id, postedAt, diaryText);
+      onOpenDiaryForm(container, me.id, postedAt, diaryText, 1);
     }
   }
 
@@ -81,8 +81,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setDiaryDetailComponent({ diary }));
   },
   onOpenArticle: (container, diaryId) => dispatch(openArticle({ container, diaryId })),
-  onOpenDiaryForm: (container, userId, postedAt, contentText) => {
-    const diary = { userId, postedAt: moment(postedAt), contentText }
+  onOpenDiaryForm: (container, userId, postedAt, contentText, emojiId) => {
+    const diary = { userId, postedAt: moment(postedAt), contentText, emojiId }
     dispatch(openDiaryForm({ container, diary }));
   },
 });

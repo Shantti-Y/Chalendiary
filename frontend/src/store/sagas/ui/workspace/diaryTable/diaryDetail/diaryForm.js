@@ -24,6 +24,7 @@ function* invokeInitializeInputAttributes(action) {
     id: null,
     userId: null,
     contentText: '',
+    diaryId: null,
     postedAt: null
   }, diary);
   yield put(setInput({ input: newInput }));

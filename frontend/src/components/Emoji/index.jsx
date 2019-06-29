@@ -4,11 +4,15 @@ import style from './style.scss';
 import { connect } from 'react-redux';
 
 const Emoji = ({
-  emoji
+  emoji,
+  size
 }) => {
-  return <p style={{
-    filter: 'contrast(200%)'
-  }} >🍔</p>
+  const fontSize = size || 14;
+  return (<span className={style.emoji} style={{
+    ...emoji.style,
+    fontSize: `${fontSize}px`
+  }} >
+    {emoji.value}</span>)
 };
 
 const mapStateToProps = state => ({

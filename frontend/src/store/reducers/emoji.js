@@ -14,5 +14,5 @@ const functions = {
 };
 
 export default handleActions({
-  [actions.SET_EMOJIS]: (state, action) => functions.setDiaries(state, action.payload)
+  [actions.SET_EMOJIS]: (state, action) => functions.setEmojis(state, action.payload)
 }, initialState);
