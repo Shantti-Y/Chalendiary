@@ -8,6 +8,7 @@ data class Diary(
     val userId: Int,
     val contentText: String,
     val postedAt: LocalDate,
+    val emojiId: Int,
     val createdAt: LocalDateTime?,
     val updatedAt: LocalDateTime?,
     val deletedAt: LocalDateTime?

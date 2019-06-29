@@ -14,6 +14,8 @@ import Button from '@material-ui/core/Button';
 import Delete from '@material-ui/icons/Delete';
 import Launch from '@material-ui/icons/Launch';
 
+import Emoji from '@components/Emoji';
+
 const DiaryCell = ({
   me,
   currentContainer,
@@ -24,15 +26,14 @@ const DiaryCell = ({
   onOpenDiaryDetail,
   onOpenArticle
 }) => {
-  const diaryText = diary ? diary.contentText : "";
-
   const isYourDiary = me.id === memberId;
 
   const container = React.useRef(null);
 
   const handleOpeningFormModal = () => {
     if (isYourDiary){
-      onOpenDiaryForm(container, me.id, postedAt, diaryText);
+      const diaryText = diary ? diary.contentText : "";
+      onOpenDiaryForm(container, me.id, postedAt, diaryText, 1);
     }
   }
 
@@ -46,7 +47,9 @@ const DiaryCell = ({
         align="justify"
       >
         <span className={style.cellText}>
-          {diary.deletedAt === null ? diaryText : <span><Delete /> deleted</span>}
+          {diary.deletedAt === null ? (
+            <><Emoji emoji={diary.emoji} />{diary.contentText}</>
+          ) : (<span><Delete /> deleted</span>)}
         </span>
         <span className={style.repliesText}>{`${diary.replies.length} replies`}</span>
       </TableCell>
@@ -78,8 +81,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setDiaryDetailComponent({ diary }));
   },
   onOpenArticle: (container, diaryId) => dispatch(openArticle({ container, diaryId })),
-  onOpenDiaryForm: (container, userId, postedAt, contentText) => {
-    const diary = { userId, postedAt: moment(postedAt), contentText }
+  onOpenDiaryForm: (container, userId, postedAt, contentText, emojiId) => {
+    const diary = { userId, postedAt: moment(postedAt), contentText, emojiId }
     dispatch(openDiaryForm({ container, diary }));
   },
 });

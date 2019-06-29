@@ -1,7 +1,23 @@
+.header {
+  margin-bottom: 8px;
+}
+
 .inputHead {
+  display: inline-block !important;
   text-align: left !important;
   font-weight: 500;
+  margin-top: 12px;
   font-size: 14px;
+}
+
+.emojiSelector {
+  margin-left: 16px;
+  display: inline-block !important;
+}
+
+.emojiSelectorItem {
+  display: inline-block !important;
+  padding: 8px !important;
 }
 
 .inputField textarea {

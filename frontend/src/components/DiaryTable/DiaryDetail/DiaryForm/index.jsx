@@ -4,12 +4,18 @@ import { connect } from 'react-redux';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+
+import Emoji from '@components/Emoji';
 
 import { changeInputAttributes, submitInput } from '@store/actions/ui/workspace/diaryTable/diaryDetail/diaryForm';
 import { closeDetail, changeArticle } from '@store/actions/ui/workspace/diaryTable/diaryDetail/base';
 
 const DiaryDetail = ({
   form,
+  emojis,
   onCancelEdit,
   onCancelNew,
   onChangeValue,
@@ -27,7 +33,30 @@ const DiaryDetail = ({
 
   return (
     <>
-      <p className={style.inputHead}>{isNew ? 'New Post' : 'Edit Post'}</p>
+      <div className={style.header}>
+        <p className={style.inputHead}>{isNew ? 'New Post' : 'Edit Post'}</p>
+        <FormControl>
+          <Select
+            className={style.emojiSelector}
+            value={form.emojiId}
+            onChange={e => onChangeValue('emojiId', e.target.value)}
+          >
+            {emojis.map(emoji => (
+              <MenuItem
+                className={style.emojiSelectorItem}
+                component="div"
+                value={emoji.id}
+                disableGutters
+              >
+                <Emoji emoji={emoji} size={17} />
+              </MenuItem>
+            ))}
+
+          </Select>
+
+        </FormControl>
+        
+      </div>
       <TextField
         className={style.inputField}
         autoFocus
@@ -50,7 +79,8 @@ const DiaryDetail = ({
 }
 
 const mapStateToProps = state => ({
-  form: state.ui.workspace.diaryTable.diaryDetail.diaryForm.input
+  form: state.ui.workspace.diaryTable.diaryDetail.diaryForm.input,
+  emojis: state.emoji.emojis
 });
 
 const mapDispatchToProps = dispatch => ({

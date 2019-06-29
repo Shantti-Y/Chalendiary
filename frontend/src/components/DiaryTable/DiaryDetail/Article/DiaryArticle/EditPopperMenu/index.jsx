@@ -24,7 +24,7 @@ const EditMenu = ({
 
 const mapDispatchToProps = dispatch => ({
   onClickEdit: diary => {
-    const newDiary = Object.assign({}, diary, { userId: diary.user.id, postedAt: moment(diary.postedAt) });
+    const newDiary = Object.assign({}, diary, { userId: diary.user.id, postedAt: moment(diary.postedAt), emojiId: diary.emoji.id });
     dispatch(changeDiaryForm({ diary: newDiary }));
     dispatch(closeMenu());
   },

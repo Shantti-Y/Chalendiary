@@ -14,6 +14,7 @@ import { receiveNewReply, receiveEditReply, receiveDeleteReply } from '@store/ac
 import { receiveNewTag, receiveEditTag, receiveDeleteTag } from '@store/actions/tag';
 import { receiveNewUser, receiveEditUser, receiveDeleteUser } from '@store/actions/user';
 import { fetchTags } from '@store/actions/tag';
+import { fetchEmojis } from '@store/actions/emoji';
 
 import { sessionStatuses } from '@store/reducers/util/sessionStatus';
 
@@ -105,6 +106,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(fetchMe());
     dispatch(fetchUsers());
     dispatch(fetchTags());
+    dispatch(fetchEmojis());
     const date = moment();
     dispatch(searchDiariesInMonth({ date }));
   },

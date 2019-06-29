@@ -9,6 +9,7 @@ import me from '@store/reducers/me';
 import user from '@store/reducers/user';
 import tag from '@store/reducers/tag';
 import reply from '@store/reducers/reply';
+import emoji from '@store/reducers/emoji';
 
 const reducer = combineReducers({
   ui,
@@ -18,7 +19,8 @@ const reducer = combineReducers({
   me,
   user,
   tag,
-  reply
+  reply,
+  emoji
 });
 
 export default reducer;
