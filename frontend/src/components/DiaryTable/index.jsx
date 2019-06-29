@@ -13,6 +13,7 @@ import Paper from '@material-ui/core/Paper';
 
 import DiaryCell from './DiaryCell';
 import DiaryDetail from './DiaryDetail';
+import UserNameCell from './UserNameCell';
 
 const DiaryTable = ({
   currentDate, currentTag, diaries, me
@@ -53,9 +54,7 @@ const DiaryTable = ({
               diaryTable().map(tableRow => {
                 return (
                   <TableRow key={tableRow.member.id}>
-                    <TableCell scope="row" className={style.bodyFirstColumn}>
-                      {tableRow.member.screenName}
-                    </TableCell>
+                    <UserNameCell user={tableRow.member} diaries={tableRow.row.filter(cell => cell.diary).map(cell => cell.diary)} />
                     {
                       tableRow.row.map(cell => (
                         <DiaryCell
