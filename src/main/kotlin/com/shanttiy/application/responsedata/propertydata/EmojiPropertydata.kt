@@ -9,7 +9,8 @@ import org.springframework.stereotype.Component
 
 data class EmojiPropertydata (
     val id: Int,
-    val value: String
+    val value: String,
+    val style: HashMap<String, String>
 )
 
 @Component
@@ -18,7 +19,8 @@ class EmojiPropertydataFactory(
     fun construct(emoji: Emoji): EmojiPropertydata{
         return EmojiPropertydata(
             id = emoji.id,
-            value = emoji.value
+            value = emoji.value,
+            style = emoji.style
         )
     }
 }
