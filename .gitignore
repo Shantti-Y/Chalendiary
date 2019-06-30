@@ -4,7 +4,7 @@ bin
 build
 lib
 frontend/node_modules
-frontend/firebase.json
+frontend/assets/config
 gen
 .classpath
 .project
