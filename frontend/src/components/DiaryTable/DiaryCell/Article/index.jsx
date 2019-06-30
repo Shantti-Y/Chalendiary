@@ -26,11 +26,11 @@ const Article = ({
         <div className={style.repliesBorder}>
           <span className={style.replies}>{`${diary.replies.length} replies`}</span>
         </div>
-        <ul>{diary.replies.map(reply => <ReplyArticle reply={reply} container={container} />)}</ul>
+        <ul>{diary.replies.map(reply => <ReplyArticle key={reply.id} reply={reply} container={container} />)}</ul>
       </div>
       {
         diary.deletedAt === null ? (
-          <Button className={[style.newCommentButton, style.plane]} onClick={() => onOpenReplyForm(container, me.id, diary)}>
+          <Button className={`${style.newCommentButton} ${style.plane}`} onClick={() => onOpenReplyForm(container, me.id, diary)}>
             Comment<Create className={style.newDiaryIcon} />
           </Button>
         ) : null

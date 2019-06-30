@@ -39,7 +39,7 @@ const diaryDetail = ({
       }
       
       <ul>
-        {diary.replies.map(reply => <ReplyDetail reply={reply} />)}
+        {diary.replies.map(reply => <ReplyDetail key={reply.id} reply={reply} />)}
       </ul>
       {
         diary.deletedAt === null ? (

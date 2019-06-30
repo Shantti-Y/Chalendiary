@@ -86,7 +86,7 @@ const DiaryTable = ({
               <TableCell className={style.headFirstColumn}>Members</TableCell>
               {[...Array(daysInMonth)].map((_, i) => {
                 const day = i + 1;
-                return <TableCell className={style.headCell} key={day} align="right">{day}</TableCell>
+                return <TableCell key={day} className={style.headCell} align="right">{day}</TableCell>
               })}
             </TableRow>
           </TableHead>
@@ -99,8 +99,8 @@ const DiaryTable = ({
                     {
                       tableRow.row.map(cell => (
                         <DiaryCell
-                          memberId={tableRow.member.id}
                           key={`${tableRow.member.id}-${cell.date}`}
+                          memberId={tableRow.member.id}
                           postedAt={cell.date}
                           diary={cell.diary}
                         />

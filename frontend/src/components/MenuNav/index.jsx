@@ -23,8 +23,8 @@ const MenuNav = ({
       <Hidden smUp implementation="css">
         <AppBar className={style.appBar} position="static">
           <Toolbar className={`${style.menuNav} ${style.forMobile}`}>
-            <IconButton className={style.iconButton}>
-              <Menu onClick={() => onClickMenu()} />
+            <IconButton className={style.iconButton} onClick={() => onClickMenu()}>
+              <Menu />
             </IconButton>
             {component}
           </Toolbar>

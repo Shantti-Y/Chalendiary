@@ -24,7 +24,7 @@ const UserNameCell = ({
       {user.screenName}
       <ul className={style.emojiList}>
         {emojiAggregations.map(aggregation => (
-          <li className={style.emoji}><Emoji emoji={aggregation.emoji} size={16} />: {aggregation.count}</li>
+          <li key={`${user.id}-${aggregation.emoji.id}`} className={style.emoji}><Emoji emoji={aggregation.emoji} size={16} />: {aggregation.count}</li>
         ))}
       </ul>
     </TableCell>

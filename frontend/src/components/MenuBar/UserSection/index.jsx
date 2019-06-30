@@ -41,10 +41,10 @@ const UserSection = ({
         const category = categorizedMembers[key];
         if (category.users.length > 0) {
           return (
-            <div className={style.listCategory}>
+            <div key={key} className={style.listCategory}>
               <ListSubheader className={style.listSubheader}># {category.header}</ListSubheader>
               {category.users.map(user => (
-                <SectionItem clickable={false}>
+                <SectionItem key={user.id} clickable={false}>
                   <div className={style.activity}></div>
                   <ListItemText className={style.listItemText} primary={<Typography variant="h3" className={style.typography}>{user.screenName}</Typography>} />
                 </SectionItem>

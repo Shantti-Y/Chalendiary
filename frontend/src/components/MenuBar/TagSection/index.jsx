@@ -27,16 +27,18 @@ const TagSection = ({
   onClickTagEdit
 }) => {
 
-  const TagItem = ({ tag, clickable, onClick }) => (
-    <SectionItem onClick={onClick} clickable={clickable}>
-      <ListItemText className={style.listItem} primary={<Typography variant="h3" className={style.typography}># {tag.name}</Typography>} />
-      {tag.ownerUser.id === me.id && tag.name !== DEFAULT_TAG_NAME ? (
-        <Button className={style.button}>
-          <Edit className={style.icon} onClick={() => onClickTagEdit(tag)} />
-        </Button>
-      ) : null}
-    </SectionItem>
-  )
+  const TagItem = ({ tag, clickable, onClick }) => {
+    return (
+      <SectionItem onClick={onClick} clickable={clickable}>
+        <ListItemText className={style.listItem} primary={<Typography variant="h3" className={style.typography}># {tag.name}</Typography>} />
+        {tag.ownerUser.id === me.id && tag.name !== DEFAULT_TAG_NAME ? (
+          <Button className={style.button}>
+            <Edit className={style.icon} onClick={() => onClickTagEdit(tag)} />
+          </Button>
+        ) : null}
+      </SectionItem>
+    )
+  }
 
   const currentTag = tags.find(tag => tag.id === currentTagId);
   const otherTags = tags.filter(tag => tag.id !== currentTag.id);
@@ -73,9 +75,9 @@ const TagSection = ({
         const category = categorizedTags[key];
         if(category.tags.length > 0){
           return (
-            <div className={style.listCategory}>
+            <div key={key} className={style.listCategory}>
               <ListSubheader className={style.listSubheader}>{category.header}</ListSubheader>
-              {category.tags.map(tag => <TagItem tag={tag} clickable={true} onClick={() => onClickTagItem(tag.id)} />)}
+              {category.tags.map(tag => <TagItem key={tag.id} tag={tag} clickable={true} onClick={() => onClickTagItem(tag.id)} />)}
             </div>
           )
         } else {

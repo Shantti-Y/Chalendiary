@@ -41,9 +41,9 @@ const HeaderNav = ({
     return (
       <>
         <h2 className={style.currentTagName}># {currentTagName}</h2>
-        <IconButton className={style.chevronIcon}><ChevronLeft onClick={subtractCurrentMonth} /></IconButton>
+        <IconButton className={style.chevronIcon} onClick={subtractCurrentMonth}><ChevronLeft /></IconButton>
         <h2 className={style.currentTagDate}>{formattedCurrentDate}</h2>
-        <IconButton className={style.chevronIcon}><ChevronRight onClick={addCurrentMonth} /></IconButton>
+        <IconButton className={style.chevronIcon} onClick={addCurrentMonth}><ChevronRight /></IconButton>
         <Hidden xsDown implementation="css">
           <ul className={style.tagInfo}>
             <li className={style.tagInfoItem}><Portrait className={style.icon} /><span className={style.numberOfUsers}>{currentTag.users.length}</span></li>

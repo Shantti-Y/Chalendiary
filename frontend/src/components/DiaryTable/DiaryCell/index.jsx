@@ -23,7 +23,7 @@ const DiaryCell = ({
   currentContainer
 }) => {
   const container = React.useRef();
-  const isOpeningDetail = currentContainer;
+  const isOpeningDetail = currentContainer === container;
 
   const isYourDiary = me.id === memberId;
 
@@ -49,7 +49,7 @@ const DiaryCell = ({
   } else if (isYourDiary){
     return (
       <TableCell
-        className={[style.bodyCell, style.newPostCell]}
+        className={`${style.bodyCell} ${style.newPostCell}`}
         onClick={handleOpeningFormModal}
         ref={container}
         padding="none"

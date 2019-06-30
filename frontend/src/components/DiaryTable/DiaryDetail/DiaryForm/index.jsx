@@ -35,6 +35,7 @@ const DiaryDetail = ({
           >
             {emojis.map(emoji => (
               <MenuItem
+                key={emoji.id}
                 className={style.emojiSelectorItem}
                 component="div"
                 value={emoji.id}
