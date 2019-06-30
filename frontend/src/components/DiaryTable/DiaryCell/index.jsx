@@ -49,7 +49,7 @@ const DiaryCell = ({
   } else if (isYourDiary){
     return (
       <TableCell
-        className={style.bodyCell}
+        className={[style.bodyCell, style.newPostCell]}
         onClick={handleOpeningFormModal}
         ref={container}
         padding="none"
@@ -59,7 +59,7 @@ const DiaryCell = ({
       </TableCell>
     )
   }else{
-    return <TableCell className={style.bodyCell}></TableCell>
+    return <TableCell className={style.bodyCell}><div /></TableCell>
   }
 };
 

@@ -1,13 +1,15 @@
 .bodyCell {
-  min-width: 100px;
-  max-width: 100px;
+  min-width: 180px !important;
+  max-width: 180px !important;
   height: 200px;
   position: relative;
+  box-sizing: border-box;
+  border-right: 1px solid #e0e0e0;
 }
 
 .activeBodyCell {
-  min-width: 100px;
-  max-width: 100px;
+  min-width: 180px !important;
+  max-width: 180px !important;
   height: 300px;
   position: relative;
 }
@@ -29,6 +31,13 @@
   position: absolute;
   bottom: 12px;
   margin-right: 20px;
+}
+
+.newPostCell {
+  &:hover {
+    cursor: pointer;
+    background-color: #e9e9e9;
+  }
 }
 
 .button {

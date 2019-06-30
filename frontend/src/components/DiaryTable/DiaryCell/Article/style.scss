@@ -1,5 +1,6 @@
 .article {
   padding: 8px 12px !important;
+  width: inherit;
   height: 100%;
   overflow-y: scroll;
   word-break: break-word;
@@ -19,14 +20,4 @@
   background-color: white;
   padding-right: 4px;
   font-size: 12px;
-}
-
-.newDiaryButton {
-  margin-top: 8px !important;
-  font-size: 14px !important;
-}
-
-.newDiaryIcon {
-  margin-left: 4px !important;
-  font-size: 18px !important;
 }
