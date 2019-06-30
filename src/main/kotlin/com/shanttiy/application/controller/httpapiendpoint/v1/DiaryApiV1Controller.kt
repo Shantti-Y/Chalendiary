@@ -55,8 +55,7 @@ class DiaryApiV1Controller(
 
         val dayFrom = YearMonth.of(year, month).atDay(1).dayOfMonth
         val dayTo = YearMonth.of(year, month).atEndOfMonth().dayOfMonth
-
-        val diariesInDayResponsedata = IntStream.range(dayFrom, dayTo).toList().map {
+        val diariesInDayResponsedata = IntStream.range(dayFrom, dayTo + 1).toList().map {
             val targetDate = YearMonth.of(year, month).atDay(it)
             val diaryPropertydatas = diaries.filter { diary ->
                 diary.postedAt == targetDate
