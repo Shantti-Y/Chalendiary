@@ -28,7 +28,7 @@ const Article = ({
       <ul>{diary.replies.map(reply => <ReplyArticle reply={reply} container={container} />)}</ul>
       {
         diary.deletedAt === null ? (
-          <Button className={style.newDiaryButton} onClick={() => onOpenReplyForm(container, me.id, diary)}>
+          <Button className={style.plane} onClick={() => onOpenReplyForm(container, me.id, diary)}>
             Comment<Create className={style.newDiaryIcon} />
           </Button>
         ) : null

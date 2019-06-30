@@ -10,6 +10,7 @@ import MoreVert from '@material-ui/icons/MoreVert';
 
 import EditPopperMenu from './EditPopperMenu';
 import RecoverPopperMenu from './RecoverPopperMenu';
+import Emoji from '@components/Emoji';
 
 const DiaryArticle = ({
   me,
@@ -32,7 +33,7 @@ const DiaryArticle = ({
                 <MoreVert className={style.moveVertIcon} />
               </IconButton>
             ) : null}
-            <p className={style.title}>Diary</p>
+            <p className={style.title}><Emoji emoji={diary.emoji} size={21} /></p>
             <p className={style.contentText}>{diary.contentText}</p>
           </>
         ) : (
