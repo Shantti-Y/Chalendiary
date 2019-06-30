@@ -3,7 +3,7 @@ import style from './style.scss';
 
 import { connect } from 'react-redux';
 
-import { changeReplyForm } from '@store/actions/ui/workspace/diaryTable/diaryDetail/base';
+import { openReplyForm } from '@store/actions/ui/workspace/diaryTable/diaryDetail/base';
 
 import Button from '@material-ui/core/Button';
 
@@ -15,39 +15,36 @@ import ReplyArticle from './ReplyArticle';
 const Article = ({
   me,
   diary,
+  container,
   onOpenReplyForm
 }) => {
 
   return (
-    <>
-      <DiaryArticle diary={diary} />
+    <div className={style.article}>
+      <DiaryArticle diary={diary} container={container} />
       <div className={style.repliesBorder}>
         <span className={style.replies}>{`${diary.replies.length} replies`}</span>
       </div>
-      <ul>{diary.replies.map(reply => <ReplyArticle reply={reply} />)}</ul>
+      <ul>{diary.replies.map(reply => <ReplyArticle reply={reply} container={container} />)}</ul>
       {
         diary.deletedAt === null ? (
-          <Button className={style.newDiaryButton} onClick={() => onOpenReplyForm(me.id, diary)}>
+          <Button className={style.newDiaryButton} onClick={() => onOpenReplyForm(container, me.id, diary)}>
             Comment<Create className={style.newDiaryIcon} />
           </Button>
         ) : null
       }
-    </>
+    </div>
   )
 }
 
 const mapStateToProps = state => ({
-  me: state.me.me,
-  diary: state.diary.diaries.map(item => item.diaries)
-  .flat().find(diary => {
-    return diary.id === state.ui.workspace.diaryTable.diaryDetail.article.currentDiaryId
-  }),
+  me: state.me.me
 });
 
 const mapDispatchToProps = dispatch => ({
-  onOpenReplyForm: (userId, diary) => {
+  onOpenReplyForm: (container, userId, diary) => {
     const reply = { userId, diaryId: diary.id };
-    dispatch(changeReplyForm({ reply }));
+    dispatch(openReplyForm({ container, reply }));
   }
 });
 

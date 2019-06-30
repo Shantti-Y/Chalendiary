@@ -19,7 +19,7 @@ function* invokeInitDiary(action) {
 
 function* invokeRecoverDiary(action) {
   const { diary } = action.payload;
-  const newDiary = Object.assign({}, diary, { deletedAt: null, userId: diary.user.id });
+  const newDiary = Object.assign({}, diary, { deletedAt: null, userId: diary.user.id, emojiId: diary.emoji.id });
   yield put(updateDiary({ diary: newDiary }));
   yield put(openSnackbar({ message: "Recovered a Diary!", variant: snackbarVariants.SUCCESS }));
   yield put(closeMenu());

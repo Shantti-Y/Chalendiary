@@ -25,7 +25,6 @@ const PopperMenu = ({
         open={opened}
         onClose={onClose}
         TransitionComponent={Fade}
-
       >
         {component}
       </Menu>

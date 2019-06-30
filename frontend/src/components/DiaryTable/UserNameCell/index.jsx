@@ -13,7 +13,9 @@ const UserNameCell = ({
   const emojiAggregations = emojis.map(emoji => {
     return {
       emoji: emoji,
-      count: diaries.filter(diary => diary.emoji.id === emoji.id).length
+      count: diaries.filter(diary => {
+        return diary.emoji.id === emoji.id && !diary.deletedAt
+      }).length
     }
   });
 
@@ -22,7 +24,7 @@ const UserNameCell = ({
       {user.screenName}
       <ul className={style.emojiList}>
         {emojiAggregations.map(aggregation => (
-          <li className={style.emoji}><Emoji emoji={aggregation.emoji} />: {aggregation.count}</li>
+          <li className={style.emoji}><Emoji emoji={aggregation.emoji} size={16} />: {aggregation.count}</li>
         ))}
       </ul>
     </TableCell>

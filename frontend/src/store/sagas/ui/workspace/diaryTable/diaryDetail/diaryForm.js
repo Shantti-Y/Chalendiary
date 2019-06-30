@@ -50,7 +50,7 @@ function* invokeSubmitInput(action) {
     // TODO handle actions depending on result of adding new diary
     yield put(openSnackbar({ message: "Posted A Diary!", variant: snackbarVariants.SUCCESS }));
   }
-  // TODO: replace changeArticle instead of closing diaryDetail
+  
   yield put(closeDetail());
 }
 

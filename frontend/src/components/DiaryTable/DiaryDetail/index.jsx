@@ -13,9 +13,6 @@ import Close from '@material-ui/icons/Close';
 
 import DiaryForm from './DiaryForm';
 import ReplyForm from './ReplyForm';
-import Article from './Article';
-
-import PopperMenu from '@components/PopperMenu';
 
 const DiaryDetail = ({
   container,
@@ -25,15 +22,13 @@ const DiaryDetail = ({
 
   const innerComponents = {
     'diaryForm': <DiaryForm />,
-    'replyForm': <ReplyForm />,
-    'article': <Article />
+    'replyForm': <ReplyForm />
   }
 
   if(container){
     return (
       <Portal container={container.current}>
         <Paper className={style.card}>
-          <PopperMenu />
           <div className={style.cardHeader}>
             <IconButton
               onClick={onClose}

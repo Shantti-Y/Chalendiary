@@ -1,28 +1,15 @@
 .bodyCell {
-  min-width: 104px;
-  max-width: 104px;
-  height: 120px;
-  padding: 12px 20px !important;
-  word-break: break-word;
-  vertical-align: top !important;
+  min-width: 100px;
+  max-width: 100px;
+  height: 200px;
   position: relative;
-
-  &:hover {
-    cursor: pointer;
-    background-color: #efefef;
-  }
-
-  border-right: 1px solid #c9c9c9;
 }
 
 .activeBodyCell {
-  min-width: 190px;
-  max-width: 190px;
+  min-width: 100px;
+  max-width: 100px;
   height: 300px;
-  overflow-y: scroll;
-  word-break: break-word;
   position: relative;
-  overflow: hidden;
 }
 
 .cellText {

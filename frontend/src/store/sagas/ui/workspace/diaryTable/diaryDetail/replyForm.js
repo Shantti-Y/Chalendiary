@@ -5,7 +5,7 @@ import {
   SUBMIT_INPUT,
   setInput
 } from '@store/actions/ui/workspace/diaryTable/diaryDetail/replyForm';
-import { changeArticle } from '@store/actions/ui/workspace/diaryTable/diaryDetail/base';
+import { closeDetail } from '@store/actions/ui/workspace/diaryTable/diaryDetail/base';
 import { openSnackbar } from '@store/actions/ui/snackbar';
 import {
   addNewReply,
@@ -48,9 +48,7 @@ function* invokeSubmitInput(action) {
     // TODO handle actions depending on result of adding new diary
     yield put(openSnackbar({ message: "Posted A Reply!", variant: snackbarVariants.SUCCESS }));
   }
-
-  const diaryId = input.diaryId;
-  yield put(changeArticle({ diaryId }));
+  yield put(closeDetail({}));
 }
 
 // Bundle api functions to watcher and saga

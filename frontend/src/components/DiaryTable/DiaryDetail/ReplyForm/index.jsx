@@ -7,10 +7,9 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 import { changeInputAttributes, submitInput } from '@store/actions/ui/workspace/diaryTable/diaryDetail/replyForm';
-import { changeArticle } from '@store/actions/ui/workspace/diaryTable/diaryDetail/base';
+import { closeDetail } from '@store/actions/ui/workspace/diaryTable/diaryDetail/base';
 
 const ReplyForm = ({
-  diary,
   form,
   onCancel,
   onChangeValue,
@@ -36,7 +35,7 @@ const ReplyForm = ({
         onChange={e => onChangeValue('contentText', e.target.value)}
       />
       <div className={style.formActions}>
-        <Button className={`${style.plane} ${style.modalButton}`} onClick={() => onCancel(diary.id)}>Cancel</Button>
+        <Button className={`${style.plane} ${style.modalButton}`} onClick={() => onCancel()}>Cancel</Button>
         <Button className={`${style.success} ${style.modalButton}`} onClick={() => onSubmit(form)}>Post</Button>
       </div>
     </>
@@ -44,17 +43,13 @@ const ReplyForm = ({
 }
 
 const mapStateToProps = state => ({
-  form: state.ui.workspace.diaryTable.diaryDetail.replyForm.input,
-  diary: state.diary.diaries.map(item => item.diaries)
-    .flat().find(diary => {
-    return diary.id === state.ui.workspace.diaryTable.diaryDetail.article.currentDiaryId
-  }),
+  form: state.ui.workspace.diaryTable.diaryDetail.replyForm.input
 });
 
 const mapDispatchToProps = dispatch => ({
   onChangeValue: (key, value) => dispatch(changeInputAttributes({ key, value })),
   onSubmit: input => dispatch(submitInput({ input })),
-  onCancel: diaryId => dispatch(changeArticle({ diaryId }))
+  onCancel: () => dispatch(closeDetail())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReplyForm);

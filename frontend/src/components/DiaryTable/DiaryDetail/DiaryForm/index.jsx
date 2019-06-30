@@ -11,23 +11,15 @@ import FormControl from '@material-ui/core/FormControl';
 import Emoji from '@components/Emoji';
 
 import { changeInputAttributes, submitInput } from '@store/actions/ui/workspace/diaryTable/diaryDetail/diaryForm';
-import { closeDetail, changeArticle } from '@store/actions/ui/workspace/diaryTable/diaryDetail/base';
+import { closeDetail } from '@store/actions/ui/workspace/diaryTable/diaryDetail/base';
 
 const DiaryDetail = ({
   form,
   emojis,
-  onCancelEdit,
-  onCancelNew,
+  onCancel,
   onChangeValue,
   onSubmit
 }) => {
-  const handleOnCancel = () => {
-    if(form.id){
-      onCancelEdit(form.id);
-    }else{
-      onCancelNew();
-    }
-  }
 
   const isNew = form.id === null;
 
@@ -71,7 +63,7 @@ const DiaryDetail = ({
         onChange={e => onChangeValue('contentText', e.target.value)}
       />
       <div className={style.formActions}>
-        <Button className={`${style.plane} ${style.modalButton}`} onClick={handleOnCancel}>Cancel</Button>
+        <Button className={`${style.plane} ${style.modalButton}`} onClick={onCancel}>Cancel</Button>
         <Button className={`${style.success} ${style.modalButton}`} onClick={() => onSubmit(form)}>Post</Button>
       </div>
     </>
@@ -86,8 +78,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onChangeValue: (key, value) => dispatch(changeInputAttributes({ key, value })),
   onSubmit: input => dispatch(submitInput({ input })),
-  onCancelEdit: diaryId => dispatch(changeArticle({ diaryId })),
-  onCancelNew: () => dispatch(closeDetail())
+  onCancel: () => dispatch(closeDetail())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DiaryDetail);

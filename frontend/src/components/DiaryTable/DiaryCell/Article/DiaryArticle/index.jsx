@@ -14,6 +14,7 @@ import RecoverPopperMenu from './RecoverPopperMenu';
 const DiaryArticle = ({
   me,
   diary,
+  container,
   onOpenMenu
 }) => {
   const isYourDiary = diary.user.id === me.id;
@@ -26,7 +27,7 @@ const DiaryArticle = ({
             {isYourDiary ? (
               <IconButton
                 className={style.iconButton}
-                onClick={e => onOpenMenu(e.currentTarget, <EditPopperMenu diary={diary} />)}
+                onClick={e => onOpenMenu(e.currentTarget, <EditPopperMenu diary={diary} container={container} />)}
               >
                 <MoreVert className={style.moveVertIcon} />
               </IconButton>
@@ -39,7 +40,7 @@ const DiaryArticle = ({
               {diary.deletedAt ? (
                 <IconButton
                   className={style.iconButton}
-                  onClick={e => onOpenMenu(e.currentTarget, <RecoverPopperMenu diary={diary} />)}
+                  onClick={e => onOpenMenu(e.currentTarget, <RecoverPopperMenu diary={diary} container={container} />)}
                 >
                   <MoreVert className={style.moveVertIcon} />
                 </IconButton>

@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.scss';
+import style from './style.scss';
 
 import { connect } from 'react-redux';
 import { changeComponent } from '@store/actions/ui/layout/menuNav';
@@ -16,7 +16,7 @@ const Main = ({
   onInitialize(<HeaderNav />);
 
   return (
-    <div id="main">
+    <div className={style.main}>
       <DeleteConfirmation />
       <NotifierSnackbar />
       <ModalContent />

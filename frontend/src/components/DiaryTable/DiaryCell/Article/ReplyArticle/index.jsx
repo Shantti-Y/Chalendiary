@@ -13,6 +13,7 @@ import EditPopperMenu from './EditPopperMenu';
 const ReplyArticle = ({
   me,
   reply,
+  container,
   onOpenMenu
 }) => {
   const isYourReply = reply.user.id === me.id;
@@ -22,7 +23,7 @@ const ReplyArticle = ({
       {isYourReply ? (
         <IconButton
           className={style.iconButton}
-          onClick={e => onOpenMenu(e.currentTarget, <EditPopperMenu reply={reply} />)}
+          onClick={e => onOpenMenu(e.currentTarget, <EditPopperMenu reply={reply} container={container} />)}
         >
           <MoreVert className={style.moveVertIcon} />
         </IconButton>

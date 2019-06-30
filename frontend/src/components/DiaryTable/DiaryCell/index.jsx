@@ -4,31 +4,28 @@ import style from './style.scss';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import { setDiaryDetailComponent } from '@store/actions/ui/submenu/main';
-
 import { openDiaryForm, openArticle } from '@store/actions/ui/workspace/diaryTable/diaryDetail/base';
 
 import TableCell from '@material-ui/core/TableCell';
 import Button from '@material-ui/core/Button';
 
-import Delete from '@material-ui/icons/Delete';
 import Launch from '@material-ui/icons/Launch';
 
-import Emoji from '@components/Emoji';
+import Article from './Article';
+import PopperMenu from '@components/PopperMenu';
 
 const DiaryCell = ({
   me,
-  currentContainer,
   memberId,
   postedAt,
   diary,
   onOpenDiaryForm,
-  onOpenDiaryDetail,
-  onOpenArticle
+  currentContainer
 }) => {
-  const isYourDiary = me.id === memberId;
+  const container = React.useRef();
+  const isOpeningDetail = currentContainer;
 
-  const container = React.useRef(null);
+  const isYourDiary = me.id === memberId;
 
   const handleOpeningFormModal = () => {
     if (isYourDiary){
@@ -40,24 +37,19 @@ const DiaryCell = ({
   if(diary){
     return (
       <TableCell
-        className={currentContainer === container ? style.activeBodyCell : style.bodyCell}
-        onClick={() => onOpenArticle(container, diary.id)}
+        className={isOpeningDetail ? style.activeBodyCell : style.bodyCell}
         ref={container}
         padding="none"
         align="justify"
       >
-        <span className={style.cellText}>
-          {diary.deletedAt === null ? (
-            <><Emoji emoji={diary.emoji} />{diary.contentText}</>
-          ) : (<span><Delete /> deleted</span>)}
-        </span>
-        <span className={style.repliesText}>{`${diary.replies.length} replies`}</span>
+        <PopperMenu />
+        <Article diary={diary} container={container} />
       </TableCell>
     )
   } else if (isYourDiary){
     return (
       <TableCell
-        className={currentContainer === container ? style.activeBodyCell : style.bodyCell}
+        className={style.bodyCell}
         onClick={handleOpeningFormModal}
         ref={container}
         padding="none"
@@ -77,10 +69,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onOpenDiaryDetail: diary => {
-    dispatch(setDiaryDetailComponent({ diary }));
-  },
-  onOpenArticle: (container, diaryId) => dispatch(openArticle({ container, diaryId })),
+
   onOpenDiaryForm: (container, userId, postedAt, contentText, emojiId) => {
     const diary = { userId, postedAt: moment(postedAt), contentText, emojiId }
     dispatch(openDiaryForm({ container, diary }));
