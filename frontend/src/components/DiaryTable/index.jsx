@@ -18,6 +18,14 @@ import UserNameCell from './UserNameCell';
 const DiaryTable = ({
   currentDate, currentTag, diaries, me
 }) => {
+  const container = React.useRef();
+
+  const [isDown, setIsDown] = React.useState(false);
+  const [clickedX, setClickedX] = React.useState(null);
+  const [scrollLeft, setScrollLeft] = React.useState(null);
+  const [clickedY, setClickedY] = React.useState(null);
+  const [scrollTop, setScrollTop] = React.useState(null);
+
   const daysInMonth = currentDate.daysInMonth();
   const members = () => {
     const users = Object.assign([], currentTag.users);
@@ -28,6 +36,30 @@ const DiaryTable = ({
     return users;
   }
 
+  const handleOnMouseDown = e => {
+    const table = document.querySelector(`.${style.root}`);
+    setIsDown(true);
+    setClickedX(e.pageX);
+    setScrollLeft(table.scrollLeft);
+    setClickedY(e.pageY);
+    setScrollTop(table.scrollTop);
+  }
+
+  const handleOnMouseMove = e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const table = document.querySelector(`.${style.root}`);
+    const movedX = (e.pageX - clickedX) * 2;
+    const movedY = (e.pageY - clickedY) * 2;
+    table.scrollLeft = scrollLeft - movedX;
+    table.scrollTop = scrollTop - movedY;
+
+  }
+
+  const handleMouseUp = e => {
+    setIsDown(false);
+  }
+
   const diaryTable = () => members().map(member => {
     const rowDiaries = diaries.map(item => {
       return { date: moment(item.date), diary: item.diaries.find(diary => diary.user.id === member.id) }
@@ -36,10 +68,19 @@ const DiaryTable = ({
   });
 
   return(
-    <Paper className={style.root}>
+    <Paper
+      className={style.root}
+      onMouseDown={handleOnMouseDown}
+      onMouseMove={handleOnMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+      ref={container}
+    >
       <DiaryDetail />
       <div>
-        <Table className={style.table}>
+        <Table
+          className={style.table}
+        >
           <TableHead>
             <TableRow>
               <TableCell className={style.headFirstColumn}>Members</TableCell>
