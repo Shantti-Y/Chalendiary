@@ -59,7 +59,7 @@ const DiaryCell = ({
       </TableCell>
     )
   }else{
-    return <TableCell className={style.bodyCell}><div /></TableCell>
+    return <TableCell className={style.bodyCell}></TableCell>
   }
 };
 

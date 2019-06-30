@@ -21,14 +21,16 @@ const Article = ({
 
   return (
     <div className={style.article}>
-      <DiaryArticle diary={diary} container={container} />
-      <div className={style.repliesBorder}>
-        <span className={style.replies}>{`${diary.replies.length} replies`}</span>
+      <div className={style.content}>
+        <DiaryArticle diary={diary} container={container} />
+        <div className={style.repliesBorder}>
+          <span className={style.replies}>{`${diary.replies.length} replies`}</span>
+        </div>
+        <ul>{diary.replies.map(reply => <ReplyArticle reply={reply} container={container} />)}</ul>
       </div>
-      <ul>{diary.replies.map(reply => <ReplyArticle reply={reply} container={container} />)}</ul>
       {
         diary.deletedAt === null ? (
-          <Button className={style.plane} onClick={() => onOpenReplyForm(container, me.id, diary)}>
+          <Button className={[style.newCommentButton, style.plane]} onClick={() => onOpenReplyForm(container, me.id, diary)}>
             Comment<Create className={style.newDiaryIcon} />
           </Button>
         ) : null

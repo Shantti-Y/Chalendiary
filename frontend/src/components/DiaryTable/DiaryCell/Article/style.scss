@@ -7,6 +7,11 @@
   position: relative;
 }
 
+.content {
+  min-height: calc(100% - 60px);
+  margin-bottom: 20px;
+}
+
 .repliesBorder {
   width: calc(100% - 8px);
   border-top: 1px solid #c0c0c0;
@@ -21,6 +26,15 @@
   color: #c0c0c0;
   padding-right: 10px;
   font-size: 12px;
+}
+
+.newCommentButton {
+  float: right;
+  font-size: 14px !important;
+}
+
+.newDiaryIcon {
+  font-size: 16px !important;
 }
 
 .success {
