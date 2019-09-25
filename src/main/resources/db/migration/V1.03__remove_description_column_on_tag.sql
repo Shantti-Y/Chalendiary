@@ -1,2 +1,2 @@
-ALTER TABLE tags
+ALTER TABLE nikocale.tags
 DROP COLUMN description;

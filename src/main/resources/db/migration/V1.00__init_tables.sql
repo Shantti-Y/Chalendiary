@@ -1,4 +1,4 @@
-CREATE TABLE public.teams (
+CREATE TABLE nikocale.teams (
     id serial PRIMARY KEY,
     name character varying(20) NOT NULL,
     domain character varying(60) NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE public.teams (
 );
 CREATE UNIQUE INDEX team_index_domain ON teams(domain);
 
-CREATE TABLE public.users (
+CREATE TABLE nikocale.users (
     id serial PRIMARY KEY,
     screen_name character varying(20) NOT NULL,
     email character varying(100) NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE public.users (
 );
 CREATE UNIQUE INDEX user_index_email ON users(email);
 
-CREATE TABLE public.tags (
+CREATE TABLE nikocale.tags (
     id serial PRIMARY KEY,
     team_id integer NOT NULL,
     owner_user_id integer NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE public.tags (
 );
 CREATE UNIQUE INDEX tag_index_foreign_keys_and_name ON tags(team_id, name);
 
-CREATE TABLE public.diaries (
+CREATE TABLE nikocale.diaries (
     id serial PRIMARY KEY,
     team_id integer NOT NULL,
     user_id integer NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE public.diaries (
 );
 CREATE UNIQUE INDEX diary_index_foreign_keys_and_posted_at ON diaries(team_id, user_id, posted_at);
 
-CREATE TABLE public.replies (
+CREATE TABLE nikocale.replies (
     id serial PRIMARY KEY,
     diary_id integer NOT NULL,
     user_id integer NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE public.replies (
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
-CREATE TABLE public.user_tags (
+CREATE TABLE nikocale.user_tags (
     id serial PRIMARY KEY,
     user_id integer NOT NULL,
     tag_id integer NOT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE public.user_tags (
 );
 CREATE UNIQUE INDEX user_tag_index_foreign_keys_and ON user_tags(user_id, tag_id);
 
-CREATE TABLE public.user_teams (
+CREATE TABLE nikocale.user_teams (
     id serial PRIMARY KEY,
     user_id integer NOT NULL,
     team_id integer NOT NULL,
