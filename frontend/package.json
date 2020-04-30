@@ -24,7 +24,7 @@
     "express": "^4.16.4",
     "firebase": "^6.0.4",
     "firebaseui": "^4.0.0",
-    "jquery": "^3.4.0",
+    "jquery": "^3.5.0",
     "material-ui-pickers": "^2.2.4",
     "moment": "^2.24.0",
     "morgan": "^1.9.1",
