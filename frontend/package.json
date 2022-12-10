@@ -21,7 +21,7 @@
     "axios": "^0.18.1",
     "body-parser": "^1.18.3",
     "dotenv": "^7.0.0",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "firebase": "^6.0.4",
     "firebaseui": "^4.0.0",
     "jquery": "^3.4.0",
